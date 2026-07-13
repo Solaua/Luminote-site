@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr" class="lang-fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luminote — Apprendre à lire la musique</title>
+<meta name="description" content="Luminote apprend à lire une partition, note après note : lecture des notes et rythme par exercices progressifs. Sans compte, sans publicité, entièrement hors ligne. Bientôt sur Google Play.">
+<meta property="og:title" content="Luminote — Apprendre à lire la musique">
+<meta property="og:description" content="Apprendre · Jouer · Progresser. Lire les notes et jouer en rythme, par exercices progressifs. Sans compte, sans publicité, hors ligne.">
+<meta property="og:image" content="https://luminote-app.com/assets/img/og.png">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+<noscript><style>.L{display:revert !important}</style></noscript>
+</head>
+<body data-title-fr="Luminote — Apprendre à lire la musique"
+      data-title-en="Luminote — Learn to read music"
+      data-title-es="Luminote — Aprender a leer música">
+
+<div class="glow" aria-hidden="true"></div>
+<div class="stars" aria-hidden="true"><i></i><i></i></div>
+
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="assets/img/icon-192.png" alt="" width="30" height="30">
+      Luminote
+    </a>
+    <div class="lang-switch" role="group" aria-label="Langue / Language / Idioma">
+      <button type="button" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══ Hero : marque + démo jouable ═══ -->
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="clef" aria-hidden="true">&#xE050;</span>
+        <h1>Luminote<span class="sparkle" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="sp" x1="0" y1="0" x2="24" y2="24"><stop offset="0" stop-color="#5EE0FF"/><stop offset="1" stop-color="#A78BFA"/></linearGradient></defs><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z" fill="url(#sp)"/></svg></span></h1>
+        <p class="baseline">
+          <span class="L fr" lang="fr">Apprendre · Jouer · Progresser</span>
+          <span class="L en" lang="en">Learn · Play · Progress</span>
+          <span class="L es" lang="es">Aprender · Jugar · Progresar</span>
+        </p>
+        <p class="lede L fr" lang="fr">Luminote apprend à lire une partition, note après note : lecture des notes et rythme par exercices progressifs. Sans compte, sans publicité, entièrement hors ligne.</p>
+        <p class="lede L en" lang="en">Luminote teaches you to read sheet music, one note at a time: note reading and rhythm through step-by-step exercises. No account, no ads, fully offline.</p>
+        <p class="lede L es" lang="es">Luminote enseña a leer una partitura, nota a nota: lectura de notas y ritmo mediante ejercicios progresivos. Sin cuenta, sin publicidad, totalmente sin conexión.</p>
+        <div class="cta-row">
+          <!-- QUAND L'APP SERA PUBLIÉE : remplacer ce <span> par
+               <a class="btn btn-store" style="opacity:1;cursor:pointer" href="URL_DE_LA_FICHE_PLAY">
+               et changer les trois libellés en « DISPONIBLE SUR / GET IT ON / DISPONIBLE EN ».
+               (Même chose pour le bandeau final en bas de page si souhaité.) -->
+          <span class="btn btn-store" aria-disabled="true">
+            <svg width="22" height="24" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M2.5 1.8v22.4c0 .5.6.9 1 .6l17.8-10.6c.5-.3.5-1 0-1.3L3.5 2.2c-.4-.3-1 0-1 .6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span class="store-lines">
+              <small class="L fr" lang="fr">BIENTÔT DISPONIBLE SUR</small>
+              <small class="L en" lang="en">COMING SOON ON</small>
+              <small class="L es" lang="es">PRÓXIMAMENTE EN</small>
+              Google Play
+            </span>
+          </span>
+          <a class="btn btn-cta" href="#demo">
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="none" aria-hidden="true"><path d="M1 1.7v12.6c0 .6.6.9 1.1.6l10.4-6.3c.5-.3.5-1 0-1.2L2.1 1.1C1.6.8 1 1.1 1 1.7Z" fill="#fff"/></svg>
+            <span class="L fr" lang="fr">Essayer la démo</span>
+            <span class="L en" lang="en">Try the demo</span>
+            <span class="L es" lang="es">Probar la demo</span>
+          </a>
+        </div>
+      </div>
+
+      <div id="demo">
+        <div class="phone">
+          <div class="phone-screen" id="demo-screen">
+            <img src="assets/img/screen-home.webp" alt="" width="600" height="1268">
+            <button type="button" class="demo-cover" id="demo-cover">
+              <span class="play-round" aria-hidden="true"><svg width="20" height="22" viewBox="0 0 14 16" fill="none"><path d="M1 1.7v12.6c0 .6.6.9 1.1.6l10.4-6.3c.5-.3.5-1 0-1.2L2.1 1.1C1.6.8 1 1.1 1 1.7Z" fill="#fff"/></svg></span>
+              <span class="L fr" lang="fr">Lancer la démo</span>
+              <span class="L en" lang="en">Start the demo</span>
+              <span class="L es" lang="es">Iniciar la demo</span>
+            </button>
+          </div>
+        </div>
+        <p class="demo-note">
+          <span class="L fr" lang="fr">Démo jouable dans le navigateur, avec le son. <a href="demo/app/index.html">Ouvrir en plein écran&nbsp;↗</a></span>
+          <span class="L en" lang="en">Playable in your browser, with sound. <a href="demo/app/index.html">Open full screen&nbsp;↗</a></span>
+          <span class="L es" lang="es">Jugable en el navegador, con sonido. <a href="demo/app/index.html">Abrir a pantalla completa&nbsp;↗</a></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ Trois points clés ═══ -->
+    <section aria-labelledby="keys-title">
+      <p class="eyebrow">
+        <span class="L fr" lang="fr">La méthode</span>
+        <span class="L en" lang="en">The method</span>
+        <span class="L es" lang="es">El método</span>
+      </p>
+      <h2 class="section-title" id="keys-title">
+        <span class="L fr" lang="fr">Tout ce qu'il faut pour déchiffrer</span>
+        <span class="L en" lang="en">Everything you need to sight-read</span>
+        <span class="L es" lang="es">Todo lo necesario para descifrar</span>
+      </h2>
+      <div class="keys">
+        <article class="card key-card">
+          <div class="key-tile t-blue" aria-hidden="true">🎵</div>
+          <h3>
+            <span class="L fr" lang="fr">Les notes</span>
+            <span class="L en" lang="en">The notes</span>
+            <span class="L es" lang="es">Las notas</span>
+          </h3>
+          <p>
+            <span class="L fr" lang="fr">Reconnaître chaque note sur la portée, en clé de sol comme en clé de fa.</span>
+            <span class="L en" lang="en">Recognise every note on the staff, in treble and bass clef alike.</span>
+            <span class="L es" lang="es">Reconocer cada nota en el pentagrama, tanto en clave de sol como en clave de fa.</span>
+          </p>
+        </article>
+        <article class="card key-card">
+          <div class="key-tile t-mint" aria-hidden="true">🥁</div>
+          <h3>
+            <span class="L fr" lang="fr">Le rythme</span>
+            <span class="L en" lang="en">The rhythm</span>
+            <span class="L es" lang="es">El ritmo</span>
+          </h3>
+          <p>
+            <span class="L fr" lang="fr">Jouer en mesure, de la ronde à la double-croche.</span>
+            <span class="L en" lang="en">Play in time, from whole notes to sixteenth notes.</span>
+            <span class="L es" lang="es">Tocar a compás, de la redonda a la semicorchea.</span>
+          </p>
+        </article>
+        <article class="card key-card">
+          <div class="key-tile t-amber" aria-hidden="true">⭐</div>
+          <h3>
+            <span class="L fr" lang="fr">La progression</span>
+            <span class="L en" lang="en">The progression</span>
+            <span class="L es" lang="es">La progresión</span>
+          </h3>
+          <p>
+            <span class="L fr" lang="fr">Une méthode par chapitres, jusqu'aux vraies partitions.</span>
+            <span class="L en" lang="en">A chapter-by-chapter method, all the way to real pieces.</span>
+            <span class="L es" lang="es">Un método por capítulos, hasta llegar a partituras reales.</span>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══ Captures réelles ═══ -->
+    <section aria-labelledby="shots-title">
+      <p class="eyebrow">
+        <span class="L fr" lang="fr">L'app</span>
+        <span class="L en" lang="en">The app</span>
+        <span class="L es" lang="es">La app</span>
+      </p>
+      <h2 class="section-title" id="shots-title">
+        <span class="L fr" lang="fr">Conçue pour apprendre en jouant</span>
+        <span class="L en" lang="en">Built to learn through play</span>
+        <span class="L es" lang="es">Diseñada para aprender jugando</span>
+      </h2>
+      <div class="shots">
+        <figure>
+          <div class="phone"><div class="phone-screen">
+            <img src="assets/img/screen-books.webp" width="600" height="1268"
+                 alt="" loading="lazy">
+          </div></div>
+          <figcaption>
+            <span class="L fr" lang="fr">Quatre livres, deux clés</span>
+            <span class="L en" lang="en">Four books, two clefs</span>
+            <span class="L es" lang="es">Cuatro libros, dos claves</span>
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="phone"><div class="phone-screen">
+            <img src="assets/img/screen-method.webp" width="600" height="1268"
+                 alt="" loading="lazy">
+          </div></div>
+          <figcaption>
+            <span class="L fr" lang="fr">Des chapitres à débloquer</span>
+            <span class="L en" lang="en">Chapters to unlock</span>
+            <span class="L es" lang="es">Capítulos por desbloquear</span>
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="phone"><div class="phone-screen">
+            <img src="assets/img/screen-game.webp" width="600" height="1268"
+                 alt="" loading="lazy">
+          </div></div>
+          <figcaption>
+            <span class="L fr" lang="fr">Lire et jouer en rythme</span>
+            <span class="L en" lang="en">Read and play in rhythm</span>
+            <span class="L es" lang="es">Leer y tocar a ritmo</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ═══ Bandeau final ═══ -->
+    <section class="closing">
+      <span class="clef" aria-hidden="true">&#xE050;</span>
+      <h2>
+        <span class="L fr" lang="fr">Bientôt sur Google Play</span>
+        <span class="L en" lang="en">Coming soon to Google Play</span>
+        <span class="L es" lang="es">Próximamente en Google Play</span>
+      </h2>
+      <p>
+        <span class="L fr" lang="fr">En attendant, la démo se joue directement dans le navigateur — au doigt ou à la souris.</span>
+        <span class="L en" lang="en">Meanwhile, the demo plays right in your browser — with a finger or a mouse.</span>
+        <span class="L es" lang="es">Mientras tanto, la demo se juega directamente en el navegador — con el dedo o el ratón.</span>
+      </p>
+      <a class="btn btn-cta" href="#demo">
+        <span class="L fr" lang="fr">Essayer la démo</span>
+        <span class="L en" lang="en">Try the demo</span>
+        <span class="L es" lang="es">Probar la demo</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="foot-inner">
+      <nav aria-label="Pages légales">
+        <a href="confidentialite.html">
+          <span class="L fr" lang="fr">Politique de confidentialité</span>
+          <span class="L en" lang="en">Privacy policy</span>
+          <span class="L es" lang="es">Política de privacidad</span>
+        </a>
+        <a href="mentions-legales.html">
+          <span class="L fr" lang="fr">Mentions légales</span>
+          <span class="L en" lang="en">Legal notice</span>
+          <span class="L es" lang="es">Aviso legal</span>
+        </a>
+        <a href="mailto:alexandre.solau@gmail.com">Contact</a>
+      </nav>
+      <p style="margin:0">© 2026 Premier Degré SARL · RCS Paris 911 757 912</p>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
