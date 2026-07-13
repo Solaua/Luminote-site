@@ -318,6 +318,19 @@ h2.section-title {
 }
 .shots figure { margin: 0; }
 
+/* Le programme : chiffres de la méthode + exercices avancés */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 0 0 2.4rem; }
+.stat { padding: 1.2rem 1rem; text-align: center; }
+.stat .num {
+  display: block; font-size: 2.1rem; font-weight: 700; line-height: 1.15;
+  color: var(--text-bright); text-shadow: 0 0 22px rgba(56,189,248,.30);
+}
+.stat .lbl { display: block; margin-top: .15rem; font-size: .82rem; font-weight: 600; color: var(--text-muted); }
+.program-lede { margin: 0 0 2rem; max-width: 40rem; color: var(--text-muted); font-size: 1.05rem; }
+@media (max-width: 900px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* Bandeau final */
 .closing { text-align: center; padding: 3.4rem 0 4.2rem; }
 .closing .clef { font-size: 64px; }
