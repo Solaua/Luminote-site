@@ -37,6 +37,13 @@
       });
     });
 
+    // Mouvement réduit demandé : figer la vidéo de gameplay sur son poster.
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('video[autoplay]').forEach(function (v) {
+        v.pause(); v.removeAttribute('autoplay'); v.currentTime = 0; v.load();
+      });
+    }
+
     // Démo à la demande : remplace la capture par l'app dans l'iframe.
     var cover = document.getElementById('demo-cover');
     var screen = document.getElementById('demo-screen');
