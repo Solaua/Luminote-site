@@ -67,16 +67,20 @@ publié en public tel quel.
 
 ## 🔁 Regénérer la démo (si l'app évolue)
 
-Depuis le dépôt de l'app (`solfgg`), sans toucher à son code :
+Depuis le dépôt de l'app (`solfgg`). **`VITE_DEMO=1` est indispensable** :
+c'est lui qui bride la démo au tutoriel + chapitre 1 (voir `src/demo.js`
+dans le dépôt de l'app) — sans lui, le jeu complet serait publié sur le web.
 
 ```bash
-npx vite build --base=./ --outDir "../luminote-site/demo/app" --emptyOutDir
+VITE_DEMO=1 npx vite build --base=./ --outDir "../luminote-site/demo/app" --emptyOutDir
 cd ../luminote-site/demo/app
 # Bravura est injectée par le JS de l'app avec un chemin absolu : le rendre relatif
 sed -i "s|url('/fonts/Bravura.woff2')|url('fonts/Bravura.woff2')|g" assets/index-*.js
 rm -rf samples vite.svg           # inutilisés dans le build web
 cp ../../assets/img/favicon-32.png favicon.png
 sed -i 's|type="image/svg+xml" href="./vite.svg"|type="image/png" href="./favicon.png"|' index.html
+# masquer les barres de scroll dans le cadre du téléphone
+sed -i 's|</title>|</title>\n    <style>/* démo intégrée : pas de barres de scroll visibles */ html,body{overflow:hidden} *{scrollbar-width:none} *::-webkit-scrollbar{display:none}</style>|' index.html
 ```
 
 ---

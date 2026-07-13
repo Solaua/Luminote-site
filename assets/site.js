@@ -53,6 +53,7 @@
         iframe.src = 'demo/app/index.html';
         iframe.title = 'Démo Luminote';
         iframe.setAttribute('allow', 'autoplay');
+        iframe.setAttribute('scrolling', 'no');
         screen.appendChild(iframe);
         cover.remove();
       });
