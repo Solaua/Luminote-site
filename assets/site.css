@@ -319,7 +319,7 @@ h2.section-title {
 .shots figure { margin: 0; }
 
 /* Le programme : chiffres de la méthode + exercices avancés */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 0 0 2.4rem; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 0 0 2.4rem; }
 .stat { padding: 1.2rem 1rem; text-align: center; }
 .stat .num {
   display: block; font-size: 2.1rem; font-weight: 700; line-height: 1.15;
@@ -329,6 +329,7 @@ h2.section-title {
 .program-lede { margin: 0 0 2rem; max-width: 40rem; color: var(--text-muted); font-size: 1.05rem; }
 @media (max-width: 900px) {
   .stats { grid-template-columns: repeat(2, 1fr); }
+  .stats .stat:last-child { grid-column: 1 / -1; }
 }
 
 /* Bandeau final */
