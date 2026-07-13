@@ -45,17 +45,31 @@
     }
 
     // Démo à la demande : remplace la capture par l'app dans l'iframe.
+    // L'app est conçue pour ≥ 360 px de large ; l'écran du téléphone n'en
+    // fait ~280 : on lui donne un viewport logique de 360 px et on réduit
+    // l'iframe en scale() pour la faire tenir sans rogner le bord droit.
     var cover = document.getElementById('demo-cover');
     var screen = document.getElementById('demo-screen');
     if (cover && screen) {
+      var LOGICAL_W = 360;
+      var fitIframe = function (iframe) {
+        var w = screen.clientWidth, h = screen.clientHeight;
+        var s = w / LOGICAL_W;
+        iframe.style.width = LOGICAL_W + 'px';
+        iframe.style.height = Math.round(h / s) + 'px';
+        iframe.style.transform = 'scale(' + s + ')';
+        iframe.style.transformOrigin = 'top left';
+      };
       cover.addEventListener('click', function () {
         var iframe = document.createElement('iframe');
         iframe.src = 'demo/app/index.html';
         iframe.title = 'Démo Luminote';
         iframe.setAttribute('allow', 'autoplay');
         iframe.setAttribute('scrolling', 'no');
+        fitIframe(iframe);
         screen.appendChild(iframe);
         cover.remove();
+        window.addEventListener('resize', function () { fitIframe(iframe); });
       });
     }
   });
