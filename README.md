@@ -57,11 +57,11 @@ publié en public tel quel.
    l'organisation ; l'URL de la politique de confidentialité à donner est
    `https://luminote-app.com/confidentialite.html`.
 
-## ✅ Quand l'app sera publiée
+## ✅ App publiée
 
-- **Activer le bouton Play Store** : dans `index.html`, un commentaire
-  `QUAND L'APP SERA PUBLIÉE` indique exactement quoi remplacer (le lien de la
-  fiche + les libellés « Disponible sur »).
+- Fiche Play Store :
+  `https://play.google.com/store/apps/details?id=fr.premierdegre.solfege`
+  (liée depuis le hero et le bandeau final).
 - **Rafraîchir les captures** si l'app a changé : ce sont les `.webp` de
   `assets/img/` (600px de large, prises dans un cadre 390×824).
 

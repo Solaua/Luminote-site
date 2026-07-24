@@ -197,13 +197,14 @@ a:hover { text-decoration: underline; }
   box-shadow: var(--chunk), var(--top-edge);
 }
 .btn-ghost:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(2,6,23,.8), var(--top-edge); }
-/* Badge Play Store inactif (« Bientôt disponible ») */
+/* Badge Play Store */
 .btn-store {
-  color: var(--text-muted);
+  color: var(--text);
   background: rgba(30,41,59,.55);
-  border-color: var(--border-subtle);
-  cursor: default; opacity: .8;
+  border-color: var(--border-strong);
+  box-shadow: var(--chunk), var(--top-edge);
 }
+.btn-store:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(2,6,23,.8), var(--top-edge); }
 .btn-store small { display: block; font-weight: 500; font-size: .68rem; letter-spacing: .04em; color: var(--text-subtle); }
 .btn-store .store-lines { text-align: left; line-height: 1.25; }
 
