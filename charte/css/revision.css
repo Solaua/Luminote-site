@@ -1,0 +1,63 @@
+/* ── Onglet Révision (C10-d) : la mémoire par chapitre, en opportunité ── */
+.rev { padding: 26px 24px 22px; overflow-y: auto; }
+.rev-titre-rang { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; }
+.rev-titre { font: 800 30px/1.1 var(--fonte-titres); margin: 0; display: inline-flex; align-items: center; gap: 10px; }
+.rev-session { font: 700 12px var(--fonte-titres); white-space: nowrap; }
+.rev-texte { font: 400 13.5px/1.5 var(--fonte-corps); color: var(--encre-douce); margin: 8px 0 0; }
+.rev-liste { margin-top: 18px; }
+.rev-vide { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.rev-livre-titre { font: 700 11px var(--fonte-corps); letter-spacing: .16em; text-transform: uppercase; color: var(--texte-2); margin: 16px 0 10px; }
+
+/* Cartouche de chapitre : la matière du sommaire, l'état en tampon. */
+.rev-chap {
+  border: var(--trait-fort) solid var(--encre);
+  border-radius: var(--rayon-cartouche);
+  margin-bottom: 12px;
+  padding: 0 14px;
+  background: var(--papier-carte);
+  box-shadow: var(--ombre);
+}
+.rev-chap-a-jour { box-shadow: var(--ombre-verte); }
+.rev-chap-fragile { border-color: var(--terracotta); box-shadow: 0 3px 0 var(--terracotta); }
+.rev-chap-entete {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 0;
+  background: none;
+  border: none;
+  color: var(--encre);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.rev-chap-num { width: 34px; flex-shrink: 0; font: 700 28px/1 var(--fonte-titres); color: var(--encre); }
+.rev-chap-a-jour .rev-chap-num { color: var(--vert); }
+.rev-chap-fragile .rev-chap-num { color: var(--terracotta); }
+.rev-chap-nom { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.rev-chap-titre { font: 700 17px/1.2 var(--fonte-corps); }
+.rev-chap-sous { font: 400 12px var(--fonte-corps); color: var(--texte-2); }
+.rev-chap-etat { font-size: 10px; padding: 2px 8px; transform: rotate(-3deg); white-space: nowrap; }
+
+/* Détail : un rang par élément, cinq boîtes en points, l'échéance. */
+.rev-chap-corps { padding: 0 0 14px; }
+.rev-elements { list-style: none; margin: 0; padding: 0; border-top: var(--trait) solid rgba(35, 32, 28, .15); }
+.rev-element {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: var(--trait) solid rgba(35, 32, 28, .1);
+  font: 400 13.5px var(--fonte-corps);
+}
+.rev-element-nom { min-width: 0; }
+.rev-element-sous { color: var(--texte-2); font-size: 12px; }
+.rev-element-du .rev-element-echeance { color: var(--ocre-fonce); font-weight: 700; }
+.rev-element-fragile .rev-element-nom { color: var(--terracotta); font-weight: 700; }
+.rev-element-boites { display: inline-flex; gap: 3px; }
+.rev-boite { width: 7px; height: 7px; border-radius: 999px; border: 1px solid var(--encre); box-sizing: border-box; opacity: .45; }
+.rev-boite-pleine { background: var(--encre); opacity: 1; }
+.rev-element-echeance { font: 400 12px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rev-reviser { margin-top: 14px; width: 100%; min-width: 0; }

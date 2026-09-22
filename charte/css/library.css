@@ -1,0 +1,231 @@
+/**
+ * Bibliothèque (C9) — artboard 5a « feuilletage interactif » ÉTENDU aux
+ * étagères par clé (décision 6) : une rangée d'étagères (Sol · Fa · Ut 3 ·
+ * Ut 4 · Les deux clés) au-dessus du carrousel, chaque étagère feuilletant
+ * ses livres (bookVals de l'export, à l'identique : ressort .55s, squash &
+ * stretch coverSettle à l'arrivée au centre, impression en séquence du
+ * cartouche de couverture). coverSwing est COUPÉ (registre C7) ; le sommaire
+ * s'ouvre par pageZoom (book.css).
+ */
+.biblio {
+  padding: 26px 0 22px;
+  /* Couverture de l'export : 292 × 442 sur 390 × 844. Sur un écran plus
+     court, le cahier se réduit à proportion (le carrousel absorbe). */
+  --couv-h: clamp(220px, calc(100vh - 330px), 442px);
+  --couv-h: clamp(220px, calc(100dvh - 330px), 442px);
+  --couv-l: calc(var(--couv-h) * 292 / 442);
+  --couv-pas: calc(var(--couv-l) * 252 / 292); /* translateX entre voisins */
+}
+.biblio-entete { padding: 0 26px; }
+.biblio-filet { margin: 11px 10px 0; }
+.biblio-titre { font-size: 27px; margin: 6px 26px 10px; }
+.biblio-regle { margin: 0 26px 4px; }
+
+/* ── Étagères (extension 5a) : rangée de libellés, l'active soulignée ── */
+.biblio-etageres {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 8px 20px 0;
+}
+.biblio-etagere {
+  font: 700 11px var(--fonte-corps);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--texte-2);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 4px 2px 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .3s, border-color .3s;
+}
+.biblio-etagere-active { color: var(--encre); border-bottom-color: var(--encre); }
+
+/* ── Carrousel ────────────────────────────────────────────────────────── */
+.biblio-carrousel {
+  flex: 1;
+  position: relative;
+  min-height: calc(var(--couv-h) + 16px);
+  touch-action: pan-y;
+  user-select: none;
+}
+.biblio-couv {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--couv-l);
+  height: var(--couv-h);
+  margin: calc(var(--couv-h) / -2) 0 0 calc(var(--couv-l) / -2);
+  border-radius: 18px;
+  border: var(--trait-fort) solid var(--encre);
+  background:
+    radial-gradient(rgba(35, 32, 28, .07) .5px, transparent .6px) 0 0/4px 4px,
+    radial-gradient(rgba(35, 32, 28, .045) .5px, transparent .6px) 2px 2px/7px 7px var(--papier-carte);
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .55s var(--ressort-depli), box-shadow .55s ease, opacity .4s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Position dans la pile (d = rang − centre) : translateX(d·252) rotate(d·4.5°
+   plafonné à ±5°) scale(.82 hors centre) ; opacité .75, .35 au-delà de ±1. */
+.biblio-couv-c { transform: translateX(0) rotate(0) scale(1); opacity: 1; z-index: 10; box-shadow: 0 5px 0 var(--encre); }
+.biblio-couv-m1 { transform: translateX(calc(var(--couv-pas) * -1)) rotate(-4.5deg) scale(.82); opacity: .75; z-index: 9; }
+.biblio-couv-p1 { transform: translateX(var(--couv-pas)) rotate(4.5deg) scale(.82); opacity: .75; z-index: 9; }
+.biblio-couv-m2 { transform: translateX(calc(var(--couv-pas) * -2)) rotate(-5deg) scale(.82); opacity: .35; z-index: 8; }
+.biblio-couv-p2 { transform: translateX(calc(var(--couv-pas) * 2)) rotate(5deg) scale(.82); opacity: .35; z-index: 8; }
+.biblio-couv-loin { transform: translateX(calc(var(--couv-pas) * 3)) scale(.82); opacity: 0; z-index: 1; pointer-events: none; }
+.biblio-couv-loin.biblio-couv-avant { transform: translateX(calc(var(--couv-pas) * -3)) scale(.82); }
+/* Reliure : hachures claires sur encre. */
+.biblio-couv-dos {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: repeating-linear-gradient(50deg, rgba(245, 241, 233, .22) 0 1.5px, transparent 1.5px 4px) var(--encre);
+}
+.biblio-couv-int {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 26px 14px 18px 22px;
+  box-sizing: border-box;
+}
+.biblio-couv-c .biblio-couv-int { animation: coverSettle .5s cubic-bezier(.3, 1.3, .5, 1) .18s; }
+/* Cartouche de couverture : s'IMPRIME en séquence à l'arrivée au centre
+   (mentionIn .16s → numIn .3s → titre .5s → sous-titre .58s → badge .84s →
+   folio .94s). Hors centre, le cahier reste vierge (design). */
+.biblio-couv-cadre {
+  align-self: stretch;
+  margin: 0 4px;
+  padding: 12px 10px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  opacity: 0;
+}
+.biblio-couv-c .biblio-couv-cadre { animation: mentionIn1 .3s ease .16s forwards; }
+.biblio-couv-souffle-court { flex: .6; }
+.biblio-couv-souffle { flex: 1; }
+.biblio-couv-livre { font: 700 9.5px var(--fonte-corps); letter-spacing: .16em; color: var(--texte-2); text-transform: uppercase; }
+.biblio-couv-num { font: 700 56px/1 var(--fonte-titres); color: var(--encre); opacity: 0; }
+.biblio-couv-c .biblio-couv-num { animation: numIn .45s var(--ressort) .3s forwards; }
+.biblio-couv-num-cours { color: var(--terracotta); }
+.biblio-couv-titre {
+  font: 700 16.5px/1.25 var(--fonte-corps);
+  color: var(--encre);
+  text-align: center;
+  align-self: stretch;
+  border-bottom: .75px solid var(--encre);
+  padding-bottom: 7px;
+  margin: 4px 14px 0;
+  opacity: 0;
+}
+.biblio-couv-c .biblio-couv-titre { animation: mentionIn1 .35s ease .5s forwards; }
+.biblio-couv-sous-titre { font: italic 400 12.5px var(--fonte-corps); color: var(--texte-2); text-align: center; margin-top: 7px; opacity: 0; }
+.biblio-couv-c .biblio-couv-sous-titre { animation: mentionIn1 .35s ease .58s forwards; }
+/* Retour 16 : ce qu'on va apprendre, sous le titre de la couverture. */
+.biblio-couv-desc { font: 400 11.5px/1.35 var(--fonte-corps); color: var(--texte-2); text-align: center; margin: 8px 12px 0; opacity: 0; }
+.biblio-couv-c .biblio-couv-desc { animation: mentionIn1 .35s ease .66s forwards; }
+.biblio-couv-badge {
+  border: var(--trait) solid var(--encre);
+  color: var(--encre);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font: 700 9px var(--fonte-corps);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+}
+.biblio-couv-c .biblio-couv-badge { animation: mentionIn1 .35s ease .84s forwards; }
+.biblio-couv-badge-gagne { border-color: var(--terracotta); color: var(--terracotta); }
+.biblio-couv-badge-joue { border-color: var(--vert); color: var(--vert); }
+/* Folio : étoile SVG du compteur + nombre, sur une ligne (retour appareil n°2). */
+.biblio-couv-folio {
+  font: 400 11px var(--fonte-corps);
+  color: var(--texte-2);
+  opacity: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.biblio-couv-c .biblio-couv-folio { animation: mentionIn1 .35s ease .94s forwards; }
+
+/* Flèches : ronds papier bordés d'encre, appui au ressort. */
+.biblio-fleche {
+  position: absolute;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  margin-top: -21px;
+  border-radius: 999px;
+  border: var(--trait-fort) solid var(--encre);
+  background: radial-gradient(rgba(35, 32, 28, .09) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
+  box-shadow: var(--ombre);
+  color: var(--encre);
+  font: 700 17px var(--fonte-corps);
+  padding: 0;
+  cursor: pointer;
+  z-index: 30;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+}
+.biblio-fleche:active { transform: translateY(3px) scale(1.09, .86); box-shadow: 0 0 0 var(--encre); }
+.biblio-fleche:disabled { opacity: .3; cursor: default; }
+.biblio-fleche-avant { left: 8px; }
+.biblio-fleche-apres { right: 8px; }
+
+/* ── Ouvrir ───────────────────────────────────────────────────────────── */
+.biblio-cta-cadre { padding: 0 26px; }
+.biblio-cta {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .14) 0 1.1px, transparent 1.1px 4px) var(--vert);
+  color: #F7F4EE;
+  padding: 14px;
+  text-align: center;
+  font: 700 15px var(--fonte-corps);
+  box-shadow: 0 3px 0 var(--vert-sombre);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+}
+.biblio-cta:active { transform: translateY(3px) scale(1.015, .96); box-shadow: 0 0 0 var(--vert-sombre); }
+
+/* ── Onglets (numéros des livres de l'étagère) ────────────────────────── */
+.biblio-onglets {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin: 2px 0 14px;
+}
+.biblio-onglet {
+  font: 700 15px var(--fonte-titres);
+  color: var(--texte-2);
+  background: none;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  padding: 2px 2px 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .3s, border-color .3s;
+}
+.biblio-onglet-actif { color: var(--encre); border-bottom-color: var(--encre); }
+.biblio-onglet-actif.biblio-onglet-cours { border-bottom-color: var(--terracotta); }
+
+@media (prefers-reduced-motion: reduce) {
+  .biblio-couv-cadre, .biblio-couv-num, .biblio-couv-titre, .biblio-couv-sous-titre,
+  .biblio-couv-badge, .biblio-couv-folio { animation: none; opacity: 1; }
+}

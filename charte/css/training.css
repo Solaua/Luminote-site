@@ -1,0 +1,110 @@
+/* ── Entraînement libre (8b) : menus dépliants à filets, tuiles en glyphes, jauge de tempo ── */
+.libre { padding: 26px 24px 22px; overflow-y: auto; }
+.libre-titre { font: 800 30px/1.1 var(--fonte-titres); margin: 24px 0 8px; }
+.libre-sections { display: flex; flex-direction: column; }
+.libre-souffle { flex: 1; min-height: 14px; }
+.libre-lancer { width: 100%; }
+
+/* Un menu = un rang à filet ; ouvert, son corps se pose dessous. */
+.libre-section { border-bottom: var(--trait) solid rgba(35, 32, 28, .18); }
+.libre-section-entete {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 0;
+  background: none;
+  border: none;
+  color: var(--encre);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.libre-section-titre { font: 700 16px var(--fonte-corps); white-space: nowrap; }
+.libre-section-entete .filet { flex: 1; height: 1px; background: rgba(35, 32, 28, .18); }
+.libre-section-resume { font: 700 13px var(--fonte-titres); color: var(--terracotta); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.libre-section-chevron { font: 400 16px var(--fonte-corps); color: var(--vert); width: 14px; text-align: center; }
+.libre-section-corps { padding: 2px 0 16px; animation: riseIn .25s ease both; }
+
+/* Pilules radio (clé, mesure, nombre de mesures). */
+.libre-pilules { display: flex; flex-wrap: wrap; gap: 8px; }
+.libre-pilule {
+  border: var(--trait) solid var(--encre);
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: transparent;
+  color: var(--encre);
+  font: 700 13px var(--fonte-corps);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.libre-pilule-on { background: var(--encre); color: #F5F1E9; box-shadow: 0 2.5px 0 var(--encre); }
+
+/* Notes : une pastille par note de la fenêtre, à l'encre quand choisie. */
+.libre-notes { display: flex; flex-wrap: wrap; gap: 7px; }
+.libre-note {
+  width: 46px;
+  height: 40px;
+  border-radius: 9px;
+  border: var(--trait) solid rgba(35, 32, 28, .4);
+  background: transparent;
+  color: var(--texte-2);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  font: 700 13px var(--fonte-corps);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .14s var(--ressort-fort);
+}
+.libre-note:active { transform: translateY(2px); }
+.libre-note-octave { font: 400 10px var(--fonte-corps); }
+.libre-note-on { border-color: var(--terracotta); background: var(--terracotta-pale); color: var(--terracotta); box-shadow: 0 2px 0 var(--terracotta); }
+.libre-raccourcis { display: flex; gap: 16px; margin-top: 10px; }
+.libre-raccourcis .lien-terracotta { display: inline; margin: 0; background: none; border: none; padding: 0; cursor: pointer; }
+
+/* Tuiles rythmiques : glyphes gravés, écrasement à l'appui, encre quand choisie. */
+.libre-tuiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+.libre-tuile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 8px 9px;
+  border: var(--trait) solid rgba(35, 32, 28, .4);
+  border-radius: 10px;
+  background: var(--papier-carte);
+  color: var(--texte-2);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .14s var(--ressort-fort), box-shadow .14s var(--ressort-fort);
+}
+.libre-tuile:active { transform: translateY(2px); box-shadow: none; }
+.libre-tuile-on { border: var(--trait-fort) solid var(--encre); color: var(--encre); box-shadow: var(--ombre); }
+.libre-tuile-canvas { height: 46px; width: auto; display: block; opacity: .45; }
+.libre-tuile-on .libre-tuile-canvas { opacity: 1; }
+.libre-tuile-nom { font: 700 11.5px/1.25 var(--fonte-corps); text-align: center; }
+
+/* Jauge de tempo 40-140 : rail encre, curseur papier qui s'écrase à l'appui. */
+.libre-jauge { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+.libre-jauge-borne { font: 700 11px var(--fonte-titres); color: var(--texte-2); font-variant-numeric: tabular-nums; }
+.libre-curseur { flex: 1; -webkit-appearance: none; appearance: none; height: 26px; background: transparent; }
+.libre-curseur::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--encre); }
+.libre-curseur::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  margin-top: -11px;
+  border-radius: 999px;
+  border: var(--trait-fort) solid var(--encre);
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--vert);
+  box-shadow: 0 3px 0 var(--vert-sombre);
+  cursor: grab;
+  transition: transform .14s var(--ressort-fort);
+}
+.libre-curseur:active::-webkit-slider-thumb { transform: scale(1.18, .9); box-shadow: 0 1px 0 var(--vert-sombre); }
+.libre-curseur::-moz-range-track { height: 4px; border-radius: 2px; background: var(--encre); }
+.libre-curseur::-moz-range-thumb { width: 24px; height: 24px; border-radius: 999px; border: var(--trait-fort) solid var(--encre); background: var(--vert); }
+.libre-jauge-valeur { text-align: center; font: 800 28px var(--fonte-titres); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.libre-jauge-unite { font: 700 12px var(--fonte-corps); color: var(--texte-2); }

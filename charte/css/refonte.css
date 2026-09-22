@@ -1,0 +1,22 @@
+/* ── « La méthode a été refondue » (C14) : un cartouche, une sortie ── */
+.refonte { padding: 22px 20px 20px; align-items: stretch; }
+.refonte-souffle { flex: 1; min-height: 12px; }
+.refonte-logo { text-align: center; margin-bottom: 18px; }
+.refonte-carte {
+  background: var(--papier-carte);
+  border: var(--trait-fort) solid var(--encre);
+  border-radius: var(--rayon-surface);
+  box-shadow: var(--ombre-grande);
+  padding: 22px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: softIn .5s ease .1s forwards;
+}
+.refonte-tampon { font-size: 12px; }
+.refonte-titre { font: 800 24px/1.15 var(--fonte-titres); text-align: center; margin: 14px 0 0; }
+.refonte-texte { font: 400 14px/1.55 var(--fonte-corps); color: var(--encre-douce); text-align: center; margin: 12px 0 0; }
+.refonte-note { font-size: 12.5px; color: var(--texte-2); margin-top: 8px; }
+.refonte-bouton { width: 100%; margin-top: 18px; }
+@media (prefers-reduced-motion: reduce) { .refonte-carte { animation: none; opacity: 1; } }

@@ -1,0 +1,155 @@
+/* ── « Plus de jetons » (C16) — le cartouche sur voile, design validé 13/09.
+   Le voile et le cartouche reprennent les mesures du bilan 3a (game.css :
+   .jeu-scrim, .bilan-lien). ─────────────────────────────────────────── */
+.plus-jetons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+  overflow: clip;
+  color: var(--encre);
+  background: radial-gradient(rgba(35, 32, 28, .05) .5px, transparent .6px) 0 0/4px 4px var(--papier);
+}
+.plus-jetons-cadre {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  box-sizing: border-box;
+}
+.plus-jetons-carte {
+  width: 100%;
+  background: var(--papier-carte);
+  border: var(--trait-fort) solid var(--encre);
+  border-radius: var(--rayon-surface);
+  box-shadow: var(--ombre-grande);
+  padding: 24px 20px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: cardDrop .6s cubic-bezier(.35, 1.1, .45, 1) .15s forwards;
+}
+.plus-jetons-titre { font: 800 26px var(--fonte-titres); margin: 0; }
+.plus-jetons-jetons { display: flex; gap: 6px; margin-top: 18px; }
+.plus-jetons-texte {
+  font: 400 13.5px/1.55 var(--fonte-corps);
+  color: var(--encre-douce);
+  text-align: center;
+  margin: 14px 0 0;
+}
+/* Trois sorties, trois poids. */
+.plus-jetons-sorties { display: flex; flex-direction: column; gap: 9px; width: 100%; margin-top: 22px; }
+.plus-jetons-daily {
+  border: none;
+  border-radius: var(--rayon-bouton);
+  padding: 13px 14px;
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--terracotta);
+  color: #F7F4EE;
+  box-shadow: 0 3px 0 var(--terracotta-sombre);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 700 15px var(--fonte-corps);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+}
+.plus-jetons-daily:active { transform: translateY(3px); box-shadow: none; }
+.plus-jetons-daily-gain { display: inline-flex; align-items: center; gap: 5px; font: 800 15px var(--fonte-titres); }
+.plus-jetons-complete {
+  border-radius: var(--rayon-bouton);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  background: radial-gradient(rgba(35, 32, 28, .09) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
+}
+.plus-jetons-complete-sous { font: 400 12px var(--fonte-corps); color: var(--texte-2); }
+.plus-jetons-pub {
+  border: var(--trait) dashed rgba(35, 32, 28, .35);
+  border-radius: var(--rayon-bouton);
+  padding: 11px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 700 13px var(--fonte-corps);
+  color: var(--encre);
+}
+.plus-jetons-pub-inactive { color: var(--decor); }
+.plus-jetons-pub-sous { font: 400 11.5px var(--fonte-corps); }
+.plus-jetons .bilan-lien { margin-top: 14px; }
+@media (prefers-reduced-motion: reduce) {
+  .plus-jetons-carte { animation: none; opacity: 1; }
+}
+
+/* ── Objectif du jour (C16-b) — trois cartes, la choisie levée en vert. ── */
+.objectif { padding: 26px 24px 22px; }
+.objectif-titre { font: 800 30px/1.1 var(--fonte-titres); margin: 26px 0 0; }
+.objectif-texte { font: 400 14px/1.55 var(--fonte-corps); color: var(--encre-douce); margin: 8px 0 0; }
+.objectif-niveaux { display: flex; flex-direction: column; gap: 18px; margin-top: 24px; }
+.objectif-niveau {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  border: var(--trait) solid rgba(35, 32, 28, .45);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: transparent;
+  color: var(--encre);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort), border-color .2s;
+}
+.objectif-niveau-actif {
+  border: 2px solid var(--vert);
+  background: var(--papier-carte);
+  box-shadow: 0 4px 0 var(--vert);
+}
+.objectif-niveau-actif:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--vert); }
+.objectif-niveau-nombre {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: var(--trait-fort) solid var(--encre);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 800 22px var(--fonte-titres);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.objectif-niveau-actif .objectif-niveau-nombre {
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .14) 0 1.1px, transparent 1.1px 4px) var(--vert);
+  color: #F7F4EE;
+}
+.objectif-niveau-texte { display: flex; flex-direction: column; gap: 2px; }
+.objectif-niveau-nom { font: 700 16px var(--fonte-corps); }
+.objectif-niveau-sous { font: 400 12.5px var(--fonte-corps); color: var(--texte-2); }
+.objectif-niveau-tampon {
+  position: absolute;
+  right: 14px;
+  top: -11px;
+  border: var(--trait) solid var(--vert);
+  color: var(--vert);
+  background: var(--vert-pale);
+  border-radius: 5px;
+  padding: 1px 7px;
+  font: 700 10px var(--fonte-corps);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  animation: tamponIn .35s var(--ressort) both;
+}
+.objectif-rappel { margin-top: 18px; color: var(--decor); }
+.objectif-rappel-lien { width: 100%; text-align: left; background: transparent; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.objectif-rappel b { color: var(--texte-2); font-size: 13px; }
+.objectif-souffle { flex: 1; }
+.objectif-etat { font: 700 13px var(--fonte-corps); color: var(--texte-2); text-align: center; margin: 0; }

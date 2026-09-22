@@ -1,0 +1,890 @@
+/**
+ * Écran de jeu méthode (C8) — feuille de l'artboard 2d « Jeu méthode »
+ * (Luminote - DA Jeu.dc.html). Chaque valeur est EXTRAITE de l'export ;
+ * les tokens communs viennent de styles/papier.css. Aucun style inline
+ * dans les composants de features/game.
+ *
+ * Le juice EST la charte : les keyframes (bulbPop, bulbOff, bulbRays,
+ * bulbWiggle) et les ressorts sont ceux de la classe Component de l'export.
+ */
+
+/* ── Tokens locaux à l'écran (valeurs de l'export 2d non promues au DS).
+   Partagés avec le bilan (3a) et l'intro de notion (8c) : « la famille des
+   surfaces posées sur le jeu » — même voile, même rebond. ─────────────── */
+.jeu, .bilan, .notion {
+  --jeu-filigrane: rgba(35, 32, 28, .045); /* clé de sol 2d : 4,5 % (9b : 5 %) */
+  --jeu-grain-fort: rgba(35, 32, 28, .09); /* grain des touches/boutons ronds */
+  --jeu-touche: 72px;
+  --jeu-tap: 150px; /* pad TAP v1 (C15) */
+  --jeu-rond: 48px;
+  /* 6a — entrée en jeu */
+  --jeu-ressort-tampon: cubic-bezier(.3, 1.3, .5, 1); /* stampIn clé/chiffrage, cdNum */
+  --jeu-ombre-decompte: rgba(180, 68, 46, .25);       /* « la seule couleur de la scène » */
+  /* 8a — pause */
+  --jeu-scrim: rgba(35, 32, 28, .32);
+  --jeu-ressort-carte: cubic-bezier(.35, 1.1, .45, 1); /* cardDrop */
+  --jeu-rayon-sortie: 11px;                            /* boutons du cartouche de pause */
+  /* 3a — résultat */
+  --jeu-ressort-pop: cubic-bezier(.3, 1.5, .5, 1);    /* popIn du chiffre, starBump */
+  --jeu-ressort-envol: cubic-bezier(.5, .1, .6, 1);   /* flyStar : accélère puis freine */
+  --jeu-fantome-trait: rgba(35, 32, 28, .4);          /* cercles du clavier fantôme */
+  --jeu-fantome-ligne: rgba(35, 32, 28, .35);         /* lignes des portées fantômes */
+  --jeu-fantome-touche: 58px;
+}
+
+/* ── Page ─────────────────────────────────────────────────────────────── */
+.jeu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+  /* clip (pas hidden) : l'écran ne doit JAMAIS être un conteneur de
+     défilement — le filigrane déborde, et un focus() sur un bouton du bas
+     (tap Android, Playwright) ferait défiler la scène hors champ. */
+  overflow: clip;
+  padding: 20px 18px 18px;
+  box-sizing: border-box;
+  color: var(--encre);
+  /* TOUT tient dans un seul écran, quelle que soit sa hauteur (retour
+     appareil) : les valeurs de l'export (artboard 2d, 390×844) sont les
+     PLAFONDS ; en dessous, les respirations et les touches se resserrent
+     proportionnellement à la hauteur (dvh = hauteur réellement visible,
+     vh en repli), et la portée absorbe le reste. Aucun défilement. */
+  --jeu-touche: clamp(46px, 10.8vh, 72px);
+  --jeu-touche: clamp(46px, 10.8dvh, 72px);
+  --jeu-rond: clamp(38px, 7.4vh, 48px);
+  --jeu-rond: clamp(38px, 7.4dvh, 48px);
+  --jeu-tap: clamp(104px, 22vh, 150px);
+  --jeu-tap: clamp(104px, 22dvh, 150px);
+  --jeu-souffle: clamp(6px, 1.8vh, 14px);   /* gap scène, marge de la barre */
+  --jeu-souffle: clamp(6px, 1.8dvh, 14px);
+  --jeu-souffle-court: clamp(4px, 1.2vh, 9px); /* gap entre les deux rangées */
+  --jeu-souffle-court: clamp(4px, 1.2dvh, 9px);
+  padding: clamp(10px, 2.6vh, 20px) 18px clamp(10px, 2.4vh, 18px);
+  padding: clamp(10px, 2.6dvh, 20px) 18px clamp(10px, 2.4dvh, 18px);
+}
+
+/* Filigrane 2d : bas droit, 230px, incliné de 10° (≠ .filigrane de 9b). */
+.jeu-filigrane {
+  position: absolute;
+  right: -70px;
+  bottom: -30px;
+  font: 400 230px/1 Bravura, serif;
+  color: var(--jeu-filigrane);
+  transform: rotate(10deg);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── En-tête à deux étages ─────────────────────────────────────────────── */
+.jeu-entete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+  position: relative;
+  /* 6a : l'en-tête monte en premier (mentionIn1 .35s ease .1s). */
+  opacity: 0;
+  animation: mentionIn1 .35s ease .1s forwards;
+}
+.jeu-sur-titre {
+  font: italic 400 12.5px var(--fonte-corps);
+  letter-spacing: .05em;
+  color: var(--texte-2);
+}
+.jeu-titre {
+  font: 700 21px var(--fonte-titres);
+  color: var(--encre);
+  margin: 0;
+}
+.jeu-filet { margin: 10px 2px 0; }
+
+/* ── Scène : portées + clavier ─────────────────────────────────────────── */
+.jeu-scene {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--jeu-souffle);
+  min-height: 0;
+  overflow: clip;
+  position: relative;
+}
+/* Les portées sont le SEUL élément qui rétrécit : base = hauteur naturelle
+   du canvas (ratio PAPER_W×PAPER_H à pleine largeur), rétrécissement
+   autorisé (min-height 0), le canvas se recadre en gardant son ratio. */
+.jeu-portees {
+  width: 100%;
+  flex: 0 1 auto;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative; /* le décompte se centre sur les portées */
+}
+
+/* ── Entrée en jeu (6a) : le clavier et la barre attendent la fin du dépôt,
+   puis montent (mentionIn1 .35s ease). Le décompte 1·2·3·4 se tamponne au
+   centre des portées, un chiffre par temps au BPM réel (cdNum .62s). ──── */
+.jeu-attend {
+  opacity: 0;
+  pointer-events: none;
+}
+.jeu-monte { animation: mentionIn1 .35s ease forwards; }
+.jeu-decompte {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.jeu-decompte-chiffre {
+  font: 700 96px var(--fonte-titres);
+  color: var(--encre);
+  text-shadow: 4px 4px 0 var(--jeu-ombre-decompte);
+  opacity: 0;
+  /* Un chiffre = un temps : la durée est posée par l'écran au BPM réel. */
+  animation: cdNum var(--jeu-decompte-duree, .62s) var(--jeu-ressort-tampon) forwards;
+}
+/* mentionIn1 : hoisté dans styles/papier.css (C9). */
+@keyframes cdNum {
+  0% { opacity: 0; transform: scale(2.3) rotate(-6deg); }
+  16% { opacity: 1; transform: scale(.88) rotate(1.5deg); }
+  28% { transform: scale(1.06); }
+  40%, 72% { opacity: 1; transform: scale(1) rotate(0); }
+  100% { opacity: 0; transform: scale(.6); }
+}
+.jeu-canvas {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Clavier 4 + 3 (touches rondes de 72 — moins sur les petits écrans). */
+.jeu-clavier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--jeu-souffle-court);
+  margin-top: 6px;
+}
+.jeu-rangee { display: flex; gap: 9px; }
+
+.touche {
+  width: var(--jeu-touche);
+  height: var(--jeu-touche);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font: 700 16px var(--fonte-corps);
+  color: var(--encre);
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  border: var(--trait-fort) solid var(--encre);
+  background: radial-gradient(var(--jeu-grain-fort) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
+  box-shadow: var(--ombre);
+  transform: scale(1, 1);
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+}
+/* Appui : la touche s'écrase de 3 px et perd son ombre (export). */
+.touche-active {
+  background: radial-gradient(var(--jeu-grain-fort) .5px, transparent .6px) 0 0/4px 4px var(--papier-appui);
+  transform: translateY(3px) scale(1.09, .86);
+  box-shadow: none;
+}
+/* Faux : rouge tant que la touche est tenue (export). */
+.touche-faux {
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+.touche-active.touche-faux {
+  background: radial-gradient(var(--jeu-grain-fort) .5px, transparent .6px) 0 0/4px 4px var(--papier-faux);
+}
+/* Démo : le clavier montre, il ne joue pas. */
+.jeu-clavier-demo .touche { cursor: default; }
+
+/* ── Pad TAP (C15) : l'unique bouton des exercices de rythme, même grammaire
+   que les touches (écrasement de 3 px, perte d'ombre), en grand. ───────── */
+.jeu-tap-cadre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 6px;
+  min-height: calc(var(--jeu-touche) * 2 + var(--jeu-souffle-court)); /* la place du clavier */
+}
+.jeu-tap {
+  width: var(--jeu-tap);
+  height: var(--jeu-tap);
+  font: 800 26px var(--fonte-titres);
+  letter-spacing: .14em;
+}
+
+/* ── Tampon AIDE (SEQ-06) : l'état d'étayage, affiché avant la première note ── */
+/* Retour 16 : les jetons en coin de l'en-tête. */
+.jeu-jetons { position: absolute; right: 2px; top: 4px; display: inline-flex; align-items: center; gap: 4px; font: 700 14px var(--fonte-titres); color: var(--encre); }
+.jeu-aide-cadre { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 6px; }
+/* Retour 15 : l'aide est une NOTE EN MARGE manuscrite (Caveat), pas un bouton —
+   verte comme ce qui se joue, soulignée à la main, encre pour la démo. */
+.jeu-aide-note {
+  display: inline-block;
+  font: 500 24px/1 var(--fonte-manuscrite);
+  color: var(--vert);
+  transform: rotate(-3deg);
+  text-decoration: underline wavy;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  opacity: 0;
+  animation: inkUp .45s ease both;
+}
+.jeu-aide-note-encre { color: var(--encre); }
+/* Retour 14 : « À TOI » éclate — huit points verts qui fusent du tampon. */
+.jeu-aide-eclat { position: absolute; left: 50%; top: 12px; width: 0; height: 0; pointer-events: none; }
+.jeu-aide-eclat i {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--vert);
+  box-shadow: 0 1px 0 var(--vert-sombre);
+  transform: rotate(var(--a)) translateY(0) scale(1);
+  animation: eclatPoint .85s cubic-bezier(.2, .9, .3, 1) forwards;
+}
+.jeu-aide-eclat i:nth-child(1) { --a: 0deg; }
+.jeu-aide-eclat i:nth-child(2) { --a: 45deg; }
+.jeu-aide-eclat i:nth-child(3) { --a: 90deg; }
+.jeu-aide-eclat i:nth-child(4) { --a: 135deg; }
+.jeu-aide-eclat i:nth-child(5) { --a: 180deg; }
+.jeu-aide-eclat i:nth-child(6) { --a: 225deg; }
+.jeu-aide-eclat i:nth-child(7) { --a: 270deg; }
+.jeu-aide-eclat i:nth-child(8) { --a: 315deg; }
+@keyframes eclatPoint {
+  0% { transform: rotate(var(--a)) translateY(0) scale(1); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(var(--a)) translateY(-64px) scale(.3); opacity: 0; }
+}
+/* Retour 14 : la démo se dit — tampon encre sous le titre, phrase au-dessus du clavier. */
+.jeu-demo-note { margin: 0 0 6px; text-align: center; font: 700 13px var(--fonte-corps); color: var(--texte-2); }
+.bilan-seuil { font: 700 12px var(--fonte-corps); color: var(--texte-2); text-align: center; margin: 2px 0 0; opacity: 0; animation: riseIn .35s ease 1.9s forwards; }
+.jeu-aide-tampon { font-size: 11px; padding: 2px 9px; }
+.jeu-aide-plafond { font: 700 10px var(--fonte-corps); color: var(--texte-2); letter-spacing: .02em; }
+
+/* ── Barre du bas : PAUSE ────────────────────────────────────────────── */
+.jeu-barre {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-shrink: 0;
+  margin-top: var(--jeu-souffle);
+  position: relative;
+}
+.jeu-commande {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.jeu-rond {
+  width: var(--jeu-rond);
+  height: var(--jeu-rond);
+  border-radius: 999px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--trait-fort) solid var(--encre);
+  background: radial-gradient(var(--jeu-grain-fort) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
+  box-shadow: var(--ombre);
+  color: var(--encre);
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+}
+.jeu-rond:active {
+  transform: translateY(3px) scale(1.09, .86);
+  box-shadow: 0 0 0 var(--encre);
+}
+.jeu-legende {
+  font: 700 9px var(--fonte-corps);
+  letter-spacing: .06em;
+  color: var(--texte-2);
+}
+.pause-barres { display: flex; gap: 4px; }
+.pause-barre {
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--encre);
+}
+
+/* ── Pause (8a) : le jeu reste visible sous le voile ; le cartouche tombe
+   (cardDrop), le tampon se pose (stampIn .45s), les textes montent
+   (riseIn), trois sorties, trois poids. ────────────────────────────────── */
+.jeu-pause {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+.jeu-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--jeu-scrim);
+  opacity: 0;
+  animation: scrimIn .3s ease forwards;
+}
+.jeu-pause-cadre {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 34px;
+  box-sizing: border-box;
+}
+.jeu-pause-carte {
+  width: 100%;
+  background: var(--papier-carte);
+  border: var(--trait-fort) solid var(--encre);
+  border-radius: var(--rayon-surface);
+  box-shadow: var(--ombre-grande);
+  padding: 26px 20px 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: cardDrop .55s var(--jeu-ressort-carte) .1s forwards;
+}
+.jeu-pause-tampon-cadre {
+  opacity: 0;
+  animation: stampIn .45s var(--ressort) .5s forwards;
+}
+.jeu-pause-tampon {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  border: var(--trait-fort) solid var(--encre);
+  background: radial-gradient(var(--jeu-grain-fort) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
+  box-shadow: var(--ombre);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transform: rotate(-6deg);
+}
+.jeu-pause-tampon .pause-barre {
+  width: 5px;
+  height: 20px;
+  border-radius: 2.5px;
+}
+.jeu-pause-texte {
+  text-align: center;
+  margin-top: 14px;
+  opacity: 0;
+  animation: riseIn .3s ease .75s forwards;
+}
+.jeu-pause-chapitre {
+  font: italic 400 12px var(--fonte-corps);
+  color: var(--texte-2);
+}
+.jeu-pause-titre {
+  font: 700 27px var(--fonte-titres);
+  color: var(--encre);
+  margin: 2px 0 0;
+}
+.jeu-pause-info {
+  font: 400 12.5px var(--fonte-corps);
+  color: var(--texte-2);
+  margin: 6px 0 0;
+  opacity: 0;
+  animation: riseIn .3s ease .85s forwards;
+}
+.jeu-pause-nombre {
+  font: 700 13px var(--fonte-titres);
+  color: var(--encre);
+}
+.jeu-pause-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: stretch;
+  margin-top: 20px;
+  opacity: 0;
+  animation: riseIn .35s ease .95s forwards;
+}
+/* Reprendre : hachures vertes sans bordure, 15px, ombre verte. */
+.jeu-pause-reprendre {
+  border: none;
+  border-radius: var(--jeu-rayon-sortie);
+  padding: 14px;
+  font-size: 15px;
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .14) 0 1.1px, transparent 1.1px 4px) var(--vert);
+  color: #F7F4EE; /* retour 7 : la variable --jeu-encre-sur-vert n existait pas (texte encre sur vert) */
+  box-shadow: var(--ombre-verte);
+}
+/* Recommencer la partition : papier en creux grainé, 14px. */
+.jeu-pause-recommencer {
+  border-radius: var(--jeu-rayon-sortie);
+  padding: 12px;
+  font-size: 14px;
+  background: radial-gradient(var(--jeu-grain-fort) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
+}
+/* Quitter l'exercice : un lien, pas un bouton. */
+.jeu-pause-quitter {
+  background: none;
+  border: none;
+  padding: 6px;
+  font: 400 13px var(--fonte-corps);
+  color: var(--texte-2);
+  text-align: center;
+  cursor: pointer;
+}
+/* scrimIn, cardDrop, stampIn, riseIn : keyframes communs à toute l'app,
+   hoistés dans styles/papier.css (C9). */
+
+/* ── Bilan (3a) : le jeu en fantôme sous le voile ; le cartouche tombe
+   (cardDrop .6s), l'en-tête monte, les étoiles se tamponnent une à une
+   (la manquée reste en contour), le chiffre pop et grimpe, les étoiles
+   reçues s'envolent vers le compteur qui bondit, stats et sorties montent
+   en dernier. Toutes les durées/retards sont ceux de l'export. ────────── */
+.bilan {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+  overflow: clip; /* comme .jeu : jamais un conteneur de défilement */
+  color: var(--encre);
+}
+/* Fantôme du jeu (2d simplifié par l'export : portées nues, cercles vides). */
+.bilan-fantome {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px 18px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.bilan-fantome .jeu-entete { opacity: 1; animation: none; }
+.bilan-fantome-portees {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  padding: 0 0 10px;
+}
+.bilan-fantome-portee {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: .5;
+}
+.bilan-fantome-portee line { stroke: var(--jeu-fantome-ligne); stroke-width: 1; }
+.bilan-fantome-clavier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding-bottom: 24px;
+}
+.bilan-fantome-rangee { display: flex; gap: 9px; }
+.bilan-fantome-touche {
+  width: var(--jeu-fantome-touche);
+  height: var(--jeu-fantome-touche);
+  border-radius: 999px;
+  border: var(--trait-fort) solid var(--jeu-fantome-trait);
+  box-sizing: border-box;
+}
+
+/* Le voile et le cartouche. */
+.bilan-cadre {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  box-sizing: border-box;
+}
+.bilan-carte {
+  width: 100%;
+  background: var(--papier-carte);
+  border: var(--trait-fort) solid var(--encre);
+  border-radius: var(--rayon-surface);
+  box-shadow: var(--ombre-grande);
+  padding: 24px 20px 20px;
+  box-sizing: border-box;
+  position: relative;
+  opacity: 0;
+  animation: cardDrop .6s var(--jeu-ressort-carte) .15s forwards;
+}
+.bilan-entete {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  animation: riseIn .3s ease .55s forwards;
+}
+.bilan-chapitre {
+  font: italic 400 12px var(--fonte-corps);
+  letter-spacing: .05em;
+  color: var(--texte-2);
+}
+.bilan-titre {
+  font: 700 23px var(--fonte-titres);
+  color: var(--encre);
+  margin: 0;
+}
+
+/* Les étoiles penchent (-9°, 3°, 10°) et se tamponnent à .9 / 1.15 / 1.4 s. */
+.bilan-etoiles {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 7px;
+  margin: 18px 0 4px;
+}
+.bilan-etoile-cale:nth-child(1) { margin-bottom: 5px; }
+.bilan-etoile-cale:nth-child(2) { margin-bottom: 16px; }
+.bilan-etoile-cale:nth-child(3) { margin-bottom: 1px; }
+.bilan-etoile-tampon {
+  opacity: 0;
+  animation: stampIn .5s var(--ressort) forwards;
+}
+.bilan-etoile-cale:nth-child(1) .bilan-etoile-tampon { animation-delay: .9s; }
+.bilan-etoile-cale:nth-child(2) .bilan-etoile-tampon { animation-delay: 1.15s; }
+.bilan-etoile-cale:nth-child(3) .bilan-etoile-tampon { animation-delay: 1.4s; }
+.bilan-etoile-tampon.bilan-etoile-manquee { filter: opacity(.45); }
+/* 3e étoile verrouillée (SEQ-06) : le cadenas en coin, comme sur la pièce. */
+.bilan-etoile-cale { position: relative; }
+.bilan-etoile-verrou {
+  position: absolute;
+  right: -4px;
+  bottom: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: var(--trait) solid var(--encre);
+  background: var(--papier-carte);
+  box-shadow: 0 2px 0 var(--encre);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--encre);
+  opacity: 0;
+  animation: riseIn .3s ease 1.7s forwards;
+}
+.bilan-aide-plafond, .bilan-aide-suite {
+  font: 700 12px var(--fonte-corps);
+  color: var(--texte-2);
+  text-align: center;
+  margin: 2px 0 0;
+  opacity: 0;
+  animation: riseIn .35s ease 1.9s forwards;
+}
+.bilan-aide-suite { margin: -6px 0 12px; animation-delay: 2.5s; }
+/* Succès débloqué (C12-c) : tampon terracotta + le nom, lien vers les médailles. */
+.bilan-succes { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: -4px 0 12px; opacity: 0; animation: riseIn .35s ease 2.6s forwards; }
+.bilan-succes-tampon { font-size: 10px; padding: 2px 8px; }
+.bilan-succes-lien { background: none; border: none; padding: 0; font: 700 12.5px var(--fonte-corps); color: var(--encre); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.bilan-aide-demo {
+  background: none;
+  border: none;
+  padding: 0;
+  font: 700 12px var(--fonte-corps);
+  color: var(--terracotta);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.bilan-etoile {
+  width: 64px;
+  height: 64px;
+  display: block;
+  overflow: visible;
+}
+.bilan-etoile-cale:nth-child(1) .bilan-etoile { transform: rotate(-9deg); }
+.bilan-etoile-cale:nth-child(2) .bilan-etoile { transform: rotate(3deg); }
+.bilan-etoile-cale:nth-child(3) .bilan-etoile { transform: rotate(10deg); }
+
+/* Le chiffre pop (1.7 s) et grimpe en .7 s (compteur JS, cubic out). */
+.bilan-pct {
+  text-align: center;
+  opacity: 0;
+  animation: popIn .4s var(--jeu-ressort-pop) 1.7s forwards;
+}
+.bilan-pct-chiffre {
+  font: 700 52px/1 var(--fonte-titres);
+  font-variant-numeric: tabular-nums;
+  color: var(--encre);
+}
+.bilan-pct-unite { font-size: 27px; }
+
+/* Les étoiles reçues s'envolent du chiffre vers le compteur (2.3 / 2.55 s,
+   la troisième à 2.8 s sur la trajectoire de la première — registre D3). */
+.bilan-envol {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.bilan-envol-etoile {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 17px;
+  height: 17px;
+  fill: var(--encre);
+  opacity: 0;
+}
+.bilan-envol-etoile:nth-child(odd) { animation: flyStar1 .55s var(--jeu-ressort-envol) forwards; }
+.bilan-envol-etoile:nth-child(even) { animation: flyStar2 .5s var(--jeu-ressort-envol) forwards; }
+.bilan-envol-etoile:nth-child(1) { animation-delay: 2.3s; }
+.bilan-envol-etoile:nth-child(2) { animation-delay: 2.55s; }
+.bilan-envol-etoile:nth-child(3) { animation-delay: 2.8s; }
+
+/* Stats : des chiffres posés sur le papier, aucun encadré. */
+.bilan-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 15px 0 0;
+  font: 400 12.5px var(--fonte-corps);
+  color: var(--encre-douce);
+  opacity: 0;
+  animation: riseIn .35s ease 2s forwards;
+}
+.bilan-stat {
+  font: 700 16px var(--fonte-titres);
+  color: var(--encre);
+}
+.bilan-stat-ratees { color: var(--terracotta); }
+
+/* Compteur d'étoiles : +1 à chaque étoile reçue (starBump .3s). */
+.bilan-total {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0 18px;
+  opacity: 0;
+  animation: riseIn .35s ease 2.15s forwards;
+}
+.bilan-jetons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: -8px 0 14px;
+  font: 700 13px var(--fonte-corps);
+  opacity: 0;
+  animation: riseIn .35s ease 2.45s forwards;
+}
+.bilan-jetons-perdu { color: var(--terracotta); }
+.bilan-jetons-gagne { color: var(--vert); }
+.bilan-total-etoile {
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+  transform: rotate(-9deg);
+}
+.bilan-total-nombre {
+  font: 700 16px var(--fonte-titres);
+  color: var(--encre);
+  display: inline-block;
+}
+.bilan-total-nombre[data-bond="1"] { animation: starBump1 .3s var(--jeu-ressort-pop); }
+.bilan-total-nombre[data-bond="2"] { animation: starBump2 .3s var(--jeu-ressort-pop); }
+.bilan-total-libelle {
+  font: 400 11.5px var(--fonte-corps);
+  color: var(--texte-2); /* #9A948A de l'export : réservé au décor (charte) */
+}
+
+/* Trois sorties, trois poids : encre pleine, papier grainé, simple lien. */
+.bilan-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  animation: riseIn .35s ease 2.1s forwards;
+}
+.bilan-suivant {
+  border: none;
+  border-radius: var(--jeu-rayon-sortie);
+  padding: 14px;
+  font-size: 15px;
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .14) 0 1.1px, transparent 1.1px 4px) var(--vert);
+  color: #F7F4EE; /* retour 7 : la variable --jeu-encre-sur-vert n existait pas (texte encre sur vert) */
+  box-shadow: var(--ombre-verte);
+}
+.bilan-rejouer {
+  border-radius: var(--jeu-rayon-sortie);
+  padding: 12px;
+  font-size: 14px;
+  background: radial-gradient(var(--jeu-grain-fort) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
+}
+.bilan-lien {
+  background: none;
+  border: none;
+  padding: 6px;
+  font: 400 13px var(--fonte-corps);
+  color: var(--texte-2);
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Trajectoire mesurée (retour appareil n°2) : l'export codait le départ et
+   l'arrivée en pixels (−64/124 → −26/330) ; ici l'écran mesure le centre du
+   pourcentage (--envol-x0/y0) et celui de l'étoile du compteur
+   (--envol-x1/y1) — l'étoile envolée arrive pile sur l'étoile du total.
+   Les valeurs par défaut sont celles de l'export. */
+.bilan-envol {
+  --envol-x0: -39px;
+  --envol-y0: 124px;
+  --envol-x1: -26px;
+  --envol-y1: 330px;
+}
+@keyframes flyStar1 {
+  0% { transform: translate(calc(var(--envol-x0) - 33px), var(--envol-y0)) scale(2.4); opacity: 1; }
+  45% { transform: translate(calc(var(--envol-x0) - 20px), calc(var(--envol-y0) + 72px)) scale(1.6); }
+  80% { opacity: 1; }
+  100% { transform: translate(var(--envol-x1), var(--envol-y1)) scale(.55); opacity: 0; }
+}
+@keyframes flyStar2 {
+  0% { transform: translate(calc(var(--envol-x0) + 33px), calc(var(--envol-y0) - 8px)) scale(2.4); opacity: 1; }
+  45% { transform: translate(calc(var(--envol-x0) + 20px), calc(var(--envol-y0) + 68px)) scale(1.6); }
+  80% { opacity: 1; }
+  100% { transform: translate(var(--envol-x1), var(--envol-y1)) scale(.55); opacity: 0; }
+}
+
+/* Mouvement réduit : tout est posé, sans cascade ni envol. */
+@media (prefers-reduced-motion: reduce) {
+  .bilan-carte, .bilan-entete, .bilan-etoile-tampon, .bilan-pct,
+  .bilan-stats, .bilan-total, .bilan-actions { animation: none; opacity: 1; }
+  .bilan-envol-etoile, .bilan-total-nombre { animation: none; }
+}
+
+/* ── Cartouches d'intro de notion (8c) : « on introduit, on ne célèbre
+   pas » — tout arrive en fondu posé (softIn), pas de tampon ni de rebond.
+   Le corps d'une carte : titre, figure gravée (vrais glyphes Bravura),
+   texte. Les quatre types de la donnée v3 : rhythm, notes, objective,
+   tonality (gamme sur la portée, dans la clé courante). ───────────────── */
+.notion-corps {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 0;
+}
+.notion-titre {
+  font: 700 24px var(--fonte-titres);
+  color: var(--encre);
+  text-align: center;
+  margin: 0;
+  opacity: 0;
+  animation: softIn .6s ease .2s forwards;
+}
+.notion-figure {
+  display: block;
+  overflow: visible;
+  max-width: 100%;
+  height: auto;
+}
+.notion-figure line { stroke: var(--encre); stroke-opacity: .4; stroke-width: 1; }
+.notion-figure .notion-ligne-sup { stroke-opacity: 1; stroke-width: 1.2; }
+.notion-figure text { fill: var(--encre); }
+.notion-figure .notion-glyphe { font: 400 48px Bravura, serif; }
+.notion-figure .notion-legende {
+  font: 700 10.5px var(--fonte-corps);
+  fill: var(--texte-2);
+  text-anchor: middle;
+}
+.notion-figure .notion-nouvelle text { fill: var(--terracotta); }
+.notion-figure .notion-nouvelle .notion-ligne-sup { stroke: var(--terracotta); }
+.notion-figure .notion-encre {
+  opacity: 0;
+  animation: softIn .7s ease .55s forwards;
+}
+.notion-texte {
+  font: 400 13.5px/1.6 var(--fonte-corps);
+  color: var(--encre-douce);
+  text-align: center;
+  margin: 0;
+  opacity: 0;
+  animation: softIn .6s ease 1s forwards;
+}
+/* Rythme : une carte par figure (8c) — la figure gravée AU-DESSUS du texte,
+   tout centré (retour appareil n°2 ; l'export pose la figure sur sa portée
+   puis le texte dessous). */
+.notion-figures {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  opacity: 0;
+  animation: softIn .7s ease .55s forwards;
+}
+.notion-rythme {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+/* Figure gravée (notionRhythm.js) : hauteur fixe = échelle 1/2 (interligne
+   10 px, comme le Bravura 40 px de l'export) ; la largeur suit le ratio du
+   canvas. Une seule figure par carte : elle peut respirer un peu plus. */
+.notion-rythme-canvas {
+  display: block;
+  height: 58px;
+  width: auto;
+}
+.notion-rythme-glyphe {
+  font: 400 44px/1 Bravura, serif;
+  color: var(--encre);
+  min-width: 44px;
+  text-align: center;
+  white-space: nowrap;
+}
+/* Chiffrage empilé (mesure à 6/8…) : deux chiffres Bravura l'un sur l'autre. */
+.notion-rythme-chiffrage {
+  display: flex;
+  flex-direction: column;
+  font-size: 22px;
+  line-height: .95;
+}
+.notion-rythme-nom { font: 700 14px var(--fonte-corps); color: var(--encre); }
+.notion-rythme-duree { font: 400 12px var(--fonte-corps); color: var(--texte-2); }
+.notion-rythme-desc {
+  font: 400 12.5px/1.45 var(--fonte-corps);
+  color: var(--encre-douce);
+  margin: 2px 0 0;
+}
+/* popIn, starBump1/2, softIn, inkUp : hoistés dans styles/papier.css (C9). */
+@media (prefers-reduced-motion: reduce) {
+  .notion-titre, .notion-figure .notion-encre, .notion-texte, .notion-figures { animation: none; opacity: 1; }
+}

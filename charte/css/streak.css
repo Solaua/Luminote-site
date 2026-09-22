@@ -1,0 +1,84 @@
+/* ── Série (9b) : la tache qui respire, la semaine en tampons, les paliers ── */
+.serie { padding: 24px; overflow-y: auto; }
+.serie-filigrane {
+  position: absolute;
+  right: -60px;
+  top: 150px;
+  font: 400 200px/1 Bravura, serif;
+  color: rgba(35, 32, 28, .05);
+  transform: rotate(8deg);
+  pointer-events: none;
+  user-select: none;
+}
+.serie .page-entete { position: relative; }
+.serie-gels-pilule {
+  border: var(--trait) dashed rgba(35, 32, 28, .45);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font: 700 11px var(--fonte-corps);
+  color: var(--texte-2);
+  letter-spacing: .06em;
+}
+.serie-souffle-court { flex: .7; min-height: 10px; }
+.serie-souffle { flex: 1; min-height: 10px; }
+
+.serie-tache-cadre {
+  position: relative;
+  align-self: center;
+  width: 236px;
+  height: 236px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.serie-tache { position: absolute; animation: inkBreath 3.4s ease-in-out infinite; }
+.serie-compteur { position: relative; text-align: center; color: #F5F1E9; }
+.serie-nombre { font: 700 116px/1 var(--fonte-titres); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.serie-libelle { font: italic 400 13px var(--fonte-corps); opacity: .9; margin-top: 2px; }
+@keyframes inkBreath {
+  0%, 100% { transform: scale(1) rotate(0); }
+  50% { transform: scale(1.035) rotate(1.5deg); }
+}
+
+/* La semaine : sept tampons, l'encre pour les jours faits, rouge aujourd'hui, pointillé gelé. */
+.serie-semaine { margin-top: 20px; display: flex; justify-content: center; gap: 8px; }
+.serie-jour {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: var(--trait) solid rgba(35, 32, 28, .3);
+  color: var(--texte-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 12px var(--fonte-corps);
+  box-sizing: border-box;
+}
+.serie-jour-fait {
+  border-color: var(--encre);
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .18) 0 1.1px, transparent 1.1px 4px) var(--encre);
+  color: #F5F1E9;
+}
+.serie-jour-gele { border: var(--trait) dashed var(--encre); color: var(--encre); background: transparent; }
+.serie-jour-aujourdhui { border-color: var(--terracotta); color: var(--terracotta); }
+.serie-jour-aujourdhui.serie-jour-fait { background: var(--terracotta); color: #F5F1E9; box-shadow: 0 2.5px 0 var(--terracotta-sombre); border-color: var(--terracotta); }
+.serie-note { text-align: center; font: 400 11.5px var(--fonte-corps); color: var(--decor); margin: 9px 0 0; }
+
+/* Paliers en filets, même grammaire que les rangs. */
+.serie-paliers-titre { font: 700 10px var(--fonte-corps); letter-spacing: .14em; color: var(--decor); margin-bottom: 2px; }
+.serie-palier { display: flex; align-items: center; gap: 12px; padding: 13px 2px; border-bottom: 1px solid rgba(35, 32, 28, .15); }
+.serie-palier:last-child { border-bottom: none; }
+.serie-palier-jours { font: 700 15px var(--fonte-titres); width: 72px; }
+.serie-palier-texte { flex: 1; font: 400 13px var(--fonte-corps); }
+.serie-palier-tampon { transform: rotate(-4deg); }
+.serie-tampon { font-size: 9.5px; padding: 2px 7px; }
+.serie-palier-bientot { font: 700 12px var(--fonte-corps); color: var(--terracotta); }
+.serie-palier-loin { font: 400 12px var(--fonte-corps); color: var(--decor); }
+
+.serie-gels { margin-top: 12px; }
+.serie-gels b { font-size: 12.5px; color: var(--encre); }
+.serie-gels-texte { margin-top: 3px; }
+
+@media (prefers-reduced-motion: reduce) { .serie-tache { animation: none; } }
+/* Retour 10 : en-tête comme partout (libellé à gauche, retour à droite) ; la pilule des gels descend sous le filet. */
+.serie-gels-pilule-haut { align-self: flex-end; margin-top: 12px; }

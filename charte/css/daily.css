@@ -1,0 +1,94 @@
+/* ── Ouverture du jour (C10-b) — la pièce bondit, les jetons s'encrent, la série se tamponne ── */
+.ouverture { padding: 26px 24px 22px; align-items: center; text-align: center; }
+.ouverture .page-entete { align-self: stretch; }
+.ouverture .filet-entete { align-self: stretch; }
+.ouverture-souffle { flex: 1; min-height: 12px; }
+.ouverture-cache { opacity: 0; pointer-events: none; }
+
+/* Rangée des jetons : les gagnés s'encrent avec un pop. */
+.ouverture-jetons {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 22px;
+}
+.ouverture-jeton-neuf { display: inline-flex; animation: popIn .5s var(--ressort) both; }
+.ouverture-tampon-jetons {
+  position: absolute;
+  right: -14px;
+  top: -22px;
+  font-size: 11px;
+  padding: 2px 9px;
+  transform: rotate(6deg);
+}
+
+/* 9a (retour 8) : le jeton — 150 × 157 comme la planche — tombe de loin en
+   tournant et s'écrase (coinIn), l'onde rouge claque (ringPop .55 s), le
+   « +1 » se frappe (.95 s). Trois dimensions : face, neuf tranches, dos. */
+.ouverture-jeton-cadre { position: relative; width: 150px; height: 157px; margin-top: 8px; perspective: 700px; }
+.ouverture-onde {
+  position: absolute;
+  inset: -22px;
+  border: 2.5px solid var(--terracotta);
+  border-radius: 999px;
+  opacity: 0;
+  animation: ringPop .7s ease .55s;
+}
+.ouverture-jeton {
+  position: relative;
+  width: 150px;
+  height: 157px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: coinIn .72s linear both;
+}
+.ouverture-jeton-face { display: block; width: 150px; height: 157px; overflow: visible; position: relative; transform: translateZ(5px); backface-visibility: hidden; }
+.ouverture-jeton-tranche { position: absolute; left: 15px; top: 19px; width: 120px; height: 120px; border-radius: 999px; background: var(--terracotta-sombre); }
+.ouverture-jeton-tranche:nth-child(2) { transform: translateZ(4px); }
+.ouverture-jeton-tranche:nth-child(3) { transform: translateZ(3px); }
+.ouverture-jeton-tranche:nth-child(4) { transform: translateZ(2px); }
+.ouverture-jeton-tranche:nth-child(5) { transform: translateZ(1px); }
+.ouverture-jeton-tranche:nth-child(6) { transform: translateZ(0); }
+.ouverture-jeton-tranche:nth-child(7) { transform: translateZ(-1px); }
+.ouverture-jeton-tranche:nth-child(8) { transform: translateZ(-2px); }
+.ouverture-jeton-tranche:nth-child(9) { transform: translateZ(-3px); }
+.ouverture-jeton-tranche:nth-child(10) { transform: translateZ(-4px); }
+.ouverture-jeton-dos { position: absolute; left: 0; top: 0; width: 150px; height: 157px; overflow: visible; transform: translateZ(-5px) rotateX(180deg); backface-visibility: hidden; }
+.ouverture-tampon-gain {
+  position: absolute;
+  right: -18px;
+  bottom: -2px;
+  font: 700 14px var(--fonte-corps);
+  padding: 3px 10px;
+  opacity: 0;
+  animation: stampIn .4s var(--ressort) .95s forwards;
+}
+
+.ouverture-titre { font: 800 28px/1.1 var(--fonte-titres); margin: 22px 0 0; opacity: 0; animation: titleSlam .45s cubic-bezier(.3, 1.3, .5, 1) .8s forwards; }
+
+/* Série : la flamme, le nombre de jours, les tampons record / palier. */
+.ouverture-serie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  transition: opacity .35s ease;
+}
+.ouverture-serie-ligne { display: inline-flex; align-items: center; gap: 8px; }
+.ouverture-serie-nombre { font: 800 20px var(--fonte-titres); font-variant-numeric: tabular-nums; }
+.ouverture-serie-tampons { display: flex; gap: 10px; min-height: 26px; }
+
+.ouverture-bouton { transition: opacity .35s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ouverture-jeton, .ouverture-onde, .ouverture-tampon-gain, .ouverture-titre { animation: none; opacity: 1; }
+  .ouverture-jeton-neuf { animation: none; }
+}
+
+/* Proposition du rappel du soir (une fois, après la première session). */
+.ouverture-rappel { margin-top: 18px; text-align: left; font-size: 12px; align-self: stretch; }
+.ouverture-rappel b { color: var(--encre); font-size: 12.5px; }
+.ouverture-rappel-actions { display: flex; gap: 14px; align-items: center; margin-top: 6px; }
+.ouverture-rappel-non { background: none; border: none; padding: 0; font: 400 12px var(--fonte-corps); color: var(--texte-2); cursor: pointer; }

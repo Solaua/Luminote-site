@@ -1,0 +1,491 @@
+/**
+ * Accueil (C9) — artboards 9k (freemium) et 9m (Luminote Complète) de
+ * l'export (home9Vals). Chaque valeur est extraite de l'export ; les tokens
+ * communs viennent de styles/papier.css. Zéro style inline dans l'écran.
+ *
+ * Chronologie de l'entrée (9k) : en-tête .05s → titre .15s → tagline .5s →
+ * pastille .7s → carte du jour .95s → rangs 1.2s → Reprendre 1.4s ; idles :
+ * coinNudge sur la pastille, dailyFloat (22s) et hpHop (26s) très rares.
+ */
+.accueil {
+  padding: 24px;
+  /* La page défile si l'écran est trop court (les respirations flex se
+     replient d'abord) — jamais de contenu coupé. */
+  overflow: clip;
+  overflow-y: auto;
+}
+/* `.accueil > *` (ci-dessous) remet tout en relatif au-dessus du filigrane ;
+   la spécificité supérieure garde celui-ci hors flux. */
+.accueil > .accueil-filigrane {
+  position: absolute;
+  left: -58px;
+  top: 44px;
+  font: 400 210px/1 Bravura, serif;
+  color: rgba(35, 32, 28, .05);
+  transform: rotate(-11deg);
+  pointer-events: none;
+  user-select: none;
+}
+.accueil > * { position: relative; }
+
+/* ── En-tête : compteurs (jetons · étoiles · série) et réglages ──────── */
+.accueil-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  animation: mentionIn1 .35s ease .05s forwards;
+}
+.accueil-compteurs { display: flex; align-items: center; gap: 10px; }
+.accueil-compteur {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 17px var(--fonte-titres);
+  font-variant-numeric: tabular-nums;
+  color: var(--encre);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.accueil-separateur { width: 1px; height: 18px; background: rgba(35, 32, 28, .25); }
+.accueil-reglages {
+  background: none;
+  border: none;
+  padding: 2px;
+  display: inline-flex;
+  cursor: pointer;
+  transition: transform .5s var(--ressort);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.accueil-filet { margin: 12px 14px 0; }
+
+/* ── Héros : Luminote + tagline (9k) / tampon COMPLÈTE (9m) ──────────── */
+.accueil-heros {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+.accueil-logo {
+  font: 700 36px/1 var(--fonte-titres);
+  letter-spacing: -.02em;
+  color: var(--encre);
+  margin: 0;
+  opacity: 0;
+  animation: titleSlam .45s cubic-bezier(.3, 1.3, .5, 1) .15s forwards;
+}
+.accueil-tagline {
+  font: italic 400 13px var(--fonte-corps);
+  color: var(--texte-2);
+  margin: 0;
+  opacity: 0;
+  animation: mentionIn1 .35s ease .5s forwards;
+}
+/* L'inclinaison vit sur le cadre, le tampon (stampIn) sur l'enfant : le
+   forwards de l'animation ne peut pas effacer la rotation. */
+.accueil-complete-cadre { transform: rotate(-2.5deg); }
+/* Retour 10 : un TAMPON (mention), plus la matière des boutons — l'ami croyait qu'il se cliquait. */
+.accueil-complete {
+  opacity: 0;
+  animation: stampIn .4s var(--ressort) .5s forwards;
+  font-size: 11px;
+  letter-spacing: .16em;
+  padding: 3px 12px;
+  transform: none;
+}
+
+.accueil-souffle-court { flex: .7; min-height: 8px; }
+.accueil-souffle { flex: 1; min-height: 8px; }
+
+/* ── Récompense du jour (9k) : la pastille 3D qui sautille puis bondit ── */
+.accueil-recompense {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: popIn .55s var(--ressort) .7s both;
+}
+.accueil-recompense-libelle { font: 700 12px var(--fonte-corps); color: var(--encre); }
+.accueil-recompense-espace { height: 14px; }
+.accueil-pastille-cadre { position: relative; }
+.accueil-pastille {
+  width: 98px;
+  height: 98px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--terracotta);
+  box-shadow: 0 6px 0 var(--terracotta-sombre);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+  animation: coinNudge 2.2s ease-in-out .9s infinite;
+}
+.accueil-pastille::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 999px;
+  background: var(--terracotta-sombre);
+  transform: translateZ(-4.5px);
+}
+.accueil-pastille:active {
+  animation: none;
+  transform: translateY(5px) scale(1.04, .93);
+  box-shadow: 0 1px 0 var(--terracotta-sombre);
+}
+.accueil-pastille-bondit {
+  animation: coinLeap .68s linear forwards;
+  box-shadow: none;
+}
+.accueil-pastille-bondit:active { animation: coinLeap .68s linear forwards; transform: none; }
+/* Épaisseur de la pièce : face avant, dix tranches, dos. */
+.accueil-pastille-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--terracotta);
+  transform: translateZ(5px);
+  backface-visibility: hidden;
+}
+.accueil-pastille-tranche {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--terracotta-sombre);
+}
+.accueil-pastille-tranche:nth-child(1) { transform: translateZ(4px); }
+.accueil-pastille-tranche:nth-child(2) { transform: translateZ(3px); }
+.accueil-pastille-tranche:nth-child(3) { transform: translateZ(2px); }
+.accueil-pastille-tranche:nth-child(4) { transform: translateZ(1px); }
+.accueil-pastille-tranche:nth-child(5) { transform: translateZ(0); }
+.accueil-pastille-tranche:nth-child(6) { transform: translateZ(-1px); }
+.accueil-pastille-tranche:nth-child(7) { transform: translateZ(-2px); }
+.accueil-pastille-tranche:nth-child(8) { transform: translateZ(-3px); }
+.accueil-pastille-tranche:nth-child(9) { transform: translateZ(-4px); }
+.accueil-pastille-tranche:nth-child(10) { transform: translateZ(-4.5px); }
+.accueil-pastille-dos {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .09) 0 1.1px, transparent 1.1px 4px) var(--terracotta-sombre);
+  transform: translateZ(-5px) rotateX(180deg);
+  backface-visibility: hidden;
+}
+.accueil-pastille-svg {
+  width: 88px;
+  height: 92px;
+  overflow: visible;
+  display: block;
+  position: relative;
+  transform: translateZ(5.5px);
+  backface-visibility: hidden;
+}
+.accueil-pastille-dos .accueil-pastille-svg { transform: none; }
+.accueil-pastille-glyphe { font: 400 33px Bravura, serif; }
+/* Tampon « À OUVRIR » (9k) / « À FAIRE » (9m). */
+.accueil-tampon-cadre {
+  position: absolute;
+  right: -24px;
+  top: -8px;
+  transform: rotate(7deg) translateZ(18px);
+}
+.accueil-tampon {
+  opacity: 0;
+  animation: stampIn .4s var(--ressort) 1.35s forwards;
+  display: inline-block;
+  border: 1.5px solid var(--terracotta);
+  color: var(--terracotta);
+  background: var(--terracotta-pale);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font: 700 10px var(--fonte-corps);
+  letter-spacing: .07em;
+  white-space: nowrap;
+  box-shadow: 0 2px 0 var(--terracotta);
+}
+
+/* ── Exercice du jour ─────────────────────────────────────────────────── */
+.accueil-jour-cadre {
+  position: relative;
+  opacity: 0;
+  animation: cardDrop .55s cubic-bezier(.35, 1.1, .45, 1) .95s forwards, dailyFloat 22s linear 38s infinite;
+}
+.accueil-jour-cadre-complete { animation-delay: .7s, 38s; }
+.accueil-jour-cadre .accueil-tampon-cadre {
+  right: 2px;
+  top: -11px;
+  transform: rotate(-5deg);
+}
+.accueil-jour {
+  width: 100%;
+  border: 2px solid var(--encre);
+  border-radius: 7px;
+  background: var(--papier-carte);
+  padding: 15px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--encre);
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--brun-papier);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+}
+.accueil-jour:active {
+  transform: translateY(3px) scale(1.01, .97);
+  box-shadow: 0 1px 0 var(--brun-papier);
+}
+.accueil-jour-titre { font: 700 18px var(--fonte-corps); }
+.accueil-jour-sous { font: 400 12px var(--fonte-corps); color: var(--texte-2); margin-top: 2px; }
+.accueil-jour-fleche { color: var(--vert); font-size: 9.5px; vertical-align: 1px; }
+.accueil-jour-serie { font: 700 12.5px var(--fonte-titres); color: var(--terracotta); }
+
+/* ── Rangs de navigation ──────────────────────────────────────────────── */
+.accueil-rangs {
+  opacity: 0;
+  animation: softIn .4s ease 1.2s forwards;
+}
+.accueil-rang {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 19px 6px;
+  border: none;
+  border-bottom: 1px solid rgba(35, 32, 28, .15);
+  background: transparent;
+  color: var(--encre);
+  font: 700 21px var(--fonte-corps);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .15s;
+}
+.accueil-rang:last-child { border-bottom: none; }
+.accueil-rang:active { background: rgba(35, 32, 28, .05); }
+.accueil-rang-chevron { font: 400 21px var(--fonte-corps); color: var(--vert); }
+.accueil-rang-libelle { display: inline-flex; align-items: center; gap: 9px; }
+.accueil-rang-beta {
+  font: 700 10px var(--fonte-corps);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--texte-2);
+  border: var(--trait) solid rgba(35, 32, 28, .35);
+  border-radius: 5px;
+  padding: 1px 6px;
+}
+
+/* ── C16 (design validé 13/09) : jetons, pièce grisée, bouton du jour, objectif ── */
+.accueil-jetons { display: flex; align-items: center; gap: 3px; }
+/* La pièce tant que l'exercice du jour n'est pas fait : gris papier, contour
+   pointillé, ni ombre ni idle ni appui — et un cadenas en coin. */
+.accueil-pastille-grise,
+.accueil-pastille-grise .accueil-pastille-face {
+  background: repeating-linear-gradient(38deg, rgba(35, 32, 28, .06) 0 1.1px, transparent 1.1px 4px) var(--papier-appui);
+}
+.accueil-pastille-grise {
+  border: 1.5px dashed rgba(35, 32, 28, .35);
+  box-shadow: none;
+  animation: none;
+  cursor: default;
+  transform: none;
+}
+.accueil-pastille-grise::before,
+.accueil-pastille-grise .accueil-pastille-tranche,
+.accueil-pastille-grise .accueil-pastille-dos { background: var(--papier-appui); }
+.accueil-pastille-grise:active { transform: none; box-shadow: none; animation: none; }
+.accueil-pastille-grise .accueil-pastille-svg { opacity: .45; }
+.accueil-pastille-cadenas {
+  position: absolute;
+  right: -8px;
+  bottom: -4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: var(--trait-fort) solid var(--encre);
+  background: var(--papier-carte);
+  box-shadow: var(--ombre-petite);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--encre);
+}
+/* Réveil de la pièce au retour de l'exercice du jour réussi : elle part
+   grise et plate, s'encre en terracotta d'un coup en bondissant, puis
+   reprend son idle ; le tampon « À OUVRIR » (1.35 s) suit. */
+.accueil-pastille-reveil {
+  animation: pieceReveil .9s var(--ressort) 1s both, coinNudge 2.2s ease-in-out 2.2s infinite;
+}
+@keyframes pieceReveil {
+  0% { filter: grayscale(1) opacity(.55); transform: scale(.94); box-shadow: none; }
+  45% { filter: grayscale(0) opacity(1); transform: scale(1.1) translateY(-6px); box-shadow: 0 12px 0 var(--terracotta-sombre); }
+  70% { transform: scale(.97) translateY(2px); box-shadow: 0 4px 0 var(--terracotta-sombre); }
+  100% { filter: none; transform: none; box-shadow: 0 6px 0 var(--terracotta-sombre); }
+}
+/* Le bond vers le joueur (9k, coinLeap) doit GAGNER sur l'animation de réveil
+   déclarée juste au-dessus (même spécificité, ordre de la feuille) — sinon la
+   pièce partait vers l'Ouverture sans son flip (retour 11). */
+.accueil-pastille-bondit, .accueil-pastille-reveil.accueil-pastille-bondit { animation: coinLeap .68s linear forwards; filter: none; box-shadow: none; }
+/* Récompense prise : la pièce reste terracotta, posée, sans idle ni appui. */
+/* Récompense prise : le paquet ouvert, un peu grisé (retour 16/09). */
+.accueil-pastille-ouverte { cursor: default; animation: none; opacity: .9; } /* retour 8 : plus de grisé qui délave les rubans */
+.accueil-pastille-ouverte:active { transform: none; animation: none; box-shadow: 0 3px 0 var(--terracotta-sombre); }
+/* Le bouton « Exercice du jour », terracotta comme la pièce. */
+.accueil-jour-bouton {
+  margin-top: 4px;
+  min-width: 250px;
+  border: none;
+  border-radius: 12px;
+  padding: 13px 28px;
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--terracotta);
+  color: #F7F4EE;
+  box-shadow: 0 4px 0 var(--terracotta-sombre);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+}
+.accueil-jour-bouton:active { transform: translateY(3px) scale(1.01, .97); box-shadow: 0 1px 0 var(--terracotta-sombre); }
+/* Fait (retour 10) : vert bouteille, coché. */
+/* Retour 16 : fait = papier et encre (le vert se confondait avec « jouer »). */
+.accueil-jour-bouton-fait { background: var(--papier); color: var(--encre); box-shadow: inset 0 0 0 1.5px var(--encre), 0 3px 0 var(--encre); }
+.accueil-jour-coche { font-weight: 800; margin-right: 2px; }
+/* Pas encore fait : le bouton pulse doucement (retour 6) — l'idle discret de l'accueil. */
+.accueil-jour-bouton-afaire { animation: jourPulse 2.4s ease-in-out 2.2s infinite; }
+@keyframes jourPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+.accueil-jour-bouton-afaire:active { animation: none; }
+@media (prefers-reduced-motion: reduce) { .accueil-jour-bouton-afaire { animation: none; } }
+.accueil-jour-bouton-titre { font: 800 17px var(--fonte-titres); display: flex; align-items: center; gap: 8px; }
+.accueil-jour-bouton-titre .accueil-jour-fleche { color: inherit; font-size: 11px; }
+.accueil-jour-bouton-sous { font: 400 12px var(--fonte-corps); opacity: .9; }
+/* Retour 14 : l'exercice du jour ne se joue qu'une fois — le rappel sous le bouton. */
+.accueil-jour-message { margin: 10px 0 0; font-size: 11px; padding: 3px 10px; text-transform: none; letter-spacing: .02em; }
+/* Objectif du jour : une pilule, les cases se remplissent en vert. */
+.accueil-objectif-cadre { display: flex; justify-content: center; margin-bottom: 14px; opacity: 0; animation: softIn .4s ease 1.3s forwards; }
+.accueil-objectif {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: var(--trait) solid var(--encre);
+  border-radius: 999px;
+  padding: 6px 14px;
+  background: var(--papier-carte);
+  font: 700 12.5px var(--fonte-corps);
+  color: var(--encre);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.accueil-objectif-atteint { border-color: var(--vert); color: var(--vert); }
+.accueil-objectif-cases { display: flex; gap: 4px; }
+.accueil-objectif-case { width: 12px; height: 12px; border-radius: 3px; border: var(--trait) dashed rgba(35, 32, 28, .5); box-sizing: border-box; }
+.accueil-objectif-case-faite { background: var(--vert); border: var(--trait) solid var(--encre); }
+.accueil-objectif-compte { font-weight: 400; color: var(--texte-2); }
+.accueil-objectif-choisir { color: var(--terracotta); font-weight: 700; }
+/* Pas encore choisi (retour 10) : la pilule se voit — cadre terracotta, ombre pleine. */
+.accueil-objectif:has(.accueil-objectif-choisir) { border-color: var(--terracotta); box-shadow: 0 3px 0 var(--terracotta); }
+.accueil-beta {
+  font: 400 12px var(--fonte-corps);
+  color: var(--vert);
+  border: 1px solid rgba(47, 107, 82, .45);
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-left: 9px;
+  vertical-align: 3px;
+}
+
+/* ── Reprendre ────────────────────────────────────────────────────────── */
+.accueil-reprendre-cadre {
+  margin: 0 -6px;
+  opacity: 0;
+  animation: titleSlam .42s cubic-bezier(.3, 1.3, .5, 1) 1.4s forwards, hpHop 26s linear 33s infinite;
+}
+.accueil-reprendre {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--vert);
+  color: #F7F4EE;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--vert-sombre);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+}
+.accueil-reprendre:active {
+  transform: translateY(4px) scale(1.015, .95);
+  box-shadow: 0 1px 0 var(--vert-sombre);
+}
+.accueil-reprendre-filigrane {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .2;
+  pointer-events: none;
+}
+.accueil-reprendre-filigrane text { font: 400 86px Bravura, serif; fill: var(--papier-carte); }
+.accueil-reprendre-titre { display: block; position: relative; font: 700 24px/1 var(--fonte-titres); }
+.accueil-reprendre-sous { display: block; position: relative; font: 400 12.5px var(--fonte-corps); opacity: .85; margin-top: 5px; }
+
+/* ── Coulisses (dev / smoke) : sélecteur d'exercice, vitrine, langue ──── */
+.accueil-coulisses {
+  margin-top: 18px;
+  padding: 10px 12px;
+  border: var(--trait) dashed rgba(35, 32, 28, .35);
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font: 400 12px var(--fonte-corps);
+}
+.accueil-coulisses select,
+.accueil-coulisses button {
+  font: 400 12px var(--fonte-corps);
+  padding: 5px 8px;
+  border-radius: 8px;
+  border: var(--trait) solid var(--encre);
+  background: transparent;
+  color: var(--encre);
+  max-width: 100%;
+}
+.accueil-coulisses .coulisses-on { background: var(--encre); color: var(--papier); }
+
+@media (prefers-reduced-motion: reduce) {
+  .accueil-entete, .accueil-logo, .accueil-tagline, .accueil-complete, .accueil-recompense,
+  .accueil-tampon, .accueil-jour-cadre, .accueil-rangs, .accueil-objectif-cadre, .accueil-reprendre-cadre { animation: none; opacity: 1; }
+  .accueil-pastille, .accueil-pastille-reveil { animation: none; }
+}
+/* Le rouage (retour 9) : un quart de tour à l'appui, l'ombre pleine qui s'écrase. */
+.accueil-reglages:active { transform: rotate(45deg) scale(.92); }
+.accueil-rouage { display: block; }
+
+/* Retour rapide (retour 10) : au second passage dans la session, tout est déjà en place —
+   plus de cascade d'entrée, seuls les idles restent. */
+.accueil-rapide .accueil-entete, .accueil-rapide .accueil-logo, .accueil-rapide .accueil-tagline, .accueil-rapide .accueil-complete,
+.accueil-rapide .accueil-recompense, .accueil-rapide .accueil-tampon, .accueil-rapide .accueil-rangs,
+.accueil-rapide .accueil-objectif-cadre, .accueil-rapide .accueil-reprendre-cadre { animation: none; opacity: 1; }
+.accueil-rapide .accueil-jour-cadre { opacity: 1; animation: dailyFloat 22s linear 38s infinite; }

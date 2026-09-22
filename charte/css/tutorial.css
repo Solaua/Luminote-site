@@ -1,0 +1,70 @@
+/* ── Leçon 0 (C13) : cartouches papier, portée à états, clavier du jeu ── */
+.tuto {
+  padding: 22px 20px 20px;
+  align-items: stretch;
+  /* Le clavier du jeu hors de l'écran de jeu : ses tokens locaux (game.css). */
+  --jeu-touche: clamp(46px, 10.8dvh, 72px);
+  --jeu-souffle-court: 8px;
+  --jeu-grain-fort: rgba(35, 32, 28, .09);
+}
+/* Les figures de notion arrivent en cascade dans leur cartouche ; ici la carte a son propre fondu. */
+.tuto .notion-encre, .tuto .notion-figures, .tuto .notion-titre, .tuto .notion-texte, .tuto .notion-rythme { animation: none; opacity: 1; }
+.tuto-filigrane {
+  position: absolute;
+  right: -60px;
+  top: 120px;
+  font: 400 220px/1 Bravura, serif;
+  color: rgba(35, 32, 28, .05);
+  transform: rotate(8deg);
+  pointer-events: none;
+  user-select: none;
+}
+.tuto-souffle { flex: 1; min-height: 10px; }
+.tuto-souffle-court { flex: .55; }
+.tuto-souffle-bas { flex: 1.3; }
+/* Bienvenue : « C'est parti » plus haut, centré, un peu plus gros (retour 6). */
+.tuto-depart { align-self: center; width: min(78%, 300px); font-size: 17px; padding: 16px 22px; margin-top: 0; }
+.tuto-entete { display: flex; justify-content: flex-end; align-items: baseline; margin-bottom: 14px; } /* plus de tag « Leçon 0 » (retour 6) */
+.tuto-libelle { font: 700 10px var(--fonte-corps); letter-spacing: .18em; color: var(--texte-2); text-transform: uppercase; }
+.tuto-compte { font: 700 12px var(--fonte-titres); color: var(--texte-2); font-variant-numeric: tabular-nums; }
+.tuto-logo { text-align: center; }
+.tuto-tagline { text-align: center; font: italic 400 14px var(--fonte-corps); color: var(--texte-2); margin: 4px 0 0; }
+.tuto-texte { font: 400 14px/1.55 var(--fonte-corps); color: var(--encre-douce); text-align: center; margin: 14px 0 0; }
+.tuto-tap { font: 800 13px var(--fonte-titres); letter-spacing: .12em; border: var(--trait) solid var(--encre); border-radius: 999px; padding: 2px 8px; }
+.tuto-bouton { width: 100%; margin-top: 18px; }
+.tuto-passer { align-self: center; margin-top: 12px; }
+
+/* Le cartouche : la grammaire des cartes de notion. */
+.tuto-carte {
+  background: var(--papier-carte);
+  border: var(--trait-fort) solid var(--encre);
+  border-radius: var(--rayon-surface);
+  box-shadow: var(--ombre-grande);
+  padding: 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: softIn .5s ease .1s forwards;
+}
+.tuto-carte .notion-corps { width: 100%; }
+.tuto-carte-portee { gap: 10px; }
+.tuto-consigne { font: 700 15px/1.4 var(--fonte-corps); text-align: center; margin: 0; min-height: 42px; }
+.tuto-compte-notes { font: 700 12px var(--fonte-titres); color: var(--texte-2); font-variant-numeric: tabular-nums; }
+
+/* La portée : notes faites à l'encre, active en terracotta avec un halo qui pulse, à venir pâles. */
+.tuto-portee { max-width: 100%; height: auto; }
+.tuto-note-avenir .notion-glyphe { fill: rgba(35, 32, 28, .28); }
+.tuto-note-active .notion-glyphe, .tuto-note-active .notion-legende { fill: var(--terracotta); }
+.tuto-halo { fill: var(--terracotta-pale); stroke: var(--terracotta); stroke-width: 1.5; animation: tutoHalo 1.4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+@keyframes tutoHalo { 0%, 100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.18); opacity: .5; } }
+
+/* Bravo : tampon, phrase, Suivant, Rejouer. */
+.tuto-bravo { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.tuto-bravo-tampon { font-size: 12px; }
+.tuto-bravo-texte { font: 700 17px/1.4 var(--fonte-corps); text-align: center; margin: 8px 0 0; }
+.tuto-pret { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font: 400 14px/1.5 var(--fonte-corps); color: var(--encre-douce); }
+.tuto-pret li { padding-left: 14px; border-left: 3px solid var(--vert); }
+.tuto-fin-titre { margin: 14px 0 0; text-align: center; }
+
+@media (prefers-reduced-motion: reduce) { .tuto-carte { animation: none; opacity: 1; } .tuto-halo { animation: none; } }

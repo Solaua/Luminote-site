@@ -1,0 +1,90 @@
+/* ── Progrès (C12-b) : indice, activité, anneaux de précision, courbes ── */
+.progres { padding: 26px 24px 22px; overflow-y: auto; }
+.progres-tete { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 22px; }
+.progres-indice { display: flex; flex-direction: column; }
+.progres-indice-nombre { font: 800 54px/1 var(--fonte-titres); color: var(--terracotta); font-variant-numeric: tabular-nums; }
+.progres-indice-libelle { font: 700 10px var(--fonte-corps); letter-spacing: .14em; text-transform: uppercase; color: var(--texte-2); margin-top: 4px; }
+.progres-activite { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.progres-semaine { display: flex; gap: 5px; }
+.progres-jour { width: 12px; height: 12px; border-radius: 999px; border: var(--trait) solid rgba(35, 32, 28, .3); box-sizing: border-box; }
+.progres-jour-actif { background: var(--encre); border-color: var(--encre); }
+.progres-jour-aujourdhui { border-color: var(--terracotta); }
+.progres-jour-aujourdhui.progres-jour-actif { background: var(--terracotta); }
+.progres-activite-texte { font: 400 12px var(--fonte-corps); color: var(--texte-2); }
+.progres-vide { margin-top: 22px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+
+.progres-onglets { display: flex; gap: 8px; margin-top: 22px; }
+.progres-onglet {
+  flex: 1;
+  border: var(--trait) solid var(--encre);
+  border-radius: 999px;
+  padding: 9px 0;
+  background: transparent;
+  color: var(--encre);
+  font: 700 13px var(--fonte-corps);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.progres-onglet-on { background: var(--encre); color: #F5F1E9; box-shadow: 0 2.5px 0 var(--encre); }
+.progres-astuce { font: 400 11.5px/1.5 var(--fonte-corps); color: var(--decor); margin: 12px 0 0; }
+.progres-onglet-vide { font: 400 13px var(--fonte-corps); color: var(--texte-2); margin: 18px 0 0; }
+.progres-section-titre { font: 700 10px var(--fonte-corps); letter-spacing: .16em; text-transform: uppercase; color: var(--texte-2); margin: 18px 0 4px; }
+.progres-lignes { list-style: none; margin: 0; padding: 0; }
+.progres-ligne { border-bottom: var(--trait) solid rgba(35, 32, 28, .12); }
+.progres-ligne-entete {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 0;
+  background: none;
+  border: none;
+  color: var(--encre);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.progres-ligne-texte { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.progres-ligne-nom { font: 700 14px var(--fonte-corps); }
+.progres-ligne-sous { font: 400 12px var(--fonte-corps); color: var(--texte-2); }
+.progres-ligne-indice { font: 400 11.5px var(--fonte-corps); color: var(--texte-2); }
+.progres-ligne-corps { padding: 0 0 10px 52px; }
+
+/* Anneau de précision : fond papier creusé, arc de la teinte, chiffre au centre. */
+.progres-anneau { flex-shrink: 0; }
+.progres-anneau-fond { fill: none; stroke: rgba(35, 32, 28, .12); stroke-width: 4; }
+.progres-anneau-arc { fill: none; stroke-width: 4; stroke-linecap: round; }
+.progres-anneau-vert .progres-anneau-arc { stroke: var(--vert); }
+.progres-anneau-ocre .progres-anneau-arc { stroke: var(--ocre); }
+.progres-anneau-terracotta .progres-anneau-arc { stroke: var(--terracotta); }
+.progres-anneau-pale .progres-anneau-arc { stroke: rgba(35, 32, 28, .3); }
+.progres-anneau-texte { font: 800 11px var(--fonte-titres); fill: var(--encre); }
+.progres-anneau-pale .progres-anneau-texte { fill: var(--texte-2); }
+
+/* Courbe des quatorze jours : repères 50 / 100, trait encre, points terracotta. */
+.progres-courbe { width: 100%; height: 60px; display: block; }
+.progres-courbe-repere { stroke: rgba(35, 32, 28, .15); stroke-width: 1; stroke-dasharray: 3 3; }
+.progres-courbe-trait { fill: none; stroke: var(--encre); stroke-width: 1.6; stroke-linejoin: round; }
+.progres-courbe-point { fill: var(--terracotta); }
+.progres-courbe-vide { font: 400 11.5px var(--fonte-corps); color: var(--texte-2); margin: 0; }
+
+/* Succès (10d) : atteignables depuis Progrès, plus depuis les réglages (retour 6). */
+.progres-succes {
+  margin-top: 22px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  border: none;
+  border-top: var(--trait) solid rgba(35, 32, 28, .18);
+  background: none;
+  color: var(--encre);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.progres-succes-texte { display: flex; flex-direction: column; gap: 3px; }
+.progres-succes-nom { font: 700 17px var(--fonte-corps); }
+.progres-succes-sous { font: 400 12.5px/1.4 var(--fonte-corps); color: var(--texte-2); }

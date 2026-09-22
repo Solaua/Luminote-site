@@ -1,0 +1,61 @@
+/* ── Succès (10d) : médailles rouges hachurées, FAIT tamponné, jauges vertes, cadenas ── */
+.succes { padding: 26px 24px 22px; overflow-y: auto; position: relative; }
+.succes-filigrane {
+  position: absolute;
+  right: -60px;
+  top: 150px;
+  font: 400 200px/1 Bravura, serif;
+  color: rgba(35, 32, 28, .05);
+  transform: rotate(8deg);
+  pointer-events: none;
+  user-select: none;
+}
+.succes .page-entete { position: relative; }
+.succes-compte { display: block; margin-top: 12px; font: 700 12px var(--fonte-corps); color: var(--texte-2); }
+.succes-titre { font: 800 30px/1.1 var(--fonte-titres); margin: 22px 0 8px; }
+.succes-liste { list-style: none; margin: 0; padding: 0; }
+.succes-rang { display: flex; align-items: center; gap: 12px; padding: 10px 2px; border-bottom: 1px solid rgba(35, 32, 28, .12); position: relative; }
+.succes-rang:last-child { border-bottom: none; }
+.succes-rang-loin .succes-nom, .succes-rang-loin .succes-desc { color: var(--texte-2); }
+
+.succes-medaille {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: var(--trait) dashed rgba(35, 32, 28, .45);
+  color: var(--texte-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.succes-medaille-faite { border: var(--trait-fort) solid var(--encre); color: #F5F1E9; box-shadow: 0 3px 0 var(--terracotta-sombre); }
+.succes-medaille-fond { position: absolute; inset: 0; width: 100%; height: 100%; }
+.succes-embleme { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+.succes-embleme-texte { font: 800 13px var(--fonte-titres); }
+.succes-embleme-glyphe { font: 400 22px Bravura, serif; line-height: 1; }
+.succes-embleme-n {
+  position: absolute;
+  right: -12px;
+  bottom: -9px;
+  font: 800 9px var(--fonte-titres);
+  color: var(--encre);
+  background: var(--papier-carte);
+  border: 1px solid var(--encre);
+  border-radius: 999px;
+  padding: 0 4px;
+  line-height: 13px;
+}
+.succes-medaille-faite .succes-embleme-n { color: var(--terracotta); }
+
+.succes-texte { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.succes-nom { font: 800 13px var(--fonte-corps); }
+.succes-desc { font: 400 11px var(--fonte-corps); color: var(--texte-2); }
+.succes-jauge-rang { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+.succes-jauge { flex: 1; height: 5px; border-radius: 999px; background: var(--papier-creuse); overflow: hidden; }
+.succes-jauge-plein { display: block; height: 100%; width: calc(var(--succes-ratio, 0) * 100%); background: var(--vert); border-radius: 999px; }
+.succes-compteur { font: 700 10px var(--fonte-titres); color: var(--texte-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.succes-tampon-cadre { transform: rotate(-4deg); }
+.succes-tampon { font-size: 9.5px; padding: 2px 7px; }
