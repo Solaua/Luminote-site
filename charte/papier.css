@@ -1,0 +1,779 @@
+/**
+ * Design system « papier » — chantier C7.
+ * Source de vérité : Design/Refonte design Luminote app/ (charte Tour 11).
+ * Valeurs EXTRAITES de l'export (couleurs, ombres, ressorts, grain 4px,
+ * hachures 38°) — ne pas inventer de nouvelles valeurs : toute variation
+ * passe par un token.
+ *
+ * Doctrine v2 : ZÉRO style inline dans les écrans — les composants
+ * consomment ces classes/tokens. Les ombres sont OPAQUES et jamais floues
+ * (0 3px 0 encre) ; l'appui d'un bouton = translateY(3px) + perte d'ombre ;
+ * toute fantaisie est une ANIMATION (aucune décoration statique) ; un seul
+ * idle discret par écran maximum.
+ */
+
+/* ── Fontes (auto-hébergées, subsets latins — même modèle que Quicksand) ── */
+@font-face {
+  font-family: 'Atkinson Hyperlegible'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible'; font-style: italic; font-weight: 400; font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-latin-400-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible'; font-style: normal; font-weight: 700; font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-latin-700-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 600; font-display: swap;
+  src: url('/fonts/bricolage-grotesque-latin-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-display: swap;
+  src: url('/fonts/bricolage-grotesque-latin-700-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Caveat'; font-style: normal; font-weight: 500; font-display: swap;
+  src: url('/fonts/caveat-latin-500-normal.woff2') format('woff2');
+}
+
+:root {
+  /* ── Papiers (fonds) ── */
+  --papier: #FBF8F1;         /* la page */
+  --papier-carte: #FFFDF8;   /* cartes posées sur la page */
+  --papier-creuse: #F3F0E9;  /* surfaces en creux (pistes, fonds de jauge) */
+  --papier-appui: #E2DED5;   /* état appui des surfaces papier (Tour 1) */
+  --papier-pupitre: #EDEAE3; /* hors-page (fond de pupitre) */
+  --brun-papier: #6B5F4A;    /* ombre brun papier des cartes (Tour 5) */
+
+  /* ── Encres (textes/traits) ── */
+  --encre: #23201C;
+  --encre-douce: #4A453E;    /* texte secondaire appuyé */
+  --texte-2: #6B655C;        /* texte secondaire — AA sur papier */
+  /* #9A948A ≈ 2,4:1 sur papier : RÉSERVÉ AU DÉCOR (filigranes, traits
+     morts) — jamais pour du texte porteur de sens (angle mort corrigé). */
+  --decor: #9A948A;
+
+  /* ── Les DEUX accents (doctrine) : rouge = se GAGNE, vert = se JOUE ── */
+  --terracotta: #B4442E;
+  --terracotta-sombre: #7E2E1F;  /* ombre/appui des surfaces terracotta */
+  --terracotta-vive: #8E3320;    /* hover/lien */
+  --terracotta-pale: #FBF2EF;    /* fond des tampons/cartouches rouges */
+  --vert: #2F6B52;
+  --vert-sombre: #1F4A38;        /* ombre/appui des surfaces vertes */
+  --vert-pale: #EFF5F1;          /* fond du jugement PARFAIT */
+  --ocre: #C79A3B;               /* exception unique : mention « BIEN » (bordure/ombre) */
+  --ocre-fonce: #A97F2C;         /* texte du jugement BIEN */
+  --ocre-pale: #FAF4E4;          /* fond du jugement BIEN */
+  --papier-faux: #F3DDD6;        /* état « faux » d'un bouton du clavier (Tour 1) */
+
+  /* ── Teintes de notes (7, rabattues papier) — table UNIFIÉE C7 ──
+     Deux tables divergeaient dans le design (RÉ/MI/FA) : la variante la
+     plus sombre gagne (meilleur contraste sur papier). Miroir JS pour les
+     canvas : src/styles/papier.js */
+  --note-do: #BF5B54;
+  --note-re: #C2803F;
+  --note-mi: #A8912F;
+  --note-fa: #4E8F72;
+  --note-sol: #4C7E96;
+  --note-la: #7A6E9E;
+  --note-si: #B0658A;
+
+  /* ── Traits & rayons (charte Tour 11 : rayons 10/16 ; cartouches 5) ── */
+  --trait: 1.25px;
+  --trait-fort: 1.5px;
+  --rayon-cartouche: 5px;  /* cartouches, tampons, rangs de sommaire */
+  --rayon-bouton: 10px;    /* boutons */
+  --rayon-surface: 16px;   /* cartes, surfaces */
+
+  /* ── Ombres opaques, JAMAIS floues ── */
+  --ombre: 0 3px 0 var(--encre);            /* canonique */
+  --ombre-petite: 0 2px 0 var(--encre);
+  --ombre-grande: 0 5px 0 var(--encre);
+  --ombre-terracotta: 0 3px 0 var(--terracotta-sombre);
+  --ombre-verte: 0 3px 0 var(--vert-sombre);
+  --ombre-brune: 0 4px 0 var(--brun-papier); /* cartes de l'accueil (Tour 5) */
+
+  /* ── Ressorts (extraits du design) ── */
+  --ressort: cubic-bezier(.3, 1.4, .5, 1);       /* canonique */
+  --ressort-fort: cubic-bezier(.34, 2.1, .6, 1); /* rebond marqué (tampons, pops) */
+  --ressort-doux: cubic-bezier(.3, 1.05, .5, 1); /* glissements */
+  --ressort-depli: cubic-bezier(.3, 1.25, .45, 1); /* dépliage max-height au tap (5a) */
+  --sortie: cubic-bezier(.25, .6, .25, 1);       /* sorties/fondus */
+
+  /* ── Fontes ── */
+  --fonte-corps: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --fonte-titres: 'Bricolage Grotesque', 'Atkinson Hyperlegible', sans-serif;
+  --fonte-manuscrite: 'Caveat', cursive;
+  /* Bravura (glyphes SMuFL) reste déclarée dans index.css (préchargée). */
+}
+
+/* ── Textures ─────────────────────────────────────────────────────────── */
+
+/* Grain papier : pointillé 4px extrait du design. La page et les creux. */
+.grain {
+  background: radial-gradient(rgba(35, 32, 28, .05) .5px, transparent .6px) 0 0/4px 4px var(--papier);
+}
+.grain-carte {
+  background: radial-gradient(rgba(35, 32, 28, .05) .5px, transparent .6px) 0 0/4px 4px var(--papier-carte);
+}
+.grain-creuse {
+  background: radial-gradient(rgba(35, 32, 28, .09) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
+}
+
+/* Hachures 38° : TOUT aplat d'accent est hachuré (doctrine). */
+.hachures-terracotta {
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--terracotta);
+  color: #FFFDF8;
+}
+.hachures-vert {
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--vert);
+  color: #FFFDF8;
+}
+.hachures-encre {
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .14) 0 1.1px, transparent 1.1px 4px) var(--encre);
+  color: var(--papier-carte);
+}
+
+/* Filigrane Bravura (charte art. 4) : clé de sol géante SUR CHAQUE ÉCRAN —
+   4-5 % d'encre, inclinée, coupée par un bord. Valeurs de l'écran 9b.
+   L'élément porte le glyphe (ex. &#xE050;) ; le parent doit être
+   position:relative + overflow:hidden. */
+.filigrane {
+  position: absolute;
+  right: -60px;
+  top: 150px;
+  font: 400 200px/1 Bravura, serif;
+  color: rgba(35, 32, 28, .05);
+  transform: rotate(8deg);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Filet de header estompé aux extrémités (charte art. 4, extrait de 9d). */
+.filet-entete {
+  height: 5px;
+  background:
+    linear-gradient(90deg, transparent, rgba(35, 32, 28, .22) 22%, rgba(35, 32, 28, .22) 78%, transparent) 0 0/100% 1px no-repeat,
+    linear-gradient(90deg, transparent, rgba(35, 32, 28, .05) 28%, rgba(35, 32, 28, .05) 72%, transparent) 0 1px/100% 4px no-repeat;
+}
+
+/* ── Typo utilitaires ─────────────────────────────────────────────────── */
+.titre {
+  font-family: var(--fonte-titres);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--encre);
+  margin: 0;
+}
+.chiffre { /* les chiffres (scores, compteurs) sont TOUJOURS en Bricolage tabulaire */
+  font-family: var(--fonte-titres);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.manuscrit { font-family: var(--fonte-manuscrite); }
+.libelle { /* petites étiquettes espacées (LES NOTES, OCTAVE 4…) */
+  font-family: var(--fonte-corps);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--texte-2);
+}
+
+/* ── Boutons à appui ──────────────────────────────────────────────────── */
+/* Charte article 3 (Disney) : SQUASH & STRETCH sur tout appui — le bouton
+   descend de la hauteur de son ombre ET s'écrase (scale 1.015,.96),
+   l'ombre opaque s'absorbe. Ressort d'appui = --ressort-fort en .16s
+   (valeurs extraites de l'export : homeCVals/hcPlay). */
+.btn {
+  font-family: var(--fonte-corps);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--encre);
+  background: var(--papier-carte);
+  border: var(--trait-fort) solid var(--encre);
+  border-radius: var(--rayon-bouton);
+  padding: 10px 20px;
+  box-shadow: var(--ombre);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort);
+}
+.btn:active {
+  transform: translateY(3px) scale(1.015, .96);
+  box-shadow: 0 0 0 var(--encre);
+}
+/* Variantes : à combiner avec .btn */
+.btn-terracotta {
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--terracotta);
+  color: #FFFDF8;
+  border-color: var(--terracotta-sombre);
+  box-shadow: var(--ombre-terracotta);
+}
+.btn-terracotta:active { box-shadow: 0 0 0 var(--terracotta-sombre); }
+.btn-vert {
+  background: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px) var(--vert);
+  color: #FFFDF8;
+  border-color: var(--vert-sombre);
+  box-shadow: var(--ombre-verte);
+}
+.btn-vert:active { box-shadow: 0 0 0 var(--vert-sombre); }
+.btn-discret { /* action tertiaire : trait fin, ombre petite */
+  font-weight: 400;
+  border-width: var(--trait);
+  box-shadow: var(--ombre-petite);
+  padding: 8px 14px;
+}
+.btn-discret:active { transform: translateY(2px); }
+.btn:disabled {
+  opacity: .45;
+  box-shadow: var(--ombre-petite);
+  cursor: default;
+}
+.btn:disabled:active { transform: none; }
+
+/* ── Cartes ───────────────────────────────────────────────────────────── */
+.carte {
+  background: radial-gradient(rgba(35, 32, 28, .05) .5px, transparent .6px) 0 0/4px 4px var(--papier-carte);
+  border: var(--trait) solid var(--encre);
+  border-radius: var(--rayon-surface);
+  box-shadow: var(--ombre);
+}
+.carte-plate { /* sans ombre : contenus posés, non interactifs */
+  background: radial-gradient(rgba(35, 32, 28, .05) .5px, transparent .6px) 0 0/4px 4px var(--papier-carte);
+  border: var(--trait) solid var(--encre);
+  border-radius: var(--rayon-surface);
+}
+.creux { /* surface en creux (fonds de jauge, pistes, puits) */
+  background: radial-gradient(rgba(35, 32, 28, .09) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
+  border: var(--trait) solid rgba(35, 32, 28, .35);
+  border-radius: var(--rayon-bouton);
+}
+
+/* ── Tampon ───────────────────────────────────────────────────────────── */
+/* Grammaire réelle du design (jugements PARFAIT/BIEN, FAIT, ×2) :
+   bordure simple, FOND PÂLE de la teinte, ombre 0 2px 0 de la MÊME encre,
+   Atkinson 700 espacé, incliné, entre en stampIn. */
+.tampon {
+  display: inline-block;
+  font: 700 13px var(--fonte-corps);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  background: var(--terracotta-pale);
+  border: var(--trait-fort) solid var(--terracotta);
+  border-radius: 6px;
+  padding: 3px 11px;
+  transform: rotate(-4deg);
+  box-shadow: 0 2px 0 var(--terracotta);
+}
+.tampon-vert { color: var(--vert); border-color: var(--vert); background: var(--vert-pale); box-shadow: 0 2px 0 var(--vert); }
+.tampon-ocre { color: var(--ocre-fonce); border-color: var(--ocre); background: var(--ocre-pale); box-shadow: 0 2px 0 var(--ocre); }
+.tampon-anim { animation: tamponIn .35s var(--ressort) both; }
+
+/* stampIn du design (magnitudes exactes), décalé du repos incliné -4°. */
+@keyframes tamponIn {
+  0% { opacity: 0; transform: scale(2.6) rotate(-28deg); }
+  55% { opacity: 1; transform: scale(.82) rotate(-2deg); }
+  75% { transform: scale(1.12) rotate(-4deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-4deg); }
+}
+
+/* ── Cartouche ────────────────────────────────────────────────────────── */
+/* Étiquette d'exercice/notion : petit cadre à coins francs. */
+.cartouche {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--fonte-corps);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--encre);
+  background: var(--papier-carte);
+  border: var(--trait) solid var(--encre);
+  border-radius: var(--rayon-cartouche);
+  padding: 3px 9px;
+  box-shadow: var(--ombre-petite);
+}
+.cartouche-gagne { color: var(--terracotta); border-color: var(--terracotta); box-shadow: 0 2px 0 var(--terracotta); }
+.cartouche-joue { color: var(--vert); border-color: var(--vert); box-shadow: 0 2px 0 var(--vert); }
+
+/* ── Sommaire-registre (l'« accordéon » du design, écrans 5a/9d) ──────── */
+/* Pas de chevrons ni de fond en creux : des RANGS de chapitre discrets
+   (bordure fantôme, filet pointillé de table des matières) ; le chapitre
+   ACTIF devient une carte levée (bordure encre + ombre) dont le corps se
+   déplie en max-height au ressort --ressort-depli. */
+.sommaire { display: flex; flex-direction: column; gap: 7px; }
+
+/* Filet pointillé (leader de table des matières) — relie titre et compteur. */
+.filet { flex: 1; border-bottom: 2px dotted rgba(35, 32, 28, .32); margin-bottom: 4px; min-width: 12px; }
+
+.sommaire-rang {
+  display: flex;
+  align-items: flex-end;
+  gap: 9px;
+  padding: 15px 12px;
+  border: var(--trait-fort) solid rgba(35, 32, 28, .2);
+  border-radius: var(--rayon-cartouche);
+  font-family: var(--fonte-corps);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.sommaire-rang .sommaire-num { font: 700 15px var(--fonte-titres); width: 20px; }
+.sommaire-rang .sommaire-titre { font: 700 13.5px var(--fonte-corps); }
+.sommaire-rang .sommaire-apart { font: 400 12px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; }
+
+/* Chapitre à venir : tout passe en décor, titre en maigre, cadenas. */
+.sommaire-rang-verrouille { color: var(--decor); cursor: default; }
+.sommaire-rang-verrouille .sommaire-titre { font-weight: 400; }
+.sommaire-rang-verrouille .sommaire-apart { color: var(--decor); }
+.sommaire-rang-verrouille .filet { border-bottom-color: rgba(35, 32, 28, .2); }
+
+/* Chapitre ACTIF : carte levée. */
+.sommaire-ouvert {
+  border: var(--trait-fort) solid var(--encre);
+  border-radius: var(--rayon-cartouche);
+  background: var(--papier);
+  box-shadow: var(--ombre);
+  padding: 4px 12px 8px;
+}
+.sommaire-ouvert-entete {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 12px 0 4px;
+  border-bottom: 1px solid rgba(35, 32, 28, .15);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.sommaire-ouvert-entete .sommaire-num { font: 700 15px var(--fonte-titres); width: 20px; color: var(--terracotta); }
+.sommaire-ouvert-entete .sommaire-titre { font: 700 13.5px var(--fonte-corps); }
+.sommaire-ouvert-entete .sommaire-apart { font: 400 10.5px var(--fonte-corps); color: var(--decor); }
+/* Corps déplié — LE juice du design (logique smRows de 5a) : max-height en
+   TRANSITION (s'ouvre et se referme au ressort --ressort-depli), et chaque
+   rang se TAMPONNE en cascade (rangTampon, +60 ms par rang, départ 120 ms).
+   Fermé, les rangs repassent à opacity 0 sans animation → la cascade se
+   rejoue à chaque ouverture. */
+.sommaire-corps {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .5s var(--ressort-depli);
+}
+.sommaire-corps.ouvert { max-height: var(--sommaire-deplie-max, 260px); }
+
+/* Rang d'exercice dans la carte ouverte (grammaire 9d/5a). */
+.sommaire-exercice {
+  display: flex;
+  align-items: flex-end;
+  gap: 9px;
+  padding: 9px 0 4px;
+  font-family: var(--fonte-corps);
+  opacity: 0;
+  transform-origin: left center;
+}
+.sommaire-corps.ouvert .sommaire-exercice { animation: rangTampon .3s var(--ressort) forwards; }
+.sommaire-corps.ouvert .sommaire-exercice:nth-child(1) { animation-delay: .12s; }
+.sommaire-corps.ouvert .sommaire-exercice:nth-child(2) { animation-delay: .18s; }
+.sommaire-corps.ouvert .sommaire-exercice:nth-child(3) { animation-delay: .24s; }
+.sommaire-corps.ouvert .sommaire-exercice:nth-child(4) { animation-delay: .30s; }
+.sommaire-corps.ouvert .sommaire-exercice:nth-child(5) { animation-delay: .36s; }
+.sommaire-corps.ouvert .sommaire-exercice:nth-child(6) { animation-delay: .42s; }
+.sommaire-corps.ouvert .sommaire-exercice:nth-child(7) { animation-delay: .48s; }
+.sommaire-corps.ouvert .sommaire-exercice:nth-child(8) { animation-delay: .54s; }
+/* rowStamp du design, à l'identique. */
+@keyframes rangTampon {
+  0% { opacity: 0; transform: scale(2.2) rotate(-5deg); }
+  55% { opacity: 1; transform: scale(.86) rotate(1.2deg); }
+  75% { transform: scale(1.09); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+.sommaire-exercice .sommaire-num { font: 700 13px var(--fonte-titres); width: 20px; }
+.sommaire-exercice .sommaire-titre { font: 400 13px var(--fonte-corps); }
+/* « jouer ▶ » se tamponne (stampIn du design, à l'identique) — délai .3s
+   comme en 9d (il arrive après le rang qui le porte). */
+.sommaire-jouer {
+  font: 700 11.5px var(--fonte-corps);
+  color: var(--vert);
+  white-space: nowrap;
+}
+/* Dans un corps dépliable, il se rejoue à chaque ouverture. */
+.sommaire-corps .sommaire-jouer { opacity: 0; }
+.sommaire-corps.ouvert .sommaire-jouer { animation: jouerTampon .4s var(--ressort) .3s forwards; }
+@keyframes jouerTampon {
+  0% { opacity: 0; transform: scale(2.6) rotate(-24deg); }
+  55% { opacity: 1; transform: scale(.82) rotate(2deg); }
+  75% { transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+/* ── Étoiles (fancyStars du design, à l'identique) ────────────────────── */
+/* « Les étoiles penchent — façon Cuphead » : chaque étoile est inclinée
+   (--tilt : -8°, la médiane +6°), gagnée = ombre décalée terracotta +
+   hachures sur encre + reflet, manquée = contour POINTILLÉ. Entrée
+   tamponnée une à une ; idle starTwirl (pirouette rare) en option —
+   un seul idle discret par écran. */
+.etoiles { display: inline-flex; gap: 3px; align-items: center; flex-shrink: 0; }
+.etoile { display: block; flex-shrink: 0; overflow: visible; transform: rotate(var(--tilt, -8deg)); }
+.etoile-anim { animation: etoileIn .42s var(--ressort-fort) both; }
+@keyframes etoileIn {
+  0% { opacity: 0; transform: scale(2.6) rotate(calc(var(--tilt, -8deg) - 24deg)); }
+  55% { opacity: 1; transform: scale(.82) rotate(calc(var(--tilt, -8deg) + 2deg)); }
+  75% { transform: scale(1.12) rotate(var(--tilt, -8deg)); }
+  100% { opacity: 1; transform: scale(1) rotate(var(--tilt, -8deg)); }
+}
+/* starTwirl du design : la pirouette rare (86 % du temps immobile). */
+@keyframes starTwirl {
+  0%, 86% { transform: rotate(var(--tilt, -8deg)) scale(1); }
+  88% { transform: rotate(calc(var(--tilt, -8deg) - 18deg)) scale(1.18, .85); }
+  96% { transform: rotate(calc(var(--tilt, -8deg) + 360deg)) scale(1); }
+  98% { transform: rotate(calc(var(--tilt, -8deg) + 352deg)) scale(1.06, .94); }
+  100% { transform: rotate(calc(var(--tilt, -8deg) + 360deg)) scale(1); }
+}
+
+/* ── Trait de règle (séparateur qui « claque ») ───────────────────────── */
+.regle {
+  height: 0;
+  border: none;
+  border-top: var(--trait) solid var(--encre);
+  margin: 14px 0;
+  transform-origin: left center;
+}
+.regle-anim { animation: regleIn .4s var(--sortie) both; }
+@keyframes regleIn { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+/* Règle double sous un titre de page (grammaire du sommaire 9d). */
+.regle-double { height: 3px; border-top: 2px solid var(--encre); border-bottom: 1px solid var(--encre); }
+
+/* ── Keyframes communs (C9) — TOUS extraits de l'export, à l'identique ─── */
+/* Entrées douces (mentions, textes, cartes posées). */
+@keyframes mentionIn1 {
+  0% { opacity: 0; transform: translateY(9px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes softIn {
+  0% { opacity: 0; transform: translateY(6px) scale(.985); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes riseIn {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrimIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes inkUp { to { opacity: 1; } }
+/* Retour 15 : les nouveautés d'un chapitre en couleur dans son titre. */
+.titre-nouveau { font-style: normal; color: var(--terracotta); }
+/* Tampon droit (stampIn du design : jugements, « jouer ▶ », COMPLÈTE). */
+@keyframes stampIn {
+  0% { opacity: 0; transform: scale(2.6) rotate(-24deg); }
+  55% { opacity: 1; transform: scale(.82) rotate(2deg); }
+  75% { transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+/* Carte qui tombe (pause, bilan, exercice du jour). */
+@keyframes cardDrop {
+  0% { opacity: 0; transform: translateY(-130%) rotate(-3deg); }
+  55% { opacity: 1; transform: translateY(6%) rotate(1deg); }
+  75% { transform: translateY(-2%) rotate(-.4deg); }
+  100% { opacity: 1; transform: translateY(0) rotate(0); }
+}
+@keyframes popIn {
+  0% { transform: scale(.4); opacity: 0; }
+  60% { transform: scale(1.14); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+/* Compteur qui bondit quand il reçoit (étoiles, jetons). Deux noms
+   identiques : rejouer l'animation = alterner le nom (design). */
+@keyframes starBump1 {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+@keyframes starBump2 {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+/* Titre qui claque (Luminote, titre de livre, CTA Reprendre). */
+@keyframes titleSlam {
+  0% { opacity: 0; transform: scale(1.9) rotate(-2.5deg); }
+  55% { opacity: 1; transform: scale(.93) rotate(.6deg); }
+  78% { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+/* Numéro de livre qui se frappe (couverture 5a). */
+@keyframes numIn {
+  0% { opacity: 0; transform: scale(1.7) rotate(-7deg); }
+  60% { opacity: 1; transform: scale(.94); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+/* Squash & stretch discret à l'arrivée au centre (couverture). */
+@keyframes coverSettle {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.07, .93); }
+  65% { transform: scale(.97, 1.04); }
+  100% { transform: scale(1); }
+}
+/* La page s'ouvre depuis la couverture (5a → sommaire). */
+@keyframes pageZoom {
+  0% { transform: scale(.749, .567); border-radius: 26px; }
+  55% { border-radius: 20px; }
+  100% { transform: scale(1); border-radius: 0; }
+}
+/* Dépliage d'un corps (4a). */
+@keyframes unfold { from { max-height: 0; } to { max-height: 250px; } }
+/* Le rang endormi se RÉVEILLE (4a : fond, ombre, bordure, rebond). */
+@keyframes cartWake {
+  0% { background: transparent; box-shadow: none; border-color: rgba(35, 32, 28, .35); transform: translateY(0) scale(1); }
+  30% { transform: translateY(2px) scale(1.04, .9) rotate(-.6deg); }
+  55% { background: #FFFDF8; box-shadow: 0 6px 0 #23201C; transform: translateY(-7px) scale(.97, 1.06) rotate(.5deg); }
+  75% { transform: translateY(2px) scale(1.02, .96); }
+  100% { background: #FBF8F1; box-shadow: 0 3px 0 #23201C; border-color: #23201C; transform: translateY(0) scale(1) rotate(0); }
+}
+/* Le cadenas frémit puis saute (4a, 9d). */
+@keyframes lockWiggle {
+  0% { transform: rotate(0); }
+  20% { transform: rotate(-16deg) scale(1.06, .94); }
+  45% { transform: rotate(13deg) scale(.95, 1.07); }
+  70% { transform: rotate(-7deg); }
+  100% { transform: rotate(0); }
+}
+@keyframes lockPop {
+  0% { transform: none; opacity: 1; }
+  22% { transform: translate(1px, 3px) rotate(-9deg) scale(1.25, .7); opacity: 1; }
+  55% { transform: translate(-9px, -16px) rotate(-48deg) scale(.75, 1.3); opacity: 1; }
+  80% { transform: translate(-18px, -8px) rotate(-120deg) scale(.8); }
+  100% { transform: translate(-26px, 8px) rotate(-190deg) scale(.5); opacity: 0; }
+}
+/* La plume écrit (4a : le titre du nouveau chapitre s'inscrit). */
+@keyframes penWrite { to { clip-path: inset(-20% -5% -20% 0); } }
+@keyframes penLine { to { stroke-dashoffset: 0; } }
+/* Respiration de l'encre (tache de série, « jouer ▶ »). */
+@keyframes inkBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.045); }
+}
+/* Idles rares de l'accueil (un seul idle discret par écran : ils se
+   relaient — 22 s, 26 s — et restent immobiles > 93 % du temps). */
+@keyframes hpHop {
+  0%, 94.4%, 100% { transform: translateY(0) scale(1); }
+  95.2% { transform: translateY(3px) scale(1.05, .9); }
+  97% { transform: translateY(-6px) scale(.97, 1.05); }
+  98.4% { transform: translateY(1px) scale(1.02, .96); }
+  99.2% { transform: none; }
+}
+@keyframes dailyFloat {
+  0%, 93%, 100% { transform: translateY(0) scale(1); }
+  94% { transform: translateY(2px) scale(1.02, .95); }
+  96.4% { transform: translateY(-4px) scale(.99, 1.03); }
+  98.4% { transform: translateY(0); }
+}
+/* La pastille du matin : coup de coude idle, puis SAUT PÉRILLEUX au tap
+   (coinLeap : perspective 700px, un tour complet en 3D — décision B3 :
+   conservé, c'est le cœur du rituel ; reduced-motion = saut). */
+@keyframes coinNudge {
+  0%, 72%, 100% { transform: translateY(0) scale(1) rotate(0); }
+  77% { transform: translateY(3px) scale(1.12, .84); }
+  84% { transform: translateY(-11px) scale(.92, 1.14) rotate(-5deg); }
+  90% { transform: translateY(2px) scale(1.07, .93) rotate(2deg); }
+  95% { transform: translateY(-2px) scale(.99, 1.03); }
+}
+@keyframes coinLeap {
+  0% { transform: perspective(700px) translateY(0) translateZ(0) rotateX(0) scale(1); }
+  5% { transform: perspective(700px) translateY(6px) translateZ(-8px) rotateX(-12deg) scale(1.16, .8); }
+  12% { transform: perspective(700px) translateY(11px) translateZ(-16px) rotateX(-22deg) scale(1.28, .66); }
+  18% { transform: perspective(700px) translateY(-12px) translateZ(28px) rotateX(40deg) scale(1.02, 1.04); }
+  21% { transform: perspective(700px) translateY(-18px) translateZ(42px) rotateX(71deg); }
+  24% { transform: perspective(700px) translateY(-24px) translateZ(56px) rotateX(103deg); }
+  27% { transform: perspective(700px) translateY(-28px) translateZ(69px) rotateX(134deg); }
+  30% { transform: perspective(700px) translateY(-33px) translateZ(83px) rotateX(166deg); }
+  33% { transform: perspective(700px) translateY(-36px) translateZ(97px) rotateX(197deg); }
+  36% { transform: perspective(700px) translateY(-40px) translateZ(111px) rotateX(229deg); }
+  39% { transform: perspective(700px) translateY(-43px) translateZ(125px) rotateX(260deg); }
+  42% { transform: perspective(700px) translateY(-45px) translateZ(138px) rotateX(292deg); }
+  45% { transform: perspective(700px) translateY(-47px) translateZ(152px) rotateX(323deg); }
+  48% { transform: perspective(700px) translateY(-48px) translateZ(166px) rotateX(355deg); }
+  51% { transform: perspective(700px) translateY(-49px) translateZ(180px) rotateX(386deg); }
+  54% { transform: perspective(700px) translateY(-50px) translateZ(194px) rotateX(418deg); }
+  57% { transform: perspective(700px) translateY(-50px) translateZ(207px) rotateX(449deg); }
+  60% { transform: perspective(700px) translateY(-50px) translateZ(221px) rotateX(481deg); }
+  63% { transform: perspective(700px) translateY(-49px) translateZ(235px) rotateX(512deg); }
+  66% { transform: perspective(700px) translateY(-47px) translateZ(249px) rotateX(543deg); }
+  69% { transform: perspective(700px) translateY(-46px) translateZ(263px) rotateX(575deg); }
+  72% { transform: perspective(700px) translateY(-43px) translateZ(276px) rotateX(606deg); }
+  75% { transform: perspective(700px) translateY(-41px) translateZ(290px) rotateX(638deg); }
+  78% { transform: perspective(700px) translateY(-38px) translateZ(304px) rotateX(669deg); }
+  81% { transform: perspective(700px) translateY(-34px) translateZ(318px) rotateX(701deg); }
+  84% { transform: perspective(700px) translateY(-30px) translateZ(332px) rotateX(732deg); }
+  87% { transform: perspective(700px) translateY(-25px) translateZ(345px) rotateX(764deg); }
+  90% { transform: perspective(700px) translateY(-20px) translateZ(359px) rotateX(795deg); }
+  93% { transform: perspective(700px) translateY(-15px) translateZ(373px) rotateX(827deg); }
+  96% { transform: perspective(700px) translateY(-9px) translateZ(387px) rotateX(858deg); }
+  100% { transform: perspective(700px) translateY(0) translateZ(405px) rotateX(900deg); }
+}
+
+/* ── Page produit (C9) : grammaire commune accueil / bibliothèque /
+   sommaire / notion — padding, en-tête libellé + retour, filet estompé,
+   titre de page, règle double. ───────────────────────────────────────── */
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+  overflow: clip;
+  box-sizing: border-box;
+  color: var(--encre);
+  font-family: var(--fonte-corps);
+}
+.page-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Tablette (C14, responsive minimal) : au-delà d'un téléphone large, la page
+   (et l'écran de jeu, qui a sa propre racine .jeu) devient une colonne
+   centrée de 600 px — la maquette 390 s'élargit un peu, jamais en nappe. */
+@media (min-width: 680px) {
+  .page, .jeu { width: 100%; max-width: 600px; margin: 0 auto; }
+}
+.page-libelle { font: 700 10px var(--fonte-corps); letter-spacing: .18em; color: var(--texte-2); text-transform: uppercase; }
+.page-retour {
+  font: 400 13px var(--fonte-corps);
+  color: var(--texte-2);
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.page-titre { font: 700 26px/1.15 var(--fonte-titres); color: var(--encre); margin: 0; }
+
+/* Pilule compteur (jetons 9d, étoiles 5a) : cadre encre, ombre 2,5 px. */
+.pilule {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: var(--trait) solid var(--encre);
+  border-radius: 7px;
+  padding: 4px 10px;
+  background: var(--papier-carte);
+  box-shadow: 0 2.5px 0 var(--encre);
+  font: 700 13px var(--fonte-titres);
+  font-variant-numeric: tabular-nums;
+  color: var(--encre);
+}
+.pilule-ronde { border-radius: 999px; padding: 5px 11px; }
+.pilule-bondit-1 { animation: starBump1 .45s var(--ressort-fort); }
+.pilule-bondit-2 { animation: starBump2 .45s var(--ressort-fort); }
+
+/* Encadré en pointillé (information, gel, jeton). */
+.encadre-pointille {
+  border: var(--trait) dashed rgba(35, 32, 28, .45);
+  border-radius: 9px;
+  padding: 12px 14px;
+  font: 400 11.5px/1.55 var(--fonte-corps);
+  color: var(--texte-2);
+}
+.encadre-pointille .lien-terracotta { margin-top: 6px; }
+.lien-terracotta {
+  display: block;
+  font: 700 12px var(--fonte-corps);
+  color: var(--terracotta);
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Sommaire : cadenas en bout de filet, rang verrouillé en texte secondaire. */
+.sommaire-espace { flex: 1; }
+.sommaire-verrouille { color: var(--texte-2); }
+.sommaire-exercice .cadenas { margin-bottom: 2px; }
+
+/* Jeton : les trois croches Bravura en relief (33px dans un viewBox 80). */
+.jeton { display: block; overflow: visible; flex-shrink: 0; }
+.jeton-glyphe { font: 400 33px Bravura, serif; }
+.tache-serie { display: block; flex-shrink: 0; }
+.etoile-compteur { display: block; overflow: visible; flex-shrink: 0; transform: rotate(-9deg); }
+
+/* Cadenas SVG (remplace les 🔒 du design — angle mort). */
+.cadenas { display: block; flex-shrink: 0; }
+.cadenas-fremit { animation: lockWiggle .5s var(--ressort); }
+.cadenas-saute { animation: lockPop .55s cubic-bezier(.3, .6, .4, 1) forwards; }
+
+/* ── Mouvement : respect de prefers-reduced-motion (angle mort corrigé) ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ── Étiquette du fil (guide du nouveau joueur, 17/09) ───────────────────
+   Calque fixe sans gestes ; cadre pointillé terracotta sur la cible ; carte
+   papier sous (ou sur) la cible, flèche vers elle ; géométrie en variables
+   --et-* posées par la primitive. Une seule étiquette à la fois. */
+/* div.… : plus spécifique que les « .page > * { position: relative } » des écrans (l'accueil). */
+div.etiquette-calque { position: fixed; inset: 0; z-index: 40; pointer-events: none; }
+.etiquette-cadre {
+  position: absolute;
+  left: var(--et-cadre-x); top: var(--et-cadre-y); width: var(--et-cadre-w); height: var(--et-cadre-h);
+  border: 2px dashed var(--terracotta);
+  border-radius: 12px;
+  box-sizing: border-box;
+  animation: etiquetteCadre 1.6s ease-in-out infinite;
+}
+@keyframes etiquetteCadre { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+.etiquette {
+  position: absolute;
+  left: var(--et-x); top: var(--et-y);
+  width: var(--et-largeur);
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+  background: var(--papier-carte);
+  border: var(--trait-fort) solid var(--encre);
+  border-radius: 12px;
+  box-shadow: 0 4px 0 var(--encre);
+  padding: 12px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  animation: etiquetteIn .35s var(--ressort) both;
+}
+.etiquette-haut { transform: translate(-50%, -100%); }
+.etiquette::before {
+  content: '';
+  position: absolute;
+  left: calc(50% + var(--et-fleche));
+  width: 14px; height: 14px;
+  background: var(--papier-carte);
+  border-left: var(--trait-fort) solid var(--encre);
+  border-top: var(--trait-fort) solid var(--encre);
+  box-sizing: border-box;
+}
+.etiquette-bas::before { top: -8px; transform: translateX(-50%) rotate(45deg); }
+.etiquette-haut::before { bottom: -8px; transform: translateX(-50%) rotate(225deg); border-color: var(--encre); }
+.etiquette-tampon { font-size: 10.5px; padding: 2px 8px; transform: rotate(-3deg); }
+.etiquette-texte { margin: 0; font: 400 15px/1.45 var(--fonte-corps); color: var(--encre); } /* retour 7 : lisible */
+.etiquette-bouton { align-self: flex-end; font-size: 13px; padding: 8px 16px; }
+@keyframes etiquetteIn { from { opacity: 0; transform: translate(-50%, 0) scale(.94); } to { opacity: 1; } }
+.etiquette-haut { animation-name: etiquetteInHaut; }
+@keyframes etiquetteInHaut { from { opacity: 0; transform: translate(-50%, -100%) scale(.94); } to { opacity: 1; transform: translate(-50%, -100%); } }
+@media (prefers-reduced-motion: reduce) { .etiquette, .etiquette-cadre { animation: none; opacity: 1; } }
+
+/* ── 9a (retour 8) : le jeton tombe de loin en tournant et s'écrase (coinIn), l'onde claque (ringPop), le gain se frappe (stampIn) — keyframes de l'export, à l'identique. ── */
+@keyframes coinIn{0%{transform:perspective(700px) translateY(-10px) translateZ(340px) rotateX(-720deg)}3%{transform:perspective(700px) translateY(-14px) translateZ(324px) rotateX(-680deg)}6%{transform:perspective(700px) translateY(-18px) translateZ(308px) rotateX(-640deg)}9%{transform:perspective(700px) translateY(-21px) translateZ(292px) rotateX(-600deg)}12%{transform:perspective(700px) translateY(-25px) translateZ(276px) rotateX(-561deg)}15%{transform:perspective(700px) translateY(-28px) translateZ(260px) rotateX(-523deg)}18%{transform:perspective(700px) translateY(-31px) translateZ(244px) rotateX(-484deg)}21%{transform:perspective(700px) translateY(-33px) translateZ(228px) rotateX(-446deg)}24%{transform:perspective(700px) translateY(-34px) translateZ(213px) rotateX(-410deg)}27%{transform:perspective(700px) translateY(-35px) translateZ(197px) rotateX(-373deg)}30%{transform:perspective(700px) translateY(-36px) translateZ(181px) rotateX(-337deg)}33%{transform:perspective(700px) translateY(-35px) translateZ(165px) rotateX(-302deg)}36%{transform:perspective(700px) translateY(-34px) translateZ(149px) rotateX(-267deg)}39%{transform:perspective(700px) translateY(-33px) translateZ(133px) rotateX(-233deg)}42%{transform:perspective(700px) translateY(-30px) translateZ(117px) rotateX(-200deg)}45%{transform:perspective(700px) translateY(-28px) translateZ(101px) rotateX(-168deg)}48%{transform:perspective(700px) translateY(-24px) translateZ(85px) rotateX(-136deg)}51%{transform:perspective(700px) translateY(-20px) translateZ(69px) rotateX(-106deg)}54%{transform:perspective(700px) translateY(-16px) translateZ(53px) rotateX(-78deg)}57%{transform:perspective(700px) translateY(-12px) translateZ(37px) rotateX(-51deg)}60%{transform:perspective(700px) translateY(-7px) translateZ(21px) rotateX(-26deg)}64%{transform:perspective(700px) translateY(-1px) translateZ(8px) rotateX(-8deg)}70%{transform:perspective(700px) translateY(13px) translateZ(0) rotateX(0) scale(1.26,.68)}79%{transform:perspective(700px) translateY(-12px) translateZ(0) rotateX(0) scale(.9,1.12)}88%{transform:perspective(700px) translateY(4px) rotateX(0) scale(1.07,.94)}94%{transform:perspective(700px) translateY(-2px) scale(.98,1.03)}100%{transform:perspective(700px) translateY(0) translateZ(0) rotateX(0) scale(1)}}
+@keyframes ringPop{0%{opacity:.55;transform:scale(.3)}100%{opacity:0;transform:scale(1.9)}}
