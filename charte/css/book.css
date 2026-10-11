@@ -160,8 +160,6 @@
 .livre-exo + .livre-exo { box-shadow: inset 0 1px 0 rgba(35, 32, 28, .14); }
 .livre-exo-maintenant + .livre-exo, .livre-exo + .livre-exo-maintenant { box-shadow: none; }
 .livre-exo-vu { font: 700 13px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; }
-/* Retour 14 : la prise en main porte sa mention sous le nom. */
-.livre-exo-mention { display: block; font: 400 11px/1.2 var(--fonte-corps); color: var(--texte-2); margin-top: 2px; }
 .livre-chap-requis-cadenas { color: var(--texte-2); display: inline-flex; }
 .livre-chap-corps:not(.ouvert) .livre-exos { padding-top: 0; padding-bottom: 0; transition: padding .45s var(--ressort-depli); }
 .livre-chap-corps.ouvert .livre-exos { transition: padding .45s var(--ressort-depli); }

@@ -102,7 +102,6 @@ export default {
   "result.firstStarAt": "{pct} % pour la première étoile",
   "home.dailyAgain": "Exercice du jour fait, reviens demain !",
   "book.typeWarmup": "Prise en main",
-  "book.warmupNote": "l'aide du début à la fin",
   "result.nextRepli": "Aide à la prochaine tentative",
   "result.seeDemo": "Revoir la démo",
   "book.typeRhythm": "Rythme",
