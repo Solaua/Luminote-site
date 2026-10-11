@@ -153,3 +153,6 @@
 .objectif-rappel b { color: var(--texte-2); font-size: 13px; }
 .objectif-souffle { flex: 1; }
 .objectif-etat { font: 700 13px var(--fonte-corps); color: var(--texte-2); text-align: center; margin: 0; }
+
+/* 11/10 : la récompense de chaque objectif, en vert (ce qui se joue). */
+.objectif-niveau-recompense { display: block; font: 700 12px var(--fonte-corps); color: var(--vert); margin-top: 2px; }
