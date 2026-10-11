@@ -407,6 +407,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Adagio · Bonus · 72 BPM
 
 ### 12. Révision et changements de mesure (ouvre à 58 ★)
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme · 60 BPM
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -455,6 +456,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 5. Les mesures à 2/4 et à 3/4 (ouvre à 11 ★) — figures : Mesure à 2/4, Mesure à 3/4
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -534,6 +536,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 9. Le triolet, la syncope et la syncopette (ouvre à 44 ★) — figures : Triolet, Syncope, Syncopette
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -647,6 +650,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 5. Révision : la croche (ouvre à 10 ★) — figures : Croche, Deux croches ligaturées
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -679,6 +683,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 2. Révision : les mesures à 2/4 et à 3/4, la noire pointée (ouvre à 5 ★) — figures : Mesure à 2/4, Mesure à 3/4, Noire pointée
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -686,6 +691,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 3. Révision : la double croche et le contretemps (ouvre à 10 ★) — figures : Double croche, Quatre doubles croches ligaturées, Demi-soupir, Contretemps
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -693,6 +699,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 4. Révision : le rythme pointé et la syncope (ouvre à 15 ★) — figures : Croche pointée et double, Rythme lombard, Syncope
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -700,6 +707,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 5. La mesure à 6/8 (ouvre à 20 ★) — figures : Mesure à 6/8, Noire pointée en 6/8, Blanche pointée en 6/8, Groupe de trois croches
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -740,6 +748,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 3. Révision : la croche et le rythme pointé (ouvre à 10 ★) — figures : Croche pointée et double, Rythme lombard
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -747,6 +756,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 4. Révision : la double croche, la syncope et le triolet (ouvre à 15 ★) — figures : Double croche, Quatre doubles croches ligaturées, Syncope, Triolet
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -754,6 +764,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 5. La mesure à 6/8 (ouvre à 20 ★) — figures : Mesure à 6/8, Noire pointée en 6/8, Blanche pointée en 6/8, Groupe de trois croches
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
@@ -761,6 +772,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 6. Leçons longues (ouvre à 25 ★)
+- Découverte · Démo (on écoute)
 - Lecture de rythme · Lecture de rythme · 72 BPM
 - Prise en main · Prise en main (aide du début à la fin) · 72 BPM
 - Exercice 1 : Adagio · Exercice noté · 72 BPM
