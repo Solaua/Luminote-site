@@ -27,13 +27,26 @@
    tournant et s'écrase (coinIn), l'onde rouge claque (ringPop .55 s), le
    « +1 » se frappe (.95 s). Trois dimensions : face, neuf tranches, dos. */
 .ouverture-jeton-cadre { position: relative; width: 150px; height: 157px; margin-top: 8px; perspective: 700px; }
+/* Retour 18 : l'onde de choc — trois anneaux qui partent du jeton à
+   l'atterrissage (.5 s) et se propagent en s'amincissant, décalés de 110 ms. */
 .ouverture-onde {
   position: absolute;
-  inset: -22px;
-  border: 2.5px solid var(--terracotta);
+  left: 50%;
+  top: 50%;
+  width: 136px;
+  height: 136px;
+  margin: -68px 0 0 -68px; /* un carré centré sur le jeton : des cercles, pas des carrés arrondis */
+  border: 3px solid var(--terracotta);
   border-radius: 999px;
   opacity: 0;
-  animation: ringPop .7s ease .55s;
+  pointer-events: none;
+  animation: ondeChoc .9s cubic-bezier(.15, .7, .3, 1) .5s both;
+}
+.ouverture-onde:nth-child(2) { animation-delay: .61s; border-color: var(--terracotta-sombre); }
+.ouverture-onde:nth-child(3) { animation-delay: .72s; }
+@keyframes ondeChoc {
+  0% { opacity: .85; transform: scale(.55); border-width: 4px; }
+  100% { opacity: 0; transform: scale(2.6); border-width: .5px; }
 }
 .ouverture-jeton {
   position: relative;

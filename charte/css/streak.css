@@ -32,9 +32,15 @@
   justify-content: center;
 }
 .serie-tache { position: absolute; animation: inkBreath 3.4s ease-in-out infinite; }
-.serie-compteur { position: relative; text-align: center; color: #F5F1E9; }
-.serie-nombre { font: 700 116px/1 var(--fonte-titres); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
-.serie-libelle { font: italic 400 13px var(--fonte-corps); opacity: .9; margin-top: 2px; }
+/* Retour 18 : le nombre se loge dans le corps de la flamme (plus bas que le
+   centre du cadre), sa taille suit le nombre de chiffres ; le libellé passe
+   sous la flamme, à l'encre. */
+.serie-compteur { position: relative; text-align: center; color: #F5F1E9; margin-top: 52px; }
+.serie-nombre { font: 700 84px/1 var(--fonte-titres); letter-spacing: -.04em; font-variant-numeric: tabular-nums; text-shadow: 0 2px 0 var(--terracotta-sombre); }
+.serie-nombre-2 { font-size: 74px; }
+.serie-nombre-3 { font-size: 54px; }
+.serie-nombre-4 { font-size: 40px; }
+.serie-libelle { font: italic 400 14px var(--fonte-corps); color: var(--texte-2); text-align: center; margin-top: 6px; }
 @keyframes inkBreath {
   0%, 100% { transform: scale(1) rotate(0); }
   50% { transform: scale(1.035) rotate(1.5deg); }

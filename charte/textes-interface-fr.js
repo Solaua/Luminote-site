@@ -407,7 +407,7 @@ export default {
   "home.exercisesDone.one": "{n} exercice",
   "home.exercisesDone.other": "{n} exercices",
   "home.bestCombo": "combo max {n}",
-  "home.method": "Bibliothèque",
+  "home.method": "Leçon",
   "home.training": "Entraînement libre",
   // "succès" est invariable en français — les deux formes sont identiques.
   "home.achievements.one": "{n}/{total} succès",
@@ -751,7 +751,7 @@ export default {
   "home.resumeSub": "Chapitre {n} · {chapter} — Exercice {k}",
 
   // ── C9 · Bibliothèque (5a étendu) ──
-  "library.label": "BIBLIOTHÈQUE",
+  "library.label": "LEÇON",
   "library.home": "accueil",
   "library.title": "Les douze livres",
   "library.shelf.sol": "Clé de sol",
@@ -770,7 +770,7 @@ export default {
 
   // ── C9 · Sommaire (5a ouvert / 9d / 4a) ──
   "book.label": "LIVRE {n}",
-  "book.library": "bibliothèque",
+  "book.library": "leçon",
   "book.progress": "{done} exercices sur {total} · {pct} %",
   "book.chapterProgress": "{done} / {total} · en cours",
   "book.chapterOpen": "{done} / {total} exercices",
