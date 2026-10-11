@@ -156,3 +156,47 @@
 
 /* 11/10 : la récompense de chaque objectif, en vert (ce qui se joue). */
 .objectif-niveau-recompense { display: block; font: 700 12px var(--fonte-corps); color: var(--vert); margin-top: 2px; }
+
+/* ── Luminote Complète (C11, planche 9e « le mur, poli ») ───────────────── */
+.paywall { padding: 26px 24px 22px; overflow-y: auto; }
+.paywall-rappel { display: flex; align-items: center; gap: 8px; margin: 18px 0 0; font: 400 14px/1.45 var(--fonte-corps); color: var(--texte-2); }
+.paywall-titre { font: 800 30px/1.1 var(--fonte-titres); margin: 22px 0 0; }
+.paywall-avantages { list-style: none; margin: 14px 0 0; padding: 0; }
+.paywall-avantages li { display: flex; align-items: baseline; gap: 10px; padding: 10px 0; border-bottom: .75px solid rgba(35, 32, 28, .25); font: 400 15px/1.4 var(--fonte-corps); }
+.paywall-coche { color: var(--vert); font-weight: 800; }
+.paywall-offres { display: flex; flex-direction: column; gap: 14px; margin-top: 22px; }
+.paywall-offre {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  width: 100%;
+  border: var(--trait) solid rgba(35, 32, 28, .45);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: transparent;
+  color: var(--encre);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s var(--ressort-fort), box-shadow .16s var(--ressort-fort), border-color .2s;
+}
+.paywall-offre-active { border: 2px solid var(--terracotta); background: var(--papier-carte); box-shadow: 0 4px 0 var(--terracotta); }
+.paywall-offre-active:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--terracotta); }
+.paywall-offre-nom { font: 700 16px var(--fonte-corps); }
+.paywall-offre-prix { font: 700 16px var(--fonte-titres); font-variant-numeric: tabular-nums; text-align: right; }
+.paywall-offre-sous { grid-column: 1 / -1; font: 400 12.5px var(--fonte-corps); color: var(--texte-2); }
+.paywall-offre-tampon { position: absolute; top: -11px; right: 12px; font-size: 11px; padding: 2px 8px; }
+.paywall-cta { width: 100%; margin-top: 22px; }
+.paywall-message { margin: 10px 0 0; text-align: center; font: 700 13px var(--fonte-corps); color: var(--terracotta); }
+.paywall-legal { margin: 12px 0 0; font: 400 11.5px/1.45 var(--fonte-corps); color: var(--texte-2); text-align: center; }
+.paywall-liens { margin: 8px 0 0; text-align: center; font: 400 12px var(--fonte-corps); color: var(--texte-2); }
+.paywall-lien { background: none; border: none; padding: 0; font: 700 12px var(--fonte-corps); color: var(--encre); text-decoration: underline; cursor: pointer; }
+.paywall-sortie { display: block; margin: 18px auto 0; }
+.paywall-bienvenue { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-bottom: 12vh; }
+.paywall-tampon { font-size: 15px; padding: 4px 14px; }
+.paywall-bienvenue .paywall-titre { margin-top: 26px; }
+.paywall-texte { margin: 12px 0 0; font: 400 15px/1.5 var(--fonte-corps); }
+.paywall-texte-doux { font-size: 13px; color: var(--texte-2); }
+.paywall-bienvenue .paywall-cta { margin-top: 28px; }
