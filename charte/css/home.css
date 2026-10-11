@@ -295,7 +295,9 @@
 }
 
 /* ── C16 (design validé 13/09) : jetons, pièce grisée, bouton du jour, objectif ── */
-.accueil-jetons { display: flex; align-items: center; gap: 3px; }
+.accueil-jetons { position: relative; display: flex; align-items: center; gap: 3px; }
+/* 11/10 : le compte à rebours du prochain jeton (le temps rend jusqu'à 3). */
+.accueil-jetons-minuteur { position: absolute; left: 0; top: calc(100% + 3px); font: 700 10.5px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; }
 /* La pièce tant que l'exercice du jour n'est pas fait : gris papier, contour
    pointillé, ni ombre ni idle ni appui — et un cadenas en coin. */
 .accueil-pastille-grise,

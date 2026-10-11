@@ -135,11 +135,11 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 9. Révision (ouvre à 45 ★)
-- Lecture de rythme · Lecture de rythme · 72 BPM
-- Prise en main · Prise en main (aide du début à la fin) · 72 BPM
-- Exercice 1 : Adagio · Exercice noté · 72 BPM
-- Exercice 2 : Andante · Exercice noté · 88 BPM
-- Exercice Bonus : Allegretto · Bonus · 100 BPM
+- Lecture de rythme · Lecture de rythme · 60 BPM
+- Prise en main · Prise en main (aide du début à la fin) · 60 BPM
+- Exercice 1 : Lento · Exercice noté · 60 BPM
+- Exercice 2 : Adagio · Exercice noté · 72 BPM
+- Exercice Bonus : Andante · Bonus · 88 BPM
 
 ### 10. Synthèse (ouvre à 52 ★)
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
@@ -214,7 +214,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
 - Exercice 2 : Adagio · Exercice noté · 72 BPM
-- Exercice Bonus : Andante · Bonus
+- Exercice Bonus : Adagio · Bonus · 72 BPM
 
 ### 9. Le quart de soupir (ouvre à 45 ★) — figures : Quart de soupir
 - Découverte · Démo (on écoute)
@@ -356,7 +356,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
 - Exercice 2 : Adagio · Exercice noté · 72 BPM
-- Exercice Bonus : Andante · Bonus
+- Exercice Bonus : Adagio · Bonus · 72 BPM
 
 ### 6. Croche et doubles croches (ouvre à 25 ★) — figures : Croche et quatre doubles, Doubles croche doubles
 - Découverte · Démo (on écoute)
@@ -364,7 +364,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
 - Exercice 2 : Adagio · Exercice noté · 72 BPM
-- Exercice Bonus : Andante · Bonus
+- Exercice Bonus : Adagio · Bonus · 72 BPM
 
 ### 7. La croche pointée en 6/8 (ouvre à 30 ★) — figures : Croche pointée et double, Croche pointée et trois doubles
 - Découverte · Démo (on écoute)
@@ -404,19 +404,19 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
 - Exercice 2 : Adagio · Exercice noté · 72 BPM
-- Exercice Bonus : Andante · Bonus
+- Exercice Bonus : Adagio · Bonus · 72 BPM
 
 ### 12. Révision et changements de mesure (ouvre à 58 ★)
-- Lecture de rythme · Lecture de rythme · 72 BPM
-- Prise en main · Prise en main (aide du début à la fin) · 72 BPM
-- Exercice 1 : Adagio · Exercice noté · 72 BPM
-- Exercice 2 : Andante · Exercice noté · 88 BPM
+- Lecture de rythme · Lecture de rythme · 60 BPM
+- Prise en main · Prise en main (aide du début à la fin) · 60 BPM
+- Exercice 1 : Lento · Exercice noté · 60 BPM
+- Exercice 2 : Adagio · Exercice noté · 72 BPM
 - Exercice Bonus : Allegretto · Bonus · 100 BPM
 
 ### 13. Synthèse (ouvre à 64 ★)
-- Prise en main · Prise en main (aide du début à la fin) · 72 BPM
-- Exercice 1 : Adagio · Exercice noté · 72 BPM
-- Exercice 2 : Andante · Exercice noté · 88 BPM
+- Prise en main · Prise en main (aide du début à la fin) · 60 BPM
+- Exercice 1 : Lento · Exercice noté · 60 BPM
+- Exercice 2 : Adagio · Exercice noté · 72 BPM
 - Exercice Bonus : Allegretto · Bonus · 100 BPM
 
 
@@ -470,7 +470,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 
 ## Livre VII — Clé de Fa · Vol. 2 : Niveau
 
-*En clé de fa : croche, liaison, noire pointée, contretemps, doubles croches, triolet et syncopes ; l'ambitus s'étend vers le grave et l'aigu.*
+*En clé de fa : croche, noire pointée, contretemps, doubles croches, triolet et syncopes ; l'ambitus s'étend vers le grave et l'aigu.*
 
 ### 1. La croche (ouvre à 0 ★) — figures : Croche, Deux croches ligaturées
 - Découverte · Démo (on écoute)
@@ -580,7 +580,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
 - Exercice 2 : Adagio · Exercice noté · 72 BPM
-- Exercice Bonus : Andante · Bonus
+- Exercice Bonus : Adagio · Bonus · 72 BPM
 
 ### 4. Croche et doubles croches (ouvre à 15 ★) — figures : Croche et quatre doubles, Doubles croche doubles
 - Découverte · Démo (on écoute)
@@ -588,7 +588,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
 - Exercice 2 : Adagio · Exercice noté · 72 BPM
-- Exercice Bonus : Andante · Bonus
+- Exercice Bonus : Adagio · Bonus · 72 BPM
 
 ### 5. La croche pointée (ouvre à 20 ★) — figures : Croche pointée et double, Croche pointée et trois doubles
 - Découverte · Démo (on écoute)
@@ -607,9 +607,9 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 7. Synthèse (ouvre à 30 ★)
-- Prise en main · Prise en main (aide du début à la fin) · 72 BPM
-- Exercice 1 : Adagio · Exercice noté · 72 BPM
-- Exercice 2 : Andante · Exercice noté · 88 BPM
+- Prise en main · Prise en main (aide du début à la fin) · 60 BPM
+- Exercice 1 : Lento · Exercice noté · 60 BPM
+- Exercice 2 : Adagio · Exercice noté · 72 BPM
 - Exercice Bonus : Allegretto · Bonus · 100 BPM
 
 
@@ -669,7 +669,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 
 ## Livre X — Clé d'Ut 3 · Vol. 2 : Niveau
 
-*La clé d'ut 3 de si2 à ré5 : rythmes pointés, syncopes, contretemps, 6/8, leçons longues et rapides.*
+*La clé d'ut 3 de si2 à ré5 : rythmes pointés, syncopes, contretemps, 6/8, leçons longues et rapides. Prérequis : le livre IX et les rythmes des livres I à III, révisés ici sans être enseignés.*
 
 ### 1. L'ambitus complet : de si2 à ré5 (ouvre à 0 ★) — notes nouvelles : DO5, RE5, SI2, DO3
 - Exercice 1 : Lento · Lecture dirigée
@@ -714,15 +714,15 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Allegro · Bonus · 116 BPM
 
 ### 7. Synthèse (ouvre à 30 ★)
-- Prise en main · Prise en main (aide du début à la fin) · 72 BPM
-- Exercice 1 : Adagio · Exercice noté · 72 BPM
-- Exercice 2 : Andante · Exercice noté · 88 BPM
+- Prise en main · Prise en main (aide du début à la fin) · 60 BPM
+- Exercice 1 : Lento · Exercice noté · 60 BPM
+- Exercice 2 : Adagio · Exercice noté · 72 BPM
 - Exercice Bonus : Allegretto · Bonus · 100 BPM
 
 
 ## Livre XI — Clé d'Ut 4 · Vol. 1 : Niveau
 
-*La clé d'ut 4e ligne : ses repères et son ambitus, la croche, la double croche, la syncope, le triolet et le 6/8.*
+*La clé d'ut 4e ligne : ses repères et son ambitus, la croche, la double croche, la syncope, le triolet et le 6/8. Prérequis : les rythmes des livres I à III et le 6/8 du livre V, révisés ici sans être enseignés.*
 
 ### 1. La clé d'ut 4e ligne : les notes repères (ouvre à 0 ★) — notes nouvelles : LA3, SI3, DO4, RE4, MI4
 - Découverte · Démo (on écoute)
@@ -732,7 +732,7 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice 3 : Adagio · Exercice noté · 72 BPM
 - Exercice Bonus : Andante · Bonus
 
-### 2. L'ambitus complet (ouvre à 5 ★) — notes nouvelles : SOL2, LA2, SI2, SOL4, LA4, SI4
+### 2. L'ambitus complet (ouvre à 5 ★) — notes nouvelles : SOL2, LA2, SI2, DO3, RE3, MI3, FA3, SOL3, FA4, SOL4, LA4, SI4
 - Exercice 1 : Lento · Lecture dirigée
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 2 : Lento · Exercice noté · 60 BPM
@@ -768,53 +768,53 @@ Douze livres, un livre = des chapitres, un chapitre = démo, rythme ou lecture, 
 - Exercice Bonus : Andante · Bonus
 
 ### 7. Synthèse (ouvre à 30 ★)
-- Prise en main · Prise en main (aide du début à la fin) · 72 BPM
-- Exercice 1 : Adagio · Exercice noté · 72 BPM
-- Exercice 2 : Andante · Exercice noté · 88 BPM
+- Prise en main · Prise en main (aide du début à la fin) · 60 BPM
+- Exercice 1 : Lento · Exercice noté · 60 BPM
+- Exercice 2 : Adagio · Exercice noté · 72 BPM
 - Exercice Bonus : Allegretto · Bonus · 100 BPM
 
 
 ## Livre XII — Les Deux Clés : lecture alternée sol et fa
 
-*Les deux clés, sol et fa, alternées dans un même exercice, du plus simple au plus rapide.*
+*Les deux clés, sol et fa, alternées dans un même exercice, du plus simple au plus rapide. Prérequis : les notes des livres I et VI, plus le la et le si aigus du livre II.*
 
 ### 1. Lecture alternée sol et fa : niveau 1 (ouvre à 0 ★)
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
-- Exercice 2 : Lento · Exercice noté · 60 BPM
+- Exercice 2 : Adagio · Exercice noté · 72 BPM
 - Exercice 3 : Lento · Exercice noté · 60 BPM
-- Exercice 4 : Lento · Exercice noté · 60 BPM
-- Exercice 5 : Adagio · Exercice noté · 72 BPM
+- Exercice 4 : Adagio · Exercice noté · 72 BPM
+- Exercice 5 : Lento · Exercice noté · 60 BPM
 - Exercice 6 : Adagio · Exercice noté · 72 BPM
 - Exercice Bonus : Andante · Bonus · 88 BPM
 
 ### 2. Lecture alternée sol et fa : niveau 2 (ouvre à 8 ★)
 - Prise en main · Prise en main (aide du début à la fin) · 60 BPM
 - Exercice 1 : Lento · Exercice noté · 60 BPM
-- Exercice 2 : Lento · Exercice noté · 60 BPM
-- Exercice 3 : Adagio · Exercice noté · 72 BPM
+- Exercice 2 : Adagio · Exercice noté · 72 BPM
+- Exercice 3 : Lento · Exercice noté · 60 BPM
 - Exercice 4 : Adagio · Exercice noté · 72 BPM
-- Exercice 5 : Adagio · Exercice noté · 72 BPM
+- Exercice 5 : Lento · Exercice noté · 60 BPM
 - Exercice 6 : Adagio · Exercice noté · 72 BPM
 - Exercice Bonus : Andante · Bonus · 88 BPM
 
 ### 3. Lecture alternée sol et fa : niveau 3 (ouvre à 16 ★)
-- Prise en main · Prise en main (aide du début à la fin) · 72 BPM
-- Exercice 1 : Adagio · Exercice noté · 72 BPM
+- Prise en main · Prise en main (aide du début à la fin) · 60 BPM
+- Exercice 1 : Lento · Exercice noté · 60 BPM
 - Exercice 2 : Adagio · Exercice noté · 72 BPM
-- Exercice 3 : Adagio · Exercice noté · 72 BPM
+- Exercice 3 : Lento · Exercice noté · 60 BPM
 - Exercice 4 : Adagio · Exercice noté · 72 BPM
-- Exercice 5 : Adagio · Exercice noté · 72 BPM
+- Exercice 5 : Lento · Exercice noté · 60 BPM
 - Exercice 6 : Adagio · Exercice noté · 72 BPM
 - Exercice Bonus : Andante · Bonus · 88 BPM
 
 ### 4. Lecture alternée sol et fa : niveau 4 (ouvre à 24 ★)
 - Prise en main · Prise en main (aide du début à la fin) · 72 BPM
 - Exercice 1 : Adagio · Exercice noté · 72 BPM
-- Exercice 2 : Adagio · Exercice noté · 72 BPM
-- Exercice 3 : Andante · Exercice noté · 88 BPM
+- Exercice 2 : Andante · Exercice noté · 88 BPM
+- Exercice 3 : Adagio · Exercice noté · 72 BPM
 - Exercice 4 : Andante · Exercice noté · 88 BPM
-- Exercice 5 : Andante · Exercice noté · 88 BPM
+- Exercice 5 : Adagio · Exercice noté · 72 BPM
 - Exercice 6 : Andante · Exercice noté · 88 BPM
 - Exercice Bonus : Andante · Bonus · 88 BPM
 
