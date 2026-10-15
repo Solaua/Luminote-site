@@ -321,7 +321,7 @@
 }
 
 /* ── C16 (design validé 13/09) : jetons, pièce grisée, bouton du jour, objectif ── */
-.accueil-jetons { position: relative; display: flex; align-items: center; gap: 3px; }
+.accueil-jetons { position: relative; display: flex; align-items: center; gap: 3px; background: none; border: none; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 /* La pièce tant que l'exercice du jour n'est pas fait : gris papier, contour
    pointillé, ni ombre ni idle ni appui — et un cadenas en coin. */
 .accueil-pastille-grise,

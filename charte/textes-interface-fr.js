@@ -106,6 +106,7 @@ export default {
   "home.dailyAgain": "Exercice du jour fait, le prochain dans {t} !",
   "home.dailyBoxFirst": "Ouvre d’abord ta récompense !",
   "home.dailyNextSub": "Prochain exercice dans {t}",
+  "home.jetonsFull": "Jetons au complet",
   "home.jetonsNext": "+1 dans {t}",
   "home.rewardFull": "Récompense en attente · tes 5 jetons sont au complet",
   "home.rewardNext": "Prochaine récompense dans {t}",
