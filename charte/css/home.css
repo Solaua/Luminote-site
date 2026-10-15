@@ -116,11 +116,11 @@
    des jetons — elle se remplit sur la période de recharge, les heures restantes
    au bout, sans minutes ; verte quand l'objectif du jour accélère les jetons. */
 .accueil-jauge { display: inline-flex; align-items: center; gap: 6px; }
-.accueil-jetons-jauge { position: absolute; left: 0; top: calc(100% + 5px); }
+.accueil-jetons-jauge { position: absolute; left: 0; top: calc(100% + 2px); }
 .accueil-jauge-piste {
   position: relative;
   width: 100px;
-  height: 8px;
+  height: 4px; /* fine : elle ne touche pas le filet de l'en-tête (15/10) */
   border: var(--trait) solid var(--encre);
   border-radius: 999px;
   background: var(--papier-appui);
@@ -135,7 +135,8 @@
   animation: jaugeRemplit .9s var(--ressort-doux) 1.1s both;
 }
 @keyframes jaugeRemplit { from { transform: scaleX(0); } }
-.accueil-jauge-heures { font: 700 11px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; }
+.accueil-jauge-heures { font: 700 11px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; line-height: 1; }
+.accueil-jauge-coche { font: 800 12px var(--fonte-corps); color: var(--vert); line-height: 1; } /* jauge pleine (15/10) */
 .accueil-jauge-rapide .accueil-jauge-heures { color: var(--vert); }
 @media (prefers-reduced-motion: reduce) { .accueil-jauge-remplie { animation: none; } }
 .accueil-recompense-espace { height: 14px; }
