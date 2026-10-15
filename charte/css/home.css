@@ -112,13 +112,15 @@
   animation: popIn .55s var(--ressort) .7s both;
 }
 .accueil-recompense-libelle { font: 700 12px var(--fonte-corps); color: var(--encre); }
-/* 15/10 : la jauge de la prochaine récompense (façon Pokémon TCG Pocket) — elle se
-   remplit sur les 12 h, les heures restantes au bout, sans minutes. */
-.accueil-jauge { display: inline-flex; align-items: center; gap: 8px; }
+/* 15/10 : la jauge du prochain jeton (façon Pokémon TCG Pocket), sous la rangée
+   des jetons — elle se remplit sur la période de recharge, les heures restantes
+   au bout, sans minutes ; verte quand l'objectif du jour accélère les jetons. */
+.accueil-jauge { display: inline-flex; align-items: center; gap: 6px; }
+.accueil-jetons-jauge { position: absolute; left: 0; top: calc(100% + 5px); }
 .accueil-jauge-piste {
   position: relative;
-  width: 132px;
-  height: 10px;
+  width: 100px;
+  height: 8px;
   border: var(--trait) solid var(--encre);
   border-radius: 999px;
   background: var(--papier-appui);
@@ -133,7 +135,8 @@
   animation: jaugeRemplit .9s var(--ressort-doux) 1.1s both;
 }
 @keyframes jaugeRemplit { from { transform: scaleX(0); } }
-.accueil-jauge-heures { font: 700 13px var(--fonte-corps); color: var(--encre); min-width: 34px; }
+.accueil-jauge-heures { font: 700 11px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; }
+.accueil-jauge-rapide .accueil-jauge-heures { color: var(--vert); }
 @media (prefers-reduced-motion: reduce) { .accueil-jauge-remplie { animation: none; } }
 .accueil-recompense-espace { height: 14px; }
 .accueil-pastille-cadre { position: relative; }
@@ -319,10 +322,6 @@
 
 /* ── C16 (design validé 13/09) : jetons, pièce grisée, bouton du jour, objectif ── */
 .accueil-jetons { position: relative; display: flex; align-items: center; gap: 3px; }
-/* 11/10 : le compte à rebours du prochain jeton (le temps rend jusqu'à 3). */
-/* 11/10 : objectif du jour atteint — les jetons reviennent plus vite, le compte à rebours passe en vert. */
-.accueil-jetons-minuteur-rapide { color: var(--vert); }
-.accueil-jetons-minuteur { position: absolute; left: 0; top: calc(100% + 3px); font: 700 10.5px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; }
 /* La pièce tant que l'exercice du jour n'est pas fait : gris papier, contour
    pointillé, ni ombre ni idle ni appui — et un cadenas en coin. */
 .accueil-pastille-grise,
