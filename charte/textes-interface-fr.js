@@ -252,7 +252,7 @@ export default {
   "complete.label": "Luminote Complète",
   "complete.back": "retour",
   "complete.later": "Plus tard",
-  "complete.reminder": "Ton prochain jeton gratuit revient dans {t}. Ou joue sans compter.",
+  "complete.reminder": "Ton prochain jeton gratuit revient dans {t}.",
   "complete.title": "Joue sans compter les jetons",
   "complete.benefitTokens": "Jetons illimités",
   "complete.benefitFreeze": "Un gel de série offert chaque semaine",
