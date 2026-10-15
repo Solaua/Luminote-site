@@ -446,6 +446,13 @@
   background: radial-gradient(var(--jeu-grain-fort) .5px, transparent .6px) 0 0/4px 4px var(--papier-creuse);
 }
 /* Quitter l'exercice : un lien, pas un bouton. */
+/* 15/10 : passé le premier tiers, l'abandon coûte un jeton — dit sous « Recommencer ». */
+.jeu-pause-avertissement {
+  margin: 0;
+  font: 700 12.5px/1.35 var(--fonte-corps);
+  color: var(--terracotta);
+  text-align: center;
+}
 .jeu-pause-quitter {
   background: none;
   border: none;
@@ -702,6 +709,7 @@
   animation: riseIn .35s ease 2.45s forwards;
 }
 .bilan-jetons-perdu { color: var(--terracotta); }
+.bilan-jetons-retour { color: var(--texte-2); font-weight: 400; } /* quand il revient (15/10) */
 .bilan-jetons-gagne { color: var(--vert); }
 .bilan-total-etoile {
   width: 18px;

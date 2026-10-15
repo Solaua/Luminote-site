@@ -115,6 +115,7 @@
   box-shadow: 0 4px 0 var(--vert);
 }
 .objectif-niveau-actif:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--vert); }
+.objectif-niveau:disabled { opacity: .45; cursor: default; } /* changé aujourd'hui : figé jusqu'à demain (15/10) */
 .objectif-niveau-nombre {
   width: 44px;
   height: 44px;

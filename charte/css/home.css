@@ -112,6 +112,29 @@
   animation: popIn .55s var(--ressort) .7s both;
 }
 .accueil-recompense-libelle { font: 700 12px var(--fonte-corps); color: var(--encre); }
+/* 15/10 : la jauge de la prochaine récompense (façon Pokémon TCG Pocket) — elle se
+   remplit sur les 12 h, les heures restantes au bout, sans minutes. */
+.accueil-jauge { display: inline-flex; align-items: center; gap: 8px; }
+.accueil-jauge-piste {
+  position: relative;
+  width: 132px;
+  height: 10px;
+  border: var(--trait) solid var(--encre);
+  border-radius: 999px;
+  background: var(--papier-appui);
+  overflow: hidden;
+}
+.accueil-jauge-remplie {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  transform: scaleX(var(--jauge, 0));
+  transform-origin: left center;
+  animation: jaugeRemplit .9s var(--ressort-doux) 1.1s both;
+}
+@keyframes jaugeRemplit { from { transform: scaleX(0); } }
+.accueil-jauge-heures { font: 700 13px var(--fonte-corps); color: var(--encre); min-width: 34px; }
+@media (prefers-reduced-motion: reduce) { .accueil-jauge-remplie { animation: none; } }
 .accueil-recompense-espace { height: 14px; }
 .accueil-pastille-cadre { position: relative; }
 .accueil-pastille {
