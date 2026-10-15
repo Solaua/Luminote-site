@@ -288,7 +288,7 @@ export default {
   "complete.lifetime": "Ton achat de la première version vaut Luminote Complète à vie.",
   "settings.complete": "Luminote Complète",
   "settings.completeSub": "Jetons illimités · essai gratuit de 7 jours",
-  "settings.completeManage": "Gérer mon abonnement dans Google Play",
+  "settings.completeManage": "Gérer mon abonnement",
   "settings.completeLifetime": "À vie, grâce à ton achat de la première version",
   "settings.restore": "Restaurer mes achats",
   "settings.restoreSub": "Après une réinstallation ou un changement de téléphone",
