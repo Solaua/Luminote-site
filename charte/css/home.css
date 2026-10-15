@@ -36,7 +36,7 @@
   opacity: 0;
   animation: mentionIn1 .35s ease .05s forwards;
 }
-.accueil-compteurs { display: flex; align-items: center; gap: 10px; }
+.accueil-compteurs { display: flex; align-items: center; gap: 14px; } /* 15/10 : un peu plus d'air entre jetons, étoiles et série */
 .accueil-compteur {
   display: flex;
   align-items: center;
@@ -115,11 +115,14 @@
 /* 15/10 : la jauge du prochain jeton (façon Pokémon TCG Pocket), sous la rangée
    des jetons — elle se remplit sur la période de recharge, les heures restantes
    au bout, sans minutes ; verte quand l'objectif du jour accélère les jetons. */
-.accueil-jauge { display: inline-flex; align-items: center; gap: 6px; }
-.accueil-jetons-jauge { position: absolute; left: 0; top: calc(100% + 2px); }
+.accueil-jauge { display: inline-flex; align-items: center; gap: 5px; }
+/* Toute la jauge (barre + heures ou coche) tient SOUS les jetons, centrée :
+   même retrait à gauche et à droite de la rangée (15/10). */
+.accueil-jetons-jauge { position: absolute; left: 6px; right: 6px; top: calc(100% + 1px); display: flex; }
 .accueil-jauge-piste {
   position: relative;
-  width: 100px;
+  flex: 1;
+  min-width: 0;
   height: 4px; /* fine : elle ne touche pas le filet de l'en-tête (15/10) */
   border: var(--trait) solid var(--encre);
   border-radius: 999px;
@@ -136,9 +139,26 @@
 }
 @keyframes jaugeRemplit { from { transform: scaleX(0); } }
 .accueil-jauge-heures { font: 700 11px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; line-height: 1; }
-.accueil-jauge-coche { font: 800 12px var(--fonte-corps); color: var(--vert); line-height: 1; } /* jauge pleine (15/10) */
+/* Jauge pleine (15/10) : la coche est une petite pastille tamponnée — vert, contour
+   encre, ombre décalée de la charte — qui arrive d'un coup de tampon une fois la
+   barre remplie. */
+.accueil-jauge-coche {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: var(--vert);
+  border: 1px solid var(--encre);
+  box-shadow: 0 1.5px 0 var(--encre);
+  color: var(--papier);
+  animation: cocheTampon .42s var(--ressort-fort) 1.95s both;
+}
+@keyframes cocheTampon { from { transform: scale(0) rotate(-25deg); } }
 .accueil-jauge-rapide .accueil-jauge-heures { color: var(--vert); }
-@media (prefers-reduced-motion: reduce) { .accueil-jauge-remplie { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .accueil-jauge-remplie, .accueil-jauge-coche { animation: none; } }
 .accueil-recompense-espace { height: 14px; }
 .accueil-pastille-cadre { position: relative; }
 .accueil-pastille {
