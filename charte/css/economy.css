@@ -195,6 +195,7 @@
 .paywall-liens { margin: 8px 0 0; text-align: center; font: 400 12px var(--fonte-corps); color: var(--texte-2); }
 .paywall-lien { background: none; border: none; padding: 0; font: 700 12px var(--fonte-corps); color: var(--encre); text-decoration: underline; cursor: pointer; }
 .paywall-sortie { display: block; margin: 18px auto 0; }
+.paywall-toutes { display: block; margin: 12px auto 0; } /* « Voir toutes les offres » (15/10) */
 .paywall-bienvenue { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-bottom: 12vh; }
 .paywall-tampon { font-size: 15px; padding: 4px 14px; }
 .paywall-bienvenue .paywall-titre { margin-top: 26px; }
