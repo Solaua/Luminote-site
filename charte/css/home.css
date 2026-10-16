@@ -157,8 +157,15 @@
   animation: cocheTampon .42s var(--ressort-fort) 1.95s both;
 }
 @keyframes cocheTampon { from { transform: scale(0) rotate(-25deg); } }
+/* 16/10 : un jeton est prêt — la jauge pleine pulse et se touche (le jeton passe dans la pièce-cadeau). */
+button.accueil-jauge { background: none; border: none; padding: 4px 0; margin: -4px 0; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.accueil-jauge-prete { animation: jaugePrete 1.15s ease-in-out infinite; transform-origin: center; }
+@keyframes jaugePrete { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+.accueil-jauge-prete:active { transform: scale(.94); animation: none; }
+.accueil-jauge-plus { font: 800 12px var(--fonte-corps); color: var(--terracotta); line-height: 1; white-space: nowrap; }
+.accueil-jauge-plus-depose { color: var(--texte-2); }
 .accueil-jauge-rapide .accueil-jauge-heures { color: var(--vert); }
-@media (prefers-reduced-motion: reduce) { .accueil-jauge-remplie, .accueil-jauge-coche { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .accueil-jauge-remplie, .accueil-jauge-coche, .accueil-jauge-prete { animation: none; } }
 .accueil-recompense-espace { height: 14px; }
 .accueil-pastille-cadre { position: relative; }
 .accueil-pastille {
@@ -342,6 +349,7 @@
 }
 
 /* ── C16 (design validé 13/09) : jetons, pièce grisée, bouton du jour, objectif ── */
+.accueil-jetons-bloc { position: relative; display: inline-flex; } /* la rangée + sa jauge, posée dessous (16/10) */
 .accueil-jetons { position: relative; display: flex; align-items: center; gap: 3px; background: none; border: none; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 /* La pièce tant que l'exercice du jour n'est pas fait : gris papier, contour
    pointillé, ni ombre ni idle ni appui — et un cadenas en coin. */
