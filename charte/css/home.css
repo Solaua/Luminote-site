@@ -330,9 +330,12 @@ button.accueil-jauge { background: none; border: none; padding: 4px 0; margin: -
 .accueil-rang:active { background: rgba(35, 32, 28, .05); }
 .accueil-rang-chevron { font: 400 21px var(--fonte-corps); color: var(--vert); }
 .accueil-rang-libelle { display: inline-flex; align-items: center; gap: 9px; }
+/* 16/10 : le libellé ne se coupe jamais — faute de place, le badge Premium passe dessous, à gauche. */
+.accueil-rang-libelle:has(.accueil-rang-premium) { flex-wrap: wrap; row-gap: 4px; text-align: left; }
+.accueil-rang-texte { white-space: nowrap; }
 /* Retour 18 : l'Arcade, posée mais pas encore ouverte. */
 .accueil-rang-inerte { cursor: default; color: var(--texte-2); }
-.accueil-rang-beta {
+.accueil-rang-beta, .accueil-rang-premium {
   font: 700 10px var(--fonte-corps);
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -341,6 +344,8 @@ button.accueil-jauge { background: none; border: none; padding: 4px 0; margin: -
   border-radius: 5px;
   padding: 1px 6px;
 }
+/* 16/10 : l'entraînement personnalisé et l'arcade, réservés à Premium — le même badge, à l'encre terracotta. */
+.accueil-rang-premium { color: var(--terracotta); border-color: var(--terracotta); }
 
 /* ── C16 (design validé 13/09) : jetons, pièce grisée, bouton du jour, objectif ── */
 .accueil-jetons-bloc { position: relative; display: inline-flex; } /* la rangée + sa jauge, posée dessous (16/10) */
