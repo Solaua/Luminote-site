@@ -1,394 +1,278 @@
 /* ═══════════════════════════════════════════════════════════════════
-   Luminote — site vitrine. DA reprise de l'app (refonte V7) :
-   fond nuit #0f172a + lueurs radiales, cartes « chunky », Quicksand,
-   dégradé 7 notes réservé à la clé de sol (signature de marque).
+   Luminote — site vitrine, DA « papier » de l'app 2.0 (octobre 2026).
+   Valeurs reprises de src/styles/papier.css (charte) : papier grainé,
+   encre, deux accents (terracotta = ce qui se gagne, vert = ce qui se
+   joue), hachures 38°, ombres opaques jamais floues, tampons.
    Aucune ressource externe : polices auto-hébergées (assets/fonts/).
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── Polices (identiques à l'app) ── */
-@font-face {
-  font-family: 'Quicksand'; font-style: normal; font-weight: 400; font-display: swap;
-  src: url('fonts/quicksand-latin-400-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Quicksand'; font-style: normal; font-weight: 500; font-display: swap;
-  src: url('fonts/quicksand-latin-500-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Quicksand'; font-style: normal; font-weight: 600; font-display: swap;
-  src: url('fonts/quicksand-latin-600-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Quicksand'; font-style: normal; font-weight: 700; font-display: swap;
-  src: url('fonts/quicksand-latin-700-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Quicksand'; font-style: normal; font-weight: 400; font-display: swap;
-  src: url('fonts/quicksand-latin-ext-400-normal.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Quicksand'; font-style: normal; font-weight: 500; font-display: swap;
-  src: url('fonts/quicksand-latin-ext-500-normal.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Quicksand'; font-style: normal; font-weight: 600; font-display: swap;
-  src: url('fonts/quicksand-latin-ext-600-normal.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Quicksand'; font-style: normal; font-weight: 700; font-display: swap;
-  src: url('fonts/quicksand-latin-ext-700-normal.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* Bravura : uniquement pour la clé de sol du hero (glyphe SMuFL U+E050). */
-@font-face {
-  font-family: 'Bravura'; font-style: normal; font-weight: 400; font-display: block;
-  src: url('fonts/Bravura.woff2') format('woff2');
-}
+/* ── Polices (celles de l'app) ── */
+@font-face { font-family: 'Atkinson Hyperlegible'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/atkinson-hyperlegible-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-style: italic; font-weight: 400; font-display: swap; src: url('fonts/atkinson-hyperlegible-latin-400-italic.woff2') format('woff2'); }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/atkinson-hyperlegible-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/bricolage-grotesque-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/bricolage-grotesque-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Caveat'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/caveat-latin-500-normal.woff2') format('woff2'); }
+/* Bravura : les glyphes musicaux (clé de sol U+E050). */
+@font-face { font-family: 'Bravura'; font-style: normal; font-weight: 400; font-display: block; src: url('fonts/Bravura.woff2') format('woff2'); }
 
-/* ── Tokens (mêmes valeurs que src/styles/tokens.js de l'app) ── */
+/* ── Tokens (mêmes valeurs que l'app) ── */
 :root {
-  --ink-950: #0f172a;
-  --ink-900: #1a1f2e;
-  --text: #e2e8f0;
-  --text-muted: #94a3b8;
-  --text-subtle: #7688a0;
-  --text-bright: #F3F6FF;
-  --sky: #38bdf8;
-  --blue-300: #93c5fd;
-  --blue-500: #3b82f6;
-  --indigo: #818cf8;
-  --mint: #10b981;
-  --amber: #fbbf24;
-  --emerald-500: #2EA65C;
-  --emerald-600: #1E8248;
-  --emerald-700: #155E35;
-  --raised: linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-  --border-subtle: rgba(255,255,255,.08);
-  --border-strong: rgba(255,255,255,.12);
-  --chunk: 0 4px 0 rgba(2,6,23,.8);
-  --top-edge: inset 0 1px 0 rgba(255,255,255,.08);
-  --radius-card: 20px;
-  --radius-control: 14px;
+  --papier: #FBF8F1;
+  --papier-carte: #FFFDF8;
+  --papier-creuse: #F3F0E9;
+  --encre: #23201C;
+  --encre-douce: #4A453E;
+  --texte-2: #6B655C;
+  --decor: #9A948A;
+  --terracotta: #B4442E;
+  --terracotta-sombre: #7E2E1F;
+  --terracotta-pale: #FBF2EF;
+  --vert: #2F6B52;
+  --vert-sombre: #1F4A38;
+  --vert-pale: #EFF5F1;
+  --trait: 1.25px;
+  --trait-fort: 1.5px;
+  --rayon-bouton: 10px;
+  --rayon-surface: 16px;
+  --ombre: 0 3px 0 var(--encre);
+  --ombre-grande: 0 5px 0 var(--encre);
+  --ressort: cubic-bezier(.3, 1.4, .5, 1);
+  --fonte-corps: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --fonte-titres: 'Bricolage Grotesque', 'Atkinson Hyperlegible', sans-serif;
+  --fonte-manuscrite: 'Caveat', cursive;
+  --hachures: repeating-linear-gradient(38deg, rgba(245, 241, 233, .16) 0 1.1px, transparent 1.1px 4px);
+  --grain: radial-gradient(rgba(35, 32, 28, .05) .5px, transparent .6px) 0 0/4px 4px;
 }
 
 /* ── Base ── */
-* { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--ink-950);
-  color: var(--text);
-  font-family: 'Quicksand', -apple-system, 'Segoe UI', sans-serif;
-  font-size: 16.5px;
-  line-height: 1.65;
+  background: var(--grain) var(--papier);
+  color: var(--encre);
+  font: 400 17px/1.6 var(--fonte-corps);
   overflow-x: hidden;
 }
+img, video { display: block; max-width: 100%; }
+a { color: var(--terracotta); text-underline-offset: 3px; }
+a:hover { color: var(--terracotta-sombre); }
+:focus-visible { outline: 2px solid var(--vert); outline-offset: 3px; border-radius: 4px; }
+::selection { background: var(--terracotta-pale); }
 
-/* Lueurs radiales fixes (mêmes stops que StarBackground de l'app). */
-.glow {
-  position: fixed; inset: 0; z-index: -2; pointer-events: none;
-  background:
-    radial-gradient(720px 480px at 50% -60px, rgba(56,189,248,.10), transparent 70%),
-    radial-gradient(640px 560px at 92% 38%, rgba(129,140,248,.09), transparent 70%);
-}
-/* Étoiles : deux couches de points en box-shadow, scintillement très lent. */
-.stars { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.stars i {
-  position: absolute; top: 0; left: 0; width: 2px; height: 2px;
-  border-radius: 50%; background: transparent;
-}
-.stars i:first-child {
-  box-shadow:
-    8vw 12vh 0 0 rgba(255,255,255,.38), 21vw 68vh 0 0 rgba(255,255,255,.22),
-    34vw 28vh 0 -.5px rgba(255,255,255,.30), 47vw 82vh 0 0 rgba(255,255,255,.20),
-    58vw 12vh 0 -.5px rgba(255,255,255,.34), 71vw 52vh 0 0 rgba(255,255,255,.24),
-    83vw 22vh 0 0 rgba(255,255,255,.36), 92vw 74vh 0 -.5px rgba(255,255,255,.22),
-    15vw 44vh 0 -1px rgba(255,255,255,.18), 64vw 88vh 0 -1px rgba(255,255,255,.18);
-  animation: twinkle 5.5s ease-in-out infinite;
-}
-.stars i:last-child {
-  box-shadow:
-    12vw 86vh 0 0 rgba(255,255,255,.26), 27vw 8vh 0 -.5px rgba(255,255,255,.30),
-    41vw 56vh 0 -1px rgba(255,255,255,.18), 53vw 34vh 0 0 rgba(255,255,255,.28),
-    66vw 18vh 0 -.5px rgba(255,255,255,.22), 77vw 78vh 0 0 rgba(255,255,255,.30),
-    88vw 44vh 0 -1px rgba(255,255,255,.18), 96vw 10vh 0 0 rgba(255,255,255,.26),
-    5vw 62vh 0 -.5px rgba(255,255,255,.24), 37vw 94vh 0 0 rgba(255,255,255,.20);
-  animation: twinkle 7s ease-in-out 2.2s infinite;
-}
-@keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+/* Trilingue : seul le bloc de la langue choisie s'affiche. */
+.L { display: none; }
+html.lang-fr .L.fr, html.lang-en .L.en, html.lang-es .L.es { display: revert; }
 
-/* ── Bascule de langue : .L caché sauf langue active ── */
-.L { display: none !important; }
-html.lang-fr .L.fr, html.lang-en .L.en, html.lang-es .L.es { display: revert !important; }
+.wrap { width: min(1080px, 100% - 32px); margin-inline: auto; position: relative; }
+.page { position: relative; overflow: hidden; }
 
-/* ── Liens, focus, sélection ── */
-a { color: var(--sky); text-decoration: none; }
-a:hover { text-decoration: underline; }
-:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; border-radius: 4px; }
-::selection { background: rgba(56,189,248,.30); }
-
-.wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
-
-/* ── Header commun ── */
-.site-header {
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  padding: 1.1rem 0 0.6rem;
-}
-.brand {
-  display: inline-flex; align-items: center; gap: .55rem;
-  font-weight: 700; font-size: 1.22rem; letter-spacing: -.02em;
-  color: var(--text-bright);
-  text-shadow: 0 0 18px rgba(56,189,248,.35);
-}
-.brand:hover { text-decoration: none; }
-.brand img { width: 30px; height: 30px; border-radius: 8px; }
-
-/* Sélecteur de langue : pill sombre, comme dans l'app. */
-.lang-switch {
-  display: inline-flex; gap: 2px; padding: 3px;
-  background: rgba(30,41,59,.6); border: 1px solid var(--border-subtle);
-  border-radius: 999px;
-}
+/* ── En-tête ── */
+.site-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 0 14px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font: 700 22px var(--fonte-titres); color: var(--encre); text-decoration: none; }
+.brand:hover { color: var(--encre); }
+.brand img { border-radius: 8px; border: var(--trait) solid var(--encre); box-shadow: 0 2px 0 var(--encre); }
+.lang-switch { display: inline-flex; gap: 6px; }
 .lang-switch button {
-  appearance: none; border: 0; cursor: pointer;
-  font: 700 .72rem/1 'Quicksand', sans-serif; letter-spacing: .06em;
-  color: var(--text-muted); background: transparent;
-  padding: .42rem .66rem; border-radius: 999px;
+  font: 700 12px var(--fonte-corps); letter-spacing: .08em;
+  color: var(--encre); background: var(--papier-carte);
+  border: var(--trait) solid var(--encre); border-radius: 7px;
+  padding: 5px 9px; cursor: pointer;
+  box-shadow: 0 2px 0 var(--encre);
+  transition: transform .12s var(--ressort), box-shadow .12s;
 }
-.lang-switch button:hover { color: var(--text); }
-.lang-switch button[aria-pressed="true"] {
-  color: var(--text-bright); background: rgba(255,255,255,.14);
-}
-
-/* ── Cartes « chunky » (relief V7) ── */
-.card {
-  background: var(--raised);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-card);
-  box-shadow: var(--chunk), var(--top-edge);
+.lang-switch button:active { transform: translateY(2px); box-shadow: none; }
+.lang-switch button[aria-pressed="true"] { background: var(--encre); color: var(--papier-carte); }
+.filet {
+  height: 5px;
+  background:
+    linear-gradient(90deg, transparent, rgba(35, 32, 28, .22) 22%, rgba(35, 32, 28, .22) 78%, transparent) 0 0/100% 1px no-repeat,
+    linear-gradient(90deg, transparent, rgba(35, 32, 28, .05) 28%, rgba(35, 32, 28, .05) 72%, transparent) 0 1px/100% 4px no-repeat;
 }
 
-/* ── Boutons ── */
+/* Filigrane : la clé de sol géante de chaque écran de l'app. */
+.filigrane {
+  position: absolute; pointer-events: none; user-select: none;
+  font: 400 560px/1 Bravura, serif; color: rgba(35, 32, 28, .045);
+  transform: rotate(8deg); z-index: -1;
+}
+.filigrane-heros { right: -110px; top: 40px; }
+.filigrane-bas { left: -150px; bottom: 120px; transform: rotate(-10deg); }
+
+/* ── Typo ── */
+h1, h2, h3 { font-family: var(--fonte-titres); font-weight: 700; line-height: 1.08; margin: 0; letter-spacing: -.01em; }
+.libelle { display: block; font: 700 12px var(--fonte-corps); letter-spacing: .18em; text-transform: uppercase; color: var(--texte-2); margin-bottom: 10px; }
+.titre-section { font-size: clamp(30px, 4.6vw, 44px); max-width: 20ch; }
+.chapo { color: var(--encre-douce); max-width: 60ch; margin: 14px 0 0; }
+.manuscrit { font: 500 22px/1.2 var(--fonte-manuscrite); color: var(--vert); }
+section { padding: clamp(56px, 9vw, 96px) 0 0; }
+
+/* ── Tampon ── */
+.tampon {
+  display: inline-block;
+  font: 700 12px var(--fonte-corps); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--terracotta); background: var(--terracotta-pale);
+  border: var(--trait-fort) solid var(--terracotta); border-radius: 6px;
+  padding: 3px 10px; transform: rotate(-4deg);
+  box-shadow: 0 2px 0 var(--terracotta);
+}
+.tampon.vert { color: var(--vert); background: var(--vert-pale); border-color: var(--vert); box-shadow: 0 2px 0 var(--vert); }
+.tampon.discret { color: var(--texte-2); background: var(--papier-carte); border-color: var(--decor); box-shadow: none; }
+.tampon-anim { animation: tamponIn .5s var(--ressort) .35s both; }
+@keyframes tamponIn {
+  0% { opacity: 0; transform: scale(2.6) rotate(-28deg); }
+  55% { opacity: 1; transform: scale(.82) rotate(-2deg); }
+  75% { transform: scale(1.12) rotate(-4deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-4deg); }
+}
+
+/* ── Boutons papier ── */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
-  font: 700 1.02rem/1.2 'Quicksand', sans-serif;
-  border-radius: 18px; padding: .95rem 1.5rem;
-  border: 1px solid transparent; cursor: pointer; text-decoration: none;
-  transition: transform .06s ease, box-shadow .06s ease, filter .15s ease;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 54px; padding: 10px 22px;
+  font: 700 16px var(--fonte-titres); text-decoration: none;
+  border-radius: var(--rayon-bouton); border: var(--trait) solid var(--encre);
+  box-shadow: var(--ombre); cursor: pointer;
+  transition: transform .12s var(--ressort), box-shadow .12s;
 }
-.btn:hover { text-decoration: none; filter: brightness(1.06); }
-.btn-cta {
-  color: #fff;
-  background: linear-gradient(180deg, var(--emerald-500), var(--emerald-600));
-  box-shadow: 0 4px 0 var(--emerald-700), var(--top-edge);
-}
-.btn-cta:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--emerald-700), var(--top-edge); }
-.btn-ghost {
-  color: var(--text);
-  background: var(--raised);
-  border-color: var(--border-subtle);
-  box-shadow: var(--chunk), var(--top-edge);
-}
-.btn-ghost:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(2,6,23,.8), var(--top-edge); }
-/* Badge Play Store */
-.btn-store {
-  color: var(--text);
-  background: rgba(30,41,59,.55);
-  border-color: var(--border-strong);
-  box-shadow: var(--chunk), var(--top-edge);
-}
-.btn-store:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(2,6,23,.8), var(--top-edge); }
-.btn-store small { display: block; font-weight: 500; font-size: .68rem; letter-spacing: .04em; color: var(--text-subtle); }
-.btn-store .store-lines { text-align: left; line-height: 1.25; }
+.btn:active { transform: translateY(3px); box-shadow: none; }
+.btn-store { background: var(--hachures) var(--terracotta); color: var(--papier-carte); border-color: var(--terracotta-sombre); box-shadow: 0 3px 0 var(--terracotta-sombre); }
+.btn-store:hover { color: var(--papier-carte); }
+.btn .lignes { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+.btn small { font: 700 10px var(--fonte-corps); letter-spacing: .12em; text-transform: uppercase; opacity: .92; margin-bottom: 2px; }
+.btn-bientot { background: var(--papier-carte); color: var(--texte-2); border-style: dashed; border-color: var(--decor); box-shadow: none; cursor: default; position: relative; }
+.btn-bientot:active { transform: none; }
+.btn-bientot .tampon { position: absolute; top: -13px; right: -6px; font-size: 10px; padding: 2px 7px; }
 
-/* ── Hero ── */
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2.5rem; align-items: center; padding: 3.2rem 0 3.6rem; }
-.hero-copy { max-width: 34rem; }
-/* Clé de sol Bravura au dégradé 7 notes — LA signature de marque. */
-.clef {
-  font-family: 'Bravura', serif; font-size: 120px; line-height: 0;
-  /* L'encre du glyphe déborde largement du corps (≈1,1 em au-dessus de la
-     ligne de base, ≈0,66 em en dessous) : padding en em, sinon le haut de la
-     clé est tronqué par le background-clip. */
-  display: inline-block; padding: 1.2em 0.1em 0.75em;
-  background: linear-gradient(180deg, #ffb02e 0%, #ff6a5f 32%, #e0559f 55%, #8a5cff 75%, #2e8bff 100%);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
-  filter: drop-shadow(0 0 18px rgba(255,130,90,.18));
-  user-select: none;
-}
-.hero h1 {
-  margin: .4rem 0 .3rem;
-  font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700; letter-spacing: -.03em;
-  color: var(--text-bright);
-  text-shadow: 0 0 28px rgba(56,189,248,.35);
-}
-.hero h1 .sparkle { display: inline-block; vertical-align: super; margin-left: .18rem; }
-.baseline {
-  margin: 0 0 1.1rem;
-  font-size: 1.06rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--sky);
-}
-.lede { margin: 0 0 1.8rem; font-size: 1.12rem; color: var(--text-muted); max-width: 30rem; }
-.cta-row { display: flex; flex-wrap: wrap; gap: .85rem; align-items: center; }
+/* ── Héros ── */
+.heros { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 40px; padding-top: clamp(28px, 6vw, 64px); }
+.heros .tampon { margin-bottom: 18px; }
+.heros h1 { font-size: clamp(60px, 11vw, 112px); line-height: .95; }
+.heros .devise { font: italic 400 clamp(20px, 2.6vw, 26px)/1.3 var(--fonte-corps); color: var(--texte-2); margin: 12px 0 0; }
+.heros .chapo { font-size: 18px; margin-top: 22px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 30px; align-items: center; }
+.reassurance { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 22px 0 0; padding: 0; list-style: none; color: var(--texte-2); font-size: 15px; }
+.reassurance li::before { content: '✓'; color: var(--vert); font-weight: 700; margin-right: 6px; }
 
-/* ── Téléphone (démo + captures) ── */
-.phone {
-  position: relative;
-  width: 300px; aspect-ratio: 300 / 634;
-  border-radius: 38px;
-  background: #0b101f;
-  border: 2px solid #262f45;
-  box-shadow: 0 24px 60px rgba(2,6,23,.6), var(--top-edge);
-  padding: 10px;
-  flex-shrink: 0;
+/* Téléphone papier */
+.tel {
+  width: min(300px, 78vw); margin-inline: auto; padding: 10px;
+  background: var(--papier-carte); border: var(--trait-fort) solid var(--encre);
+  border-radius: 38px; box-shadow: var(--ombre-grande);
 }
-.phone::before { /* poinçon caméra */
-  content: ""; position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
-  width: 10px; height: 10px; border-radius: 50%; background: #1e293b; z-index: 3;
-}
-.phone-screen {
-  position: relative; width: 100%; height: 100%;
-  border-radius: 28px; overflow: hidden; background: var(--ink-950);
-}
-.phone-screen img, .phone-screen video, .phone-screen iframe {
-  position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block;
-}
-.phone-screen img, .phone-screen video { object-fit: cover; }
-/* Voile + bouton play par-dessus la capture, tant que la démo n'est pas lancée */
-.demo-cover {
-  position: absolute; inset: 0; z-index: 2;
-  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-  gap: .6rem; padding-bottom: 2.1rem;
-  background: linear-gradient(180deg, rgba(15,23,42,0) 40%, rgba(15,23,42,.88) 88%);
-  border: 0; cursor: pointer; width: 100%;
-  font-family: 'Quicksand', sans-serif;
-}
-.demo-cover .play-round {
-  width: 64px; height: 64px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(180deg, var(--emerald-500), var(--emerald-600));
-  box-shadow: 0 4px 0 var(--emerald-700), 0 0 26px rgba(46,166,92,.45), var(--top-edge);
-  transition: transform .12s ease;
-}
-.demo-cover:hover .play-round { transform: scale(1.06); }
-.demo-cover .play-round svg { margin-left: 4px; }
-.demo-cover span { color: var(--text-bright); font-weight: 700; font-size: .95rem; }
-.demo-note { margin-top: .8rem; text-align: center; font-size: .8rem; color: var(--text-subtle); }
-.demo-note a { color: var(--text-muted); text-decoration: underline; }
+.tel .ecran { border-radius: 29px; overflow: hidden; border: var(--trait) solid rgba(35, 32, 28, .25); aspect-ratio: 390 / 844; background: var(--papier); }
+.tel .ecran img, .tel .ecran video { width: 100%; height: 100%; object-fit: cover; }
+.heros .tel { transform: rotate(2deg); }
+.legende { text-align: center; margin-top: 16px; }
 
-/* ── Sections ── */
-section { padding: 2.6rem 0; }
-.eyebrow {
-  margin: 0 0 .4rem; font-size: .78rem; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--text-subtle);
+/* ── Comment ça marche ── */
+.etapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 34px; }
+.carte {
+  background: var(--grain) var(--papier-carte);
+  border: var(--trait) solid var(--encre); border-radius: var(--rayon-surface);
+  box-shadow: var(--ombre); padding: 24px 22px 22px;
 }
-h2.section-title {
-  margin: 0 0 1.6rem; font-size: clamp(1.5rem, 3.4vw, 2rem);
-  font-weight: 700; letter-spacing: -.02em; color: var(--text-bright);
+.etape .num {
+  display: inline-grid; place-items: center; width: 40px; height: 40px;
+  font: 700 20px var(--fonte-titres); color: var(--papier-carte);
+  background: var(--encre); border-radius: 9px; margin-bottom: 14px;
 }
+.etape:nth-child(2) .num { background: var(--hachures) var(--vert); }
+.etape:nth-child(3) .num { background: var(--hachures) var(--terracotta); }
+.etape h3 { font-size: 24px; }
+.etape p { margin: 8px 0 0; color: var(--encre-douce); font-size: 16px; }
 
-/* 3 points clés : tuiles teintées façon V7 (bleu / émeraude / ambre). */
-.keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.key-card { padding: 1.5rem 1.4rem; }
-.key-tile {
-  width: 56px; height: 56px; border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px; margin-bottom: 1rem;
-  border: 1px solid var(--border-strong);
-}
-.key-tile.t-blue    { background: rgba(59,130,246,.16);  box-shadow: 0 0 22px rgba(59,130,246,.18); }
-.key-tile.t-mint    { background: rgba(16,185,129,.15);  box-shadow: 0 0 22px rgba(16,185,129,.16); }
-.key-tile.t-amber   { background: rgba(251,191,36,.14);  box-shadow: 0 0 22px rgba(251,191,36,.15); }
-.key-card h3 { margin: 0 0 .35rem; font-size: 1.08rem; font-weight: 700; color: var(--text-bright); }
-.key-card p { margin: 0; font-size: .95rem; color: var(--text-muted); }
+/* ── Écrans ── */
+.ecrans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; margin-top: 38px; }
+.ecrans figure { margin: 0; }
+.ecrans .tel { width: 100%; padding: 7px; border-radius: 28px; box-shadow: var(--ombre); }
+.ecrans .tel .ecran { border-radius: 21px; }
+.ecrans figure:nth-child(odd) .tel { transform: rotate(-1.5deg); }
+.ecrans figure:nth-child(even) .tel { transform: rotate(1.5deg); }
+.ecrans figcaption { text-align: center; margin-top: 14px; }
 
-/* Bande de captures réelles */
-.shots { display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; }
-.shots .phone { width: 236px; }
-.shots figcaption {
-  text-align: center; margin-top: .75rem;
-  font-size: .85rem; font-weight: 600; color: var(--text-muted);
-}
-.shots figure { margin: 0; }
+/* ── Le programme ── */
+.chiffres { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 34px; }
+.chiffre { text-align: center; padding: 20px 10px 16px; }
+.chiffre .n { display: block; font: 700 clamp(30px, 4vw, 40px)/1 var(--fonte-titres); }
+.chiffre .l { display: block; margin-top: 8px; font-size: 14px; color: var(--texte-2); line-height: 1.35; }
+.programme-liste { columns: 2; column-gap: 40px; margin: 28px 0 0; padding: 0; list-style: none; }
+.programme-liste li { break-inside: avoid; padding: 10px 0; border-bottom: .75px solid rgba(35, 32, 28, .25); color: var(--encre-douce); }
+.programme-liste li b { font-family: var(--fonte-titres); color: var(--encre); }
 
-/* Le programme : chiffres de la méthode + exercices avancés */
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 0 0 2.4rem; }
-.stat { padding: 1.2rem 1rem; text-align: center; }
-.stat .num {
-  display: block; font-size: 2.1rem; font-weight: 700; line-height: 1.15;
-  color: var(--text-bright); text-shadow: 0 0 22px rgba(56,189,248,.30);
+/* ── Offre ── */
+.offre { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: start; margin-top: 34px; }
+.offre-gratuit p { margin: 0 0 14px; color: var(--encre-douce); }
+.jetons { display: inline-flex; gap: 6px; margin: 4px 0 18px; }
+.jetons i {
+  width: 26px; height: 26px; border-radius: 50%; display: inline-block;
+  background: var(--hachures) var(--terracotta); border: var(--trait) solid var(--encre); box-shadow: 0 2px 0 var(--encre);
 }
-.stat .lbl { display: block; margin-top: .15rem; font-size: .82rem; font-weight: 600; color: var(--text-muted); }
-.program-lede { margin: 0 0 2rem; max-width: 40rem; color: var(--text-muted); font-size: 1.05rem; }
+.jetons i.vide { background: var(--papier-carte); border-style: dashed; border-color: var(--decor); box-shadow: none; }
+.complete { border-color: var(--terracotta); box-shadow: 0 4px 0 var(--terracotta); position: relative; }
+.complete > .tampon { position: absolute; top: -13px; right: 18px; }
+.complete h3 { font-size: 26px; }
+.avantages { list-style: none; padding: 0; margin: 14px 0 6px; }
+.avantages li { padding: 9px 0; border-bottom: .75px solid rgba(35, 32, 28, .25); }
+.avantages li::before { content: '✓'; color: var(--vert); font-weight: 800; margin-right: 10px; }
+.prix { list-style: none; padding: 0; margin: 14px 0 0; }
+.prix li { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; padding: 6px 0; }
+.prix li b { font: 700 19px var(--fonte-titres); white-space: nowrap; }
+.prix .sous { display: block; color: var(--texte-2); font-size: 14px; }
+.petit { font-size: 13px; color: var(--texte-2); margin: 12px 0 0; }
+
+/* ── Engagements ── */
+.engagements { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 22px; margin-top: 26px; }
+.engagements .tampon { font-size: 13px; padding: 5px 12px; }
+.engagements .tampon:nth-child(even) { transform: rotate(3deg); }
+
+/* ── Bandeau final ── */
+.final { text-align: center; padding-bottom: 20px; }
+.final .clef { display: block; font: 400 84px/1 Bravura, serif; color: var(--encre); text-shadow: 3px 3px 0 var(--terracotta); margin-bottom: 4px; }
+.final h2 { font-size: clamp(30px, 4.6vw, 44px); }
+.final .chapo { margin-inline: auto; }
+.final .ctas { justify-content: center; }
+
+/* ── Pied de page ── */
+.site-footer { margin-top: clamp(56px, 8vw, 90px); padding: 0 0 34px; color: var(--texte-2); font-size: 14px; }
+.site-footer .pied { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; align-items: center; margin-top: 18px; }
+.site-footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.site-footer a { color: var(--encre-douce); }
+.site-footer p { margin: 0; }
+
+/* ── Pages légales ── */
+.doc { width: min(780px, 100% - 32px); margin: 0 auto; padding-top: clamp(28px, 5vw, 48px); }
+.doc-entete h1 { font-size: clamp(36px, 6vw, 52px); }
+.doc-entete .maj { color: var(--texte-2); margin: 10px 0 0; font-size: 15px; }
+.doc .carte { margin: 26px 0 8px; }
+.doc .carte p { margin: 0; color: var(--encre); }
+.doc h2 { font-size: 22px; margin: 34px 0 10px; display: flex; gap: 10px; align-items: baseline; }
+.doc h2 .num { font: 700 16px var(--fonte-corps); color: var(--terracotta); }
+.doc p, .doc li { color: var(--encre-douce); }
+.doc ul { padding-left: 20px; }
+.doc ul.kv { list-style: none; padding: 0; }
+.doc ul.kv li { padding: 7px 0; border-bottom: .75px solid rgba(35, 32, 28, .2); }
+.doc .k { color: var(--texte-2); }
+
+/* ── Mobile ── */
 @media (max-width: 900px) {
-  .stats { grid-template-columns: repeat(2, 1fr); }
-  .stats .stat:last-child { grid-column: 1 / -1; }
+  .heros { grid-template-columns: 1fr; }
+  .heros .tel { margin-top: 10px; }
+  .etapes, .offre { grid-template-columns: 1fr; }
+  .ecrans { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .chiffres { grid-template-columns: repeat(2, 1fr); }
+  .chiffre:last-child { grid-column: 1 / -1; }
+  .programme-liste { columns: 1; }
+  .filigrane { font-size: 380px; }
+}
+@media (max-width: 420px) {
+  body { font-size: 16px; }
+  .ctas .btn { width: 100%; }
+  .site-header { padding-top: 16px; }
+  .brand { font-size: 20px; }
 }
 
-/* Bandeau final */
-.closing { text-align: center; padding: 3.4rem 0 4.2rem; }
-.closing .clef { font-size: 64px; }
-.closing h2 { margin: .3rem 0 .5rem; font-size: 1.7rem; font-weight: 700; color: var(--text-bright); letter-spacing: -.02em; }
-.closing p { margin: 0 auto 1.6rem; max-width: 30rem; color: var(--text-muted); }
-
-/* ── Footer commun ── */
-.site-footer {
-  border-top: 1px solid var(--border-subtle);
-  padding: 1.8rem 0 2.4rem; margin-top: 2rem;
-  font-size: .86rem; color: var(--text-subtle);
-}
-.site-footer .foot-inner { display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; align-items: center; justify-content: space-between; }
-.site-footer nav { display: flex; flex-wrap: wrap; gap: 1.2rem; }
-.site-footer a { color: var(--text-muted); }
-.site-footer a:hover { color: var(--text); }
-
-/* ── Pages légales (lecture longue) ── */
-.doc { max-width: 46rem; margin: 0 auto; padding: 1.2rem 1.25rem 3rem; }
-.doc-header { padding: 2.2rem 0 1.4rem; border-bottom: 1px solid var(--border-subtle); margin-bottom: 1.8rem; }
-.doc-header h1 { margin: 0 0 .4rem; font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 700; letter-spacing: -.02em; color: var(--text-bright); }
-.doc-header .updated { margin: 0; color: var(--text-subtle); font-size: .88rem; }
-.doc h2 { margin: 2.2rem 0 .7rem; font-size: 1.12rem; font-weight: 700; color: var(--text-bright); }
-.doc h2 .num { color: var(--text-subtle); font-weight: 500; margin-right: .5rem; }
-.doc p, .doc li { color: var(--text); }
-.doc p { margin: 0 0 .9rem; }
-.doc ul { margin: 0 0 .9rem; padding-left: 1.2rem; }
-.doc li { margin-bottom: .4rem; }
-.doc strong { color: var(--text-bright); }
-/* Cartouche « l'essentiel » en tête de la politique */
-.callout {
-  padding: 1.1rem 1.25rem; margin: 0 0 1.6rem;
-  border-left: 3px solid var(--emerald-500);
-}
-.callout p { margin: 0; font-weight: 600; color: var(--text-bright); }
-.doc address { font-style: normal; }
-.doc .kv { margin: 0 0 .9rem; padding-left: 0; list-style: none; }
-.doc .kv li { margin-bottom: .3rem; }
-.doc .kv .k { color: var(--text-muted); }
-
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; justify-items: center; text-align: center; padding-top: 2rem; }
-  .hero-copy { max-width: 36rem; }
-  .lede { margin-inline: auto; }
-  .cta-row { justify-content: center; }
-  .keys { grid-template-columns: 1fr; }
-}
-@media (max-width: 400px) {
-  .phone { width: min(300px, 88vw); }
-  .btn { width: 100%; }
-  .cta-row { flex-direction: column; align-items: stretch; }
-}
-
-/* ── Accessibilité : mouvement réduit ── */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

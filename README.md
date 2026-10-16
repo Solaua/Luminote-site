@@ -1,10 +1,15 @@
 # Site vitrine Luminote — luminote-app.com
 
 Site statique trilingue (FR/EN/ES) de l'application **Luminote**, éditée par
-Premier Degré SARL. Trois pages : accueil (avec démo jouable), politique de
-confidentialité, mentions légales. **Aucune dépendance externe** : polices,
-images et démo sont embarquées — le site ne fait aucune requête hors de son
-propre domaine (cohérent avec la politique de confidentialité).
+Premier Degré SARL. Trois pages : accueil, politique de confidentialité,
+mentions légales. **Aucune dépendance externe** : polices, images et vidéo
+sont embarquées — le site ne fait aucune requête hors de son propre domaine
+(cohérent avec la politique de confidentialité).
+
+DA « papier » de l'app 2.0 (octobre 2026) : papier grainé, encre, terracotta
+et vert hachurés, ombres opaques, tampons, polices de l'app (Bricolage
+Grotesque, Atkinson Hyperlegible, Caveat, Bravura). Valeurs reprises de
+`src/styles/papier.css` du dépôt de l'app.
 
 Ce dossier est **le dépôt complet** : il ne contient aucun secret et peut être
 publié en public tel quel.
@@ -13,11 +18,12 @@ publié en public tel quel.
 
 | Fichier / dossier | Rôle |
 |---|---|
-| `index.html` | Accueil : marque, 3 points clés, captures réelles, **démo jouable**, bouton Play Store (inactif pour l'instant) |
-| `confidentialite.html` | Politique de confidentialité (FR/EN/ES) — l'URL à donner à Google Play |
-| `mentions-legales.html` | Mentions légales (FR/EN/ES) — le lien Premier Degré ↔ Luminote pour la validation du compte |
-| `assets/` | CSS, JS (bascule de langue + chargement de la démo), polices woff2, images |
-| `demo/app/` | L'app web complète (build Vite), chargée uniquement quand on clique « Lancer la démo » |
+| `index.html` | Accueil : héros + vidéo de jeu, « comment ça marche », écrans réels, le programme, l'offre (gratuit / Luminote Complète), boutons Google Play et App Store (« bientôt ») |
+| `confidentialite.html` | Politique de confidentialité 2.0 (FR/EN/ES) — l'URL à donner à Google Play et à l'App Store |
+| `mentions-legales.html` | Mentions légales 2.0 (FR/EN/ES) — le lien Premier Degré ↔ Luminote pour la validation du compte |
+| `assets/` | CSS, JS (bascule de langue), polices woff2, images, vidéo de jeu |
+| `demo/app/` | Ancienne démo jouable de la 1.x — **plus liée depuis la 2.0** (la v2 n'a pas encore de mode démo bridé, voir plus bas) |
+| `v2/`, `charte/` | Page privée de test de la 2.0 et copie de la charte pour Claude Design |
 | `.nojekyll` | Indique à GitHub Pages de servir les fichiers tels quels |
 
 ## 🚀 Mettre en ligne (GitHub Pages)
@@ -62,10 +68,19 @@ publié en public tel quel.
 - Fiche Play Store :
   `https://play.google.com/store/apps/details?id=fr.premierdegre.solfege`
   (liée depuis le hero et le bandeau final).
-- **Rafraîchir les captures** si l'app a changé : ce sont les `.webp` de
-  `assets/img/` (600px de large, prises dans un cadre 390×824).
+- **Rafraîchir les captures** si l'app a changé, depuis le dépôt de l'app :
+  `node tools/site/captures-vitrine.mjs` — écrans réels (`ecran-*.webp`,
+  600 px de large) et vidéo d'un exercice joué par le pilote de dev
+  (`jeu.mp4`, `jeu-poster.webp`) ; ffmpeg requis.
+- `og.png` (image de partage, 1200×630) est un rendu de la charte : à
+  refaire si la marque change.
 
-## 🔁 Regénérer la démo (si l'app évolue)
+## 🔁 Démo jouable (1.x seulement)
+
+⚠️ La 2.0 n'a pas encore de mode démo bridé : `VITE_DEMO=1` n'y limite plus
+le contenu. **Ne pas** régénérer la démo depuis la branche `v2` tant que ce
+mode n'existe pas — tout le jeu serait publié sur le web. La procédure
+ci-dessous vaut pour la 1.x.
 
 Depuis le dépôt de l'app (`solfgg`). **`VITE_DEMO=1` est indispensable** :
 c'est lui qui bride la démo au tutoriel + chapitre 1 (voir `src/demo.js`
