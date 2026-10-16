@@ -370,7 +370,7 @@ button.accueil-jauge { background: none; border: none; padding: 4px 0; margin: -
    grise et plate, s'encre en terracotta d'un coup en bondissant, puis
    reprend son idle ; le tampon « À OUVRIR » (1.35 s) suit. */
 .accueil-pastille-reveil {
-  animation: pieceReveil .9s var(--ressort) 1s both, coinNudge 2.2s ease-in-out 2.2s infinite;
+  animation: pieceReveil .6s var(--ressort) 1s both, coinNudge 2.2s ease-in-out 2s infinite; /* 16/10 : plus vif (.9 → .6 s) */
 }
 @keyframes pieceReveil {
   0% { filter: grayscale(1) opacity(.55); transform: scale(.94); box-shadow: none; }
@@ -378,6 +378,8 @@ button.accueil-jauge { background: none; border: none; padding: 4px 0; margin: -
   70% { transform: scale(.97) translateY(2px); box-shadow: 0 4px 0 var(--terracotta-sombre); }
   100% { filter: none; transform: none; box-shadow: 0 6px 0 var(--terracotta-sombre); }
 }
+/* 16/10 : réveil au toucher de la jauge — sans attendre l'entrée de l'accueil, deux fois plus court. */
+.accueil-pastille-reveil.accueil-pastille-reveil-vite { animation: pieceReveil .45s var(--ressort) .05s both, coinNudge 2.2s ease-in-out 1.2s infinite; }
 /* Le bond vers le joueur (9k, coinLeap) doit GAGNER sur l'animation de réveil
    déclarée juste au-dessus (même spécificité, ordre de la feuille) — sinon la
    pièce partait vers l'Ouverture sans son flip (retour 11). */
