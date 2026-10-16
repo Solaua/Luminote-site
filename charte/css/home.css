@@ -139,6 +139,18 @@
 }
 @keyframes jaugeRemplit { from { transform: scaleX(0); } }
 .accueil-jauge-heures { font: 700 11px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; line-height: 1; }
+/* 16/10 : Premium — un jeton et un ∞ dessiné à l'encre terracotta, qu'un éclat clair parcourt sans fin. */
+.accueil-jetons-premium { gap: 5px; }
+.accueil-infini { overflow: visible; }
+.accueil-infini-encre { fill: none; stroke: var(--encre); stroke-width: 5.4; stroke-linecap: round; stroke-linejoin: round; }
+.accueil-infini-trait { fill: none; stroke: var(--terracotta); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.accueil-infini-eclat {
+  fill: none; stroke: #FFF4DC; stroke-width: 1.5; stroke-linecap: round;
+  stroke-dasharray: 16 84; animation: infiniEclat 2.6s linear infinite;
+  filter: drop-shadow(0 0 1.5px rgba(255, 236, 196, .9));
+}
+@keyframes infiniEclat { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
+@media (prefers-reduced-motion: reduce) { .accueil-infini-eclat { animation: none; opacity: 0; } }
 /* 16/10 : un jeton est prêt — la jauge pleine pulse et se touche (le jeton passe dans la pièce-cadeau). */
 button.accueil-jauge { background: none; border: none; padding: 4px 0; margin: -4px 0; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .accueil-jauge-prete { animation: jaugePrete 1.15s ease-in-out infinite; transform-origin: center; }
