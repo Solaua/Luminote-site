@@ -622,6 +622,8 @@
 /* ── Page produit (C9) : grammaire commune accueil / bibliothèque /
    sommaire / notion — padding, en-tête libellé + retour, filet estompé,
    titre de page, règle double. ───────────────────────────────────────── */
+/* 16/10 : écran préchauffé sous l'écran courant (app/prechauffe.js) — figé jusqu'à sa promotion. */
+.ecran-pret, .ecran-pret *, .ecran-pret *::before, .ecran-pret *::after { animation-play-state: paused !important; }
 .page {
   flex: 1;
   display: flex;
