@@ -139,24 +139,6 @@
 }
 @keyframes jaugeRemplit { from { transform: scaleX(0); } }
 .accueil-jauge-heures { font: 700 11px var(--fonte-corps); color: var(--texte-2); white-space: nowrap; line-height: 1; }
-/* Jauge pleine (15/10) : la coche est une petite pastille tamponnée — vert, contour
-   encre, ombre décalée de la charte — qui arrive d'un coup de tampon une fois la
-   barre remplie. */
-.accueil-jauge-coche {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-  width: 11px;
-  height: 11px;
-  border-radius: 999px;
-  background: var(--vert);
-  border: 1px solid var(--encre);
-  box-shadow: 0 1.5px 0 var(--encre);
-  color: var(--papier);
-  animation: cocheTampon .42s var(--ressort-fort) 1.95s both;
-}
-@keyframes cocheTampon { from { transform: scale(0) rotate(-25deg); } }
 /* 16/10 : un jeton est prêt — la jauge pleine pulse et se touche (le jeton passe dans la pièce-cadeau). */
 button.accueil-jauge { background: none; border: none; padding: 4px 0; margin: -4px 0; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .accueil-jauge-prete { animation: jaugePrete 1.15s ease-in-out infinite; transform-origin: center; }
@@ -165,7 +147,7 @@ button.accueil-jauge { background: none; border: none; padding: 4px 0; margin: -
 .accueil-jauge-plus { font: 800 12px var(--fonte-corps); color: var(--terracotta); line-height: 1; white-space: nowrap; }
 .accueil-jauge-plus-depose { color: var(--texte-2); }
 .accueil-jauge-rapide .accueil-jauge-heures { color: var(--vert); }
-@media (prefers-reduced-motion: reduce) { .accueil-jauge-remplie, .accueil-jauge-coche, .accueil-jauge-prete { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .accueil-jauge-remplie, .accueil-jauge-prete { animation: none; } }
 .accueil-recompense-espace { height: 14px; }
 .accueil-pastille-cadre { position: relative; }
 .accueil-pastille {
