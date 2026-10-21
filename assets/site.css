@@ -166,22 +166,12 @@ section { padding: clamp(56px, 9vw, 96px) 0 0; }
 .heros .tel { transform: rotate(2deg); }
 .legende { text-align: center; margin-top: 16px; }
 
-/* ── Comment ça marche ── */
-.etapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 34px; }
+/* ── Cartes ── */
 .carte {
   background: var(--grain) var(--papier-carte);
   border: var(--trait) solid var(--encre); border-radius: var(--rayon-surface);
   box-shadow: var(--ombre); padding: 24px 22px 22px;
 }
-.etape .num {
-  display: inline-grid; place-items: center; width: 40px; height: 40px;
-  font: 700 20px var(--fonte-titres); color: var(--papier-carte);
-  background: var(--encre); border-radius: 9px; margin-bottom: 14px;
-}
-.etape:nth-child(2) .num { background: var(--hachures) var(--vert); }
-.etape:nth-child(3) .num { background: var(--hachures) var(--terracotta); }
-.etape h3 { font-size: 24px; }
-.etape p { margin: 8px 0 0; color: var(--encre-douce); font-size: 16px; }
 
 /* ── Écrans ── */
 .ecrans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; margin-top: 38px; }
@@ -192,14 +182,6 @@ section { padding: clamp(56px, 9vw, 96px) 0 0; }
 .ecrans figure:nth-child(even) .tel { transform: rotate(1.5deg); }
 .ecrans figcaption { text-align: center; margin-top: 14px; }
 
-/* ── Le programme ── */
-.chiffres { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 34px; }
-.chiffre { text-align: center; padding: 20px 10px 16px; }
-.chiffre .n { display: block; font: 700 clamp(30px, 4vw, 40px)/1 var(--fonte-titres); }
-.chiffre .l { display: block; margin-top: 8px; font-size: 14px; color: var(--texte-2); line-height: 1.35; }
-.programme-liste { columns: 2; column-gap: 40px; margin: 28px 0 0; padding: 0; list-style: none; }
-.programme-liste li { break-inside: avoid; padding: 10px 0; border-bottom: .75px solid rgba(35, 32, 28, .25); color: var(--encre-douce); }
-.programme-liste li b { font-family: var(--fonte-titres); color: var(--encre); }
 
 /* ── Offre ── */
 .offre { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: start; margin-top: 34px; }
@@ -259,11 +241,8 @@ section { padding: clamp(56px, 9vw, 96px) 0 0; }
 @media (max-width: 900px) {
   .heros { grid-template-columns: 1fr; }
   .heros .tel { margin-top: 10px; }
-  .etapes, .offre { grid-template-columns: 1fr; }
+  .offre { grid-template-columns: 1fr; }
   .ecrans { grid-template-columns: repeat(2, 1fr); gap: 22px; }
-  .chiffres { grid-template-columns: repeat(2, 1fr); }
-  .chiffre:last-child { grid-column: 1 / -1; }
-  .programme-liste { columns: 1; }
   .filigrane { font-size: 380px; }
 }
 @media (max-width: 420px) {
