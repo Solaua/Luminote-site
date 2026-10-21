@@ -3,29 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Luminote — Apprendre à lire la musique</title>
-<meta name="description" content="Luminote apprend à lire une partition, note après note. Exercices progressifs de lecture de notes et de rythme. Sans compte, sans publicité, entièrement hors ligne. Disponible sur Google Play.">
-<meta property="og:title" content="Luminote — Apprendre à lire la musique">
-<meta property="og:description" content="Apprendre · Jouer · Progresser. Lire les notes et jouer en rythme, par exercices progressifs. Sans compte, sans publicité, hors ligne.">
+<title>Luminote — La lecture de notes, en jouant</title>
+<meta name="description" content="Luminote apprend à lire la musique : les notes et les rythmes, ensemble, sur de vraies partitions. 12 livres, plus de 500 exercices, quatre clés. Gratuit pour commencer, sans compte, sans publicité. Sur Google Play, bientôt sur l'App Store.">
+<meta property="og:title" content="Luminote — La lecture de notes, en jouant">
+<meta property="og:description" content="Une méthode complète pour apprendre à lire la musique.">
 <meta property="og:image" content="https://luminote-app.com/assets/img/og.png">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#FBF8F1">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/Bravura.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
 <noscript><style>.L{display:revert !important}</style></noscript>
 </head>
-<body data-title-fr="Luminote — Apprendre à lire la musique"
-      data-title-en="Luminote — Learn to read music"
-      data-title-es="Luminote — Aprender a leer música">
+<body data-title-fr="Luminote — La lecture de notes, en jouant"
+      data-title-en="Luminote — Learn to read music, by playing"
+      data-title-es="Luminote — La lectura de notas, jugando">
 
-<div class="glow" aria-hidden="true"></div>
-<div class="stars" aria-hidden="true"><i></i><i></i></div>
+<div class="page">
+<span class="filigrane filigrane-heros" aria-hidden="true">&#xE050;</span>
+<span class="filigrane filigrane-bas" aria-hidden="true">&#xE050;</span>
 
 <div class="wrap">
   <header class="site-header">
     <a class="brand" href="index.html">
-      <img src="assets/img/icon-192.png" alt="" width="30" height="30">
+      <img src="assets/img/icon-192.png" alt="" width="34" height="34">
       Luminote
     </a>
     <div class="lang-switch" role="group" aria-label="Langue / Language / Idioma">
@@ -34,230 +37,221 @@
       <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
     </div>
   </header>
+  <div class="filet"></div>
 
   <main>
-    <!-- ═══ Hero : marque + démo jouable ═══ -->
-    <section class="hero">
-      <div class="hero-copy">
-        <span class="clef" aria-hidden="true">&#xE050;</span>
-        <h1>Luminote<span class="sparkle" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="sp" x1="0" y1="0" x2="24" y2="24"><stop offset="0" stop-color="#5EE0FF"/><stop offset="1" stop-color="#A78BFA"/></linearGradient></defs><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z" fill="url(#sp)"/></svg></span></h1>
-        <p class="baseline">
-          <span class="L fr" lang="fr">Apprendre · Jouer · Progresser</span>
-          <span class="L en" lang="en">Learn · Play · Progress</span>
-          <span class="L es" lang="es">Aprender · Jugar · Progresar</span>
+    <!-- ═══ Héros ═══ -->
+    <section class="heros">
+      <div>
+        <span class="tampon tampon-anim">
+          <span class="L fr" lang="fr">Méthode de solfège</span>
+          <span class="L en" lang="en">Music reading method</span>
+          <span class="L es" lang="es">Método de solfeo</span>
+        </span>
+        <h1>Luminote</h1>
+        <p class="devise">
+          <span class="L fr" lang="fr">La lecture de notes, en jouant</span>
+          <span class="L en" lang="en">Learn to read music, by playing</span>
+          <span class="L es" lang="es">La lectura de notas, jugando</span>
         </p>
-        <p class="lede L fr" lang="fr">Luminote t'apprend à lire de vraies partitions. Les notes ET les rythmes tout en même temps 🎵</p>
-        <p class="lede L en" lang="en">Luminote teaches you to read real sheet music. Notes AND rhythms, all at once 🎵</p>
-        <p class="lede L es" lang="es">Luminote te enseña a leer partituras de verdad. Las notas Y los ritmos, todo a la vez 🎵</p>
-        <div class="cta-row">
+        <p class="chapo">
+          <span class="L fr" lang="fr">Une méthode complète pour apprendre à lire la musique.</span>
+          <span class="L en" lang="en">A complete method to learn to read music.</span>
+          <span class="L es" lang="es">Un método completo para aprender a leer música.</span>
+        </p>
+        <div class="ctas">
           <a class="btn btn-store" href="https://play.google.com/store/apps/details?id=fr.premierdegre.solfege">
-            <svg width="22" height="24" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M2.5 1.8v22.4c0 .5.6.9 1 .6l17.8-10.6c.5-.3.5-1 0-1.3L3.5 2.2c-.4-.3-1 0-1 .6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-            <span class="store-lines">
-              <small class="L fr" lang="fr">DISPONIBLE SUR</small>
-              <small class="L en" lang="en">GET IT ON</small>
-              <small class="L es" lang="es">DISPONIBLE EN</small>
+            <svg width="20" height="22" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M2.5 1.8v22.4c0 .5.6.9 1 .6l17.8-10.6c.5-.3.5-1 0-1.3L3.5 2.2c-.4-.3-1 0-1 .6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span class="lignes">
+              <small class="L fr" lang="fr">Disponible sur</small>
+              <small class="L en" lang="en">Get it on</small>
+              <small class="L es" lang="es">Disponible en</small>
               Google Play
             </span>
           </a>
-          <a class="btn btn-cta" href="#demo">
-            <svg width="14" height="16" viewBox="0 0 14 16" fill="none" aria-hidden="true"><path d="M1 1.7v12.6c0 .6.6.9 1.1.6l10.4-6.3c.5-.3.5-1 0-1.2L2.1 1.1C1.6.8 1 1.1 1 1.7Z" fill="#fff"/></svg>
-            <span class="L fr" lang="fr">Essayer la démo</span>
-            <span class="L en" lang="en">Try the demo</span>
-            <span class="L es" lang="es">Probar la demo</span>
-          </a>
+          <span class="btn btn-bientot" aria-disabled="true">
+            <svg width="18" height="22" viewBox="0 0 17 20" fill="currentColor" aria-hidden="true"><path d="M14.1 10.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9C3.6 4.8 2 5.8 1.1 7.4c-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.7-1-2.7-4.3ZM11.5 3c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5Z"/></svg>
+            <span class="lignes">
+              <small class="L fr" lang="fr">Bientôt sur</small>
+              <small class="L en" lang="en">Coming to</small>
+              <small class="L es" lang="es">Próximamente en</small>
+              App Store
+            </span>
+            <span class="tampon discret">
+              <span class="L fr" lang="fr">bientôt</span>
+              <span class="L en" lang="en">soon</span>
+              <span class="L es" lang="es">pronto</span>
+            </span>
+          </span>
         </div>
+        <ul class="reassurance">
+          <li><span class="L fr" lang="fr">Gratuit pour commencer</span><span class="L en" lang="en">Free to start</span><span class="L es" lang="es">Gratis para empezar</span></li>
+          <li><span class="L fr" lang="fr">Sans compte</span><span class="L en" lang="en">No account</span><span class="L es" lang="es">Sin cuenta</span></li>
+          <li><span class="L fr" lang="fr">Sans publicité</span><span class="L en" lang="en">No ads</span><span class="L es" lang="es">Sin publicidad</span></li>
+          <li><span class="L fr" lang="fr">Fonctionne hors ligne</span><span class="L en" lang="en">Works offline</span><span class="L es" lang="es">Funciona sin conexión</span></li>
+        </ul>
       </div>
 
-      <div id="demo">
-        <div class="phone">
-          <div class="phone-screen" id="demo-screen">
-            <img src="assets/img/screen-home.webp" alt="" width="600" height="1268">
-            <button type="button" class="demo-cover" id="demo-cover">
-              <span class="play-round" aria-hidden="true"><svg width="20" height="22" viewBox="0 0 14 16" fill="none"><path d="M1 1.7v12.6c0 .6.6.9 1.1.6l10.4-6.3c.5-.3.5-1 0-1.2L2.1 1.1C1.6.8 1 1.1 1 1.7Z" fill="#fff"/></svg></span>
-              <span class="L fr" lang="fr">Lancer la démo</span>
-              <span class="L en" lang="en">Start the demo</span>
-              <span class="L es" lang="es">Iniciar la demo</span>
-            </button>
+      <figure style="margin:0">
+        <div class="tel">
+          <div class="ecran">
+            <video src="assets/img/jeu.mp4" poster="assets/img/jeu-poster.webp" muted autoplay loop playsinline disablepictureinpicture
+                   width="390" height="844" aria-label="Luminote"></video>
           </div>
         </div>
-        <p class="demo-note">
-          <span class="L fr" lang="fr">Démo jouable directement dans le navigateur, avec le son.</span>
-          <span class="L en" lang="en">Playable right in your browser, with sound.</span>
-          <span class="L es" lang="es">Jugable directamente en el navegador, con sonido.</span>
-        </p>
-      </div>
+        <figcaption class="legende manuscrit">
+          <span class="L fr" lang="fr">un exercice de la méthode</span>
+          <span class="L en" lang="en">an exercise from the method</span>
+          <span class="L es" lang="es">un ejercicio del método</span>
+        </figcaption>
+      </figure>
     </section>
 
-    <!-- ═══ Captures réelles ═══ -->
-    <section aria-labelledby="shots-title">
-      <p class="eyebrow">
+    <!-- ═══ Écrans ═══ -->
+    <section aria-labelledby="t-ecrans">
+      <span class="libelle">
         <span class="L fr" lang="fr">L'app</span>
         <span class="L en" lang="en">The app</span>
         <span class="L es" lang="es">La app</span>
-      </p>
-      <h2 class="section-title" id="shots-title">
-        <span class="L fr" lang="fr">Conçue comme un jeu vidéo</span>
-        <span class="L en" lang="en">Designed like a video game</span>
-        <span class="L es" lang="es">Diseñada como un videojuego</span>
+      </span>
+      <h2 class="titre-section" id="t-ecrans">
+        <span class="L fr" lang="fr">Pensée comme un carnet de musique</span>
+        <span class="L en" lang="en">Designed like a music notebook</span>
+        <span class="L es" lang="es">Pensada como un cuaderno de música</span>
       </h2>
-      <p class="program-lede">
-        <span class="L fr" lang="fr">Fais exploser les notes, tiens ton combo et débloque les chapitres grâce aux étoiles. Essaie sans aide pour en obtenir plus ⭐&nbsp;!</span>
-        <span class="L en" lang="en">Blast the notes, keep your combo alive and unlock chapters with stars. Try without help mode to earn more ⭐!</span>
-        <span class="L es" lang="es">Haz explotar las notas, mantén tu combo y desbloquea capítulos con las estrellas. ¡Inténtalo sin ayuda para ganar más ⭐!</span>
-      </p>
-      <div class="shots">
+      <div class="ecrans">
         <figure>
-          <div class="phone"><div class="phone-screen">
-            <img src="assets/img/screen-books.webp" width="600" height="1268"
-                 alt="" loading="lazy">
-          </div></div>
-          <figcaption>
-            <span class="L fr" lang="fr">Quatre livres, deux clés</span>
-            <span class="L en" lang="en">Four books, two clefs</span>
-            <span class="L es" lang="es">Cuatro libros, dos claves</span>
+          <div class="tel"><div class="ecran"><img src="assets/img/ecran-lecons.webp" width="600" height="1298" alt="" loading="lazy"></div></div>
+          <figcaption class="manuscrit">
+            <span class="L fr" lang="fr">douze livres, quatre clés</span>
+            <span class="L en" lang="en">twelve books, four clefs</span>
+            <span class="L es" lang="es">doce libros, cuatro claves</span>
           </figcaption>
         </figure>
         <figure>
-          <div class="phone"><div class="phone-screen">
-            <img src="assets/img/screen-method.webp" width="600" height="1268"
-                 alt="" loading="lazy">
-          </div></div>
-          <figcaption>
-            <span class="L fr" lang="fr">Des chapitres à débloquer</span>
-            <span class="L en" lang="en">Chapters to unlock</span>
-            <span class="L es" lang="es">Capítulos por desbloquear</span>
+          <div class="tel"><div class="ecran"><img src="assets/img/ecran-sommaire.webp" width="600" height="1298" alt="" loading="lazy"></div></div>
+          <figcaption class="manuscrit">
+            <span class="L fr" lang="fr">des chapitres à débloquer</span>
+            <span class="L en" lang="en">chapters to unlock</span>
+            <span class="L es" lang="es">capítulos por desbloquear</span>
           </figcaption>
         </figure>
         <figure>
-          <div class="phone"><div class="phone-screen">
-            <video src="assets/img/gameplay.mp4" poster="assets/img/gameplay-poster.webp"
-                   muted autoplay loop playsinline disablepictureinpicture
-                   width="390" height="824"></video>
-          </div></div>
-          <figcaption>
-            <span class="L fr" lang="fr">Lire et jouer en rythme</span>
-            <span class="L en" lang="en">Read and play in rhythm</span>
-            <span class="L es" lang="es">Leer y tocar a ritmo</span>
+          <div class="tel"><div class="ecran"><img src="assets/img/ecran-jeu.webp" width="600" height="1298" alt="" loading="lazy"></div></div>
+          <figcaption class="manuscrit">
+            <span class="L fr" lang="fr">l'aide qui s'efface</span>
+            <span class="L en" lang="en">help that fades away</span>
+            <span class="L es" lang="es">la ayuda que se desvanece</span>
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="tel"><div class="ecran"><img src="assets/img/ecran-serie.webp" width="600" height="1298" alt="" loading="lazy"></div></div>
+          <figcaption class="manuscrit">
+            <span class="L fr" lang="fr">une série à entretenir</span>
+            <span class="L en" lang="en">a streak to keep up</span>
+            <span class="L es" lang="es">una racha que mantener</span>
           </figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- ═══ Le programme : les bases d'abord, et de quoi voir loin ═══ -->
-    <section aria-labelledby="program-title">
-      <p class="eyebrow">
-        <span class="L fr" lang="fr">Le programme</span>
-        <span class="L en" lang="en">The program</span>
-        <span class="L es" lang="es">El programa</span>
-      </p>
-      <h2 class="section-title" id="program-title">
-        <span class="L fr" lang="fr">Toutes les bases pour apprendre</span>
-        <span class="L en" lang="en">All the fundamentals</span>
-        <span class="L es" lang="es">Todas las bases para aprender</span>
+    <!-- ═══ L'offre ═══ -->
+    <section aria-labelledby="t-offre">
+      <span class="libelle">
+        <span class="L fr" lang="fr">Gratuit pour commencer</span>
+        <span class="L en" lang="en">Free to start</span>
+        <span class="L es" lang="es">Gratis para empezar</span>
+      </span>
+      <h2 class="titre-section" id="t-offre">
+        <span class="L fr" lang="fr">Joue gratuitement, ou sans compter</span>
+        <span class="L en" lang="en">Play for free, or without limits</span>
+        <span class="L es" lang="es">Juega gratis, o sin límites</span>
       </h2>
-      <p class="program-lede">
-        <span class="L fr" lang="fr">La méthode couvre les deux clés de sol et de fa, les notes au-dessus et en dessous de la portée, et les rythmes de la ronde à la double-croche en passant par les silences.</span>
-        <span class="L en" lang="en">The method covers both treble and bass clefs, notes above and below the staff, and rhythms from whole notes to sixteenths, rests included.</span>
-        <span class="L es" lang="es">El método cubre las claves de sol y de fa, las notas por encima y por debajo del pentagrama, y los ritmos de la redonda a la semicorchea, silencios incluidos.</span>
-      </p>
-      <div class="stats">
-        <div class="card stat">
-          <span class="num">44</span>
-          <span class="lbl">
-            <span class="L fr" lang="fr">chapitres</span>
-            <span class="L en" lang="en">chapters</span>
-            <span class="L es" lang="es">capítulos</span>
-          </span>
+      <div class="offre">
+        <div class="offre-gratuit">
+          <div class="jetons" aria-hidden="true"><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></div>
+          <p>
+            <span class="L fr" lang="fr">Luminote est gratuit. Une tentative ratée coûte un jeton&nbsp;; les jetons reviennent avec le temps — un toutes les 7&nbsp;heures, jusqu'à cinq — et avec l'exercice du jour.</span>
+            <span class="L en" lang="en">Luminote is free. A failed attempt costs one token; tokens come back over time — one every 7 hours, up to five — and with the daily exercise.</span>
+            <span class="L es" lang="es">Luminote es gratis. Un intento fallido cuesta una ficha; las fichas vuelven con el tiempo — una cada 7 horas, hasta cinco — y con el ejercicio del día.</span>
+          </p>
+          <p>
+            <span class="L fr" lang="fr">Les démos et l'exercice du jour ne coûtent jamais rien.</span>
+            <span class="L en" lang="en">Demos and the daily exercise never cost anything.</span>
+            <span class="L es" lang="es">Las demos y el ejercicio del día nunca cuestan nada.</span>
+          </p>
         </div>
-        <div class="card stat">
-          <span class="num">161</span>
-          <span class="lbl">
-            <span class="L fr" lang="fr">exercices</span>
-            <span class="L en" lang="en">exercises</span>
-            <span class="L es" lang="es">ejercicios</span>
+        <div class="carte complete">
+          <span class="tampon vert">
+            <span class="L fr" lang="fr">7 jours d'essai</span>
+            <span class="L en" lang="en">7-day trial</span>
+            <span class="L es" lang="es">7 días de prueba</span>
           </span>
-        </div>
-        <div class="card stat">
-          <span class="num">4/4&nbsp;·&nbsp;6/8</span>
-          <span class="lbl">
-            <span class="L fr" lang="fr">rythmes binaires et ternaires</span>
-            <span class="L en" lang="en">simple and compound time</span>
-            <span class="L es" lang="es">ritmos binarios y ternarios</span>
-          </span>
+          <h3>Luminote Premium</h3>
+          <ul class="avantages">
+            <li><span class="L fr" lang="fr">Jetons illimités</span><span class="L en" lang="en">Unlimited tokens</span><span class="L es" lang="es">Fichas ilimitadas</span></li>
+            <li><span class="L fr" lang="fr">Plus de 500 exercices rejouables à l'infini</span><span class="L en" lang="en">Over 500 exercises, replayable forever</span><span class="L es" lang="es">Más de 500 ejercicios que puedes repetir sin fin</span></li>
+            <li><span class="L fr" lang="fr">L'entraînement personnalisé</span><span class="L en" lang="en">Custom practice</span><span class="L es" lang="es">La práctica personalizada</span></li>
+            <li><span class="L fr" lang="fr">Un gel de série offert chaque semaine</span><span class="L en" lang="en">One free streak freeze every week</span><span class="L es" lang="es">Un hielo de racha gratis cada semana</span></li>
+          </ul>
+          <ul class="prix">
+            <li>
+              <span><span class="L fr" lang="fr">Annuel</span><span class="L en" lang="en">Yearly</span><span class="L es" lang="es">Anual</span>
+                <span class="sous"><span class="L fr" lang="fr">7 jours gratuits · soit 2,50&nbsp;€ / mois</span><span class="L en" lang="en">7 days free · that's €2.50 / month</span><span class="L es" lang="es">7 días gratis · solo 2,50&nbsp;€ / mes</span></span></span>
+              <b><span class="L fr" lang="fr">29,99&nbsp;€ / an</span><span class="L en" lang="en">€29.99 / year</span><span class="L es" lang="es">29,99&nbsp;€ / año</span></b>
+            </li>
+            <li>
+              <span><span class="L fr" lang="fr">Mensuel</span><span class="L en" lang="en">Monthly</span><span class="L es" lang="es">Mensual</span>
+                <span class="sous"><span class="L fr" lang="fr">7 jours gratuits</span><span class="L en" lang="en">7 days free</span><span class="L es" lang="es">7 días gratis</span></span></span>
+              <b><span class="L fr" lang="fr">5,99&nbsp;€ / mois</span><span class="L en" lang="en">€5.99 / month</span><span class="L es" lang="es">5,99&nbsp;€ / mes</span></b>
+            </li>
+            <li>
+              <span><span class="L fr" lang="fr">À vie</span><span class="L en" lang="en">Lifetime</span><span class="L es" lang="es">De por vida</span>
+                <span class="sous"><span class="L fr" lang="fr">paiement unique</span><span class="L en" lang="en">one-time payment</span><span class="L es" lang="es">pago único</span></span></span>
+              <b><span class="L fr" lang="fr">59,99&nbsp;€</span><span class="L en" lang="en">€59.99</span><span class="L es" lang="es">59,99&nbsp;€</span></b>
+            </li>
+          </ul>
+          <p class="petit">
+            <span class="L fr" lang="fr">Prix en France, TTC&nbsp;; le prix affiché par Google Play ou l'App Store fait foi. Abonnement résiliable à tout moment depuis le store.</span>
+            <span class="L en" lang="en">Prices in France, taxes included; the price shown by Google Play or the App Store prevails. Cancel your subscription anytime from the store.</span>
+            <span class="L es" lang="es">Precios en Francia, IVA incluido; prevalece el precio mostrado por Google Play o la App Store. Suscripción cancelable en cualquier momento desde la tienda.</span>
+          </p>
         </div>
       </div>
-      <div class="shots">
-        <figure>
-          <div class="phone"><div class="phone-screen">
-            <img src="assets/img/screen-fa.webp" width="600" height="1268"
-                 alt="" loading="lazy">
-          </div></div>
-          <figcaption>
-            <span class="L fr" lang="fr">La clé de fa aussi</span>
-            <span class="L en" lang="en">Bass clef too</span>
-            <span class="L es" lang="es">También la clave de fa</span>
-          </figcaption>
-        </figure>
-        <figure>
-          <div class="phone"><div class="phone-screen">
-            <img src="assets/img/screen-ternaire.webp" width="600" height="1268"
-                 alt="" loading="lazy">
-          </div></div>
-          <figcaption>
-            <span class="L fr" lang="fr">Le ternaire et la mesure à 6/8</span>
-            <span class="L en" lang="en">Compound time and 6/8</span>
-            <span class="L es" lang="es">El ternario y el compás de 6/8</span>
-          </figcaption>
-        </figure>
-        <figure>
-          <div class="phone"><div class="phone-screen">
-            <img src="assets/img/screen-pointee.webp" width="600" height="1268"
-                 alt="" loading="lazy">
-          </div></div>
-          <figcaption>
-            <span class="L fr" lang="fr">Croches pointées, doubles croches</span>
-            <span class="L en" lang="en">Dotted eighths, sixteenths</span>
-            <span class="L es" lang="es">Corcheas con puntillo, semicorcheas</span>
-          </figcaption>
-        </figure>
+      <div class="engagements">
+        <span class="tampon vert"><span class="L fr" lang="fr">Sans compte</span><span class="L en" lang="en">No account</span><span class="L es" lang="es">Sin cuenta</span></span>
+        <span class="tampon"><span class="L fr" lang="fr">Sans publicité</span><span class="L en" lang="en">No ads</span><span class="L es" lang="es">Sin publicidad</span></span>
+        <span class="tampon vert"><span class="L fr" lang="fr">Hors ligne</span><span class="L en" lang="en">Offline</span><span class="L es" lang="es">Sin conexión</span></span>
+        <span class="tampon"><span class="L fr" lang="fr">Tes données restent sur ton téléphone</span><span class="L en" lang="en">Your data stays on your phone</span><span class="L es" lang="es">Tus datos se quedan en tu teléfono</span></span>
       </div>
     </section>
 
     <!-- ═══ Bandeau final ═══ -->
-    <section class="closing">
+    <section class="final">
       <span class="clef" aria-hidden="true">&#xE050;</span>
       <h2>
-        <span class="L fr" lang="fr">Disponible sur Google Play</span>
-        <span class="L en" lang="en">Available on Google Play</span>
-        <span class="L es" lang="es">Disponible en Google Play</span>
+        <span class="L fr" lang="fr">Prêt à lire ta première partition&nbsp;?</span>
+        <span class="L en" lang="en">Ready to read your first score?</span>
+        <span class="L es" lang="es">¿Listo para leer tu primera partitura?</span>
       </h2>
-      <p style="margin-bottom:.55rem">
-        <span class="L fr" lang="fr"><em>Pour le prix d'un café, pas de compte, pas d'abonnement, pas de pub.</em></span>
-        <span class="L en" lang="en"><em>For the price of a coffee, no account, no subscription, no ads.</em></span>
-        <span class="L es" lang="es"><em>Por el precio de un café, sin cuenta, sin suscripción, sin anuncios.</em></span>
+      <p class="chapo">
+        <span class="L fr" lang="fr">Sur Android dès maintenant, bientôt sur iPhone et iPad.</span>
+        <span class="L en" lang="en">On Android now, coming soon to iPhone and iPad.</span>
+        <span class="L es" lang="es">En Android desde ya, pronto en iPhone y iPad.</span>
       </p>
-      <p>
-        <span class="L fr" lang="fr">La démo se joue ici, direct dans le navigateur.</span>
-        <span class="L en" lang="en">The demo plays right here in your browser.</span>
-        <span class="L es" lang="es">La demo se juega aquí mismo, en el navegador.</span>
-      </p>
-      <div class="cta-row" style="justify-content:center">
-        <a class="btn btn-cta" href="https://play.google.com/store/apps/details?id=fr.premierdegre.solfege">
+      <div class="ctas">
+        <a class="btn btn-store" href="https://play.google.com/store/apps/details?id=fr.premierdegre.solfege">
           <span class="L fr" lang="fr">Télécharger sur Google Play</span>
           <span class="L en" lang="en">Get it on Google Play</span>
           <span class="L es" lang="es">Descargar en Google Play</span>
-        </a>
-        <a class="btn btn-ghost" href="#demo">
-          <span class="L fr" lang="fr">Essayer la démo</span>
-          <span class="L en" lang="en">Try the demo</span>
-          <span class="L es" lang="es">Probar la demo</span>
         </a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="foot-inner">
+    <div class="filet"></div>
+    <div class="pied">
       <nav aria-label="Pages légales">
         <a href="confidentialite.html">
           <span class="L fr" lang="fr">Politique de confidentialité</span>
@@ -269,11 +263,12 @@
           <span class="L en" lang="en">Legal notice</span>
           <span class="L es" lang="es">Aviso legal</span>
         </a>
-        <a href="mailto:alexandre.solau@gmail.com">Contact</a>
+        <a href="mailto:premierdegrepro@gmail.com">Contact</a>
       </nav>
-      <p style="margin:0">© 2026 Premier Degré SARL · RCS Paris 911 757 912</p>
+      <p>© 2026 Premier Degré SARL · RCS Paris 911 757 912</p>
     </div>
   </footer>
+</div>
 </div>
 
 </body>
