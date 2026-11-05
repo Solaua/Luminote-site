@@ -74,6 +74,18 @@ html.lang-fr .L.fr, html.lang-en .L.en, html.lang-es .L.es { display: revert; }
 .brand:hover { color: var(--encre); }
 .brand img { border-radius: 8px; border: var(--trait) solid var(--encre); box-shadow: 0 2px 0 var(--encre); }
 .lang-switch { display: inline-flex; gap: 6px; }
+/* Réseaux (05/11, Nestor) : YouTube et Instagram bien visibles, en-tête de chaque page et bandeau final */
+.entete-droite { display: flex; align-items: center; gap: 14px; }
+.reseaux { display: inline-flex; gap: 8px; }
+.reseau {
+  display: inline-grid; place-items: center; width: 36px; height: 36px;
+  color: var(--encre); background: var(--papier-carte);
+  border: var(--trait) solid var(--encre); border-radius: 50%; box-shadow: 0 2px 0 var(--encre);
+  transition: transform .12s var(--ressort), box-shadow .12s, color .12s;
+}
+.reseau:hover { color: var(--terracotta); }
+.reseau:active { transform: translateY(2px); box-shadow: none; }
+.reseau svg { width: 19px; height: 19px; }
 .lang-switch button {
   font: 700 12px var(--fonte-corps); letter-spacing: .08em;
   color: var(--encre); background: var(--papier-carte);
@@ -227,6 +239,12 @@ section { padding: clamp(56px, 9vw, 96px) 0 0; }
 .final h2 { font-size: clamp(30px, 4.6vw, 44px); }
 .final .chapo { margin-inline: auto; }
 .final .ctas { justify-content: center; }
+.suivre { margin-top: 38px; }
+.suivre-titre { font: 700 clamp(24px, 3vw, 30px)/1.2 var(--fonte-manuscrite); color: var(--vert); margin: 0 0 4px; }
+.suivre .ctas { margin-top: 14px; }
+.btn-reseau { background: var(--papier-carte); color: var(--encre); }
+.btn-reseau:hover { color: var(--terracotta); }
+.btn-reseau svg { width: 24px; height: 24px; flex: none; }
 
 /* ── Pied de page ── */
 .site-footer { margin-top: clamp(56px, 8vw, 90px); padding: 0 0 34px; color: var(--texte-2); font-size: 14px; }
@@ -262,6 +280,13 @@ section { padding: clamp(56px, 9vw, 96px) 0 0; }
   .ctas .btn { width: 100%; }
   .site-header { padding-top: 16px; }
   .brand { font-size: 20px; }
+  .entete-droite { gap: 8px; }
+  .reseaux { gap: 6px; }
+  .reseau { width: 32px; height: 32px; }
+  .reseau svg { width: 17px; height: 17px; }
+  .suivre .ctas { flex-wrap: nowrap; gap: 12px; }
+  .suivre .ctas .btn { width: auto; flex: 1; padding-inline: 10px; }
+  .brand img { width: 30px; height: 30px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
