@@ -65,13 +65,14 @@ publié en public tel quel.
 
 ## ✅ App publiée
 
-- Fiche Play Store :
-  `https://play.google.com/store/apps/details?id=fr.premierdegre.solfege`
-  (liée depuis le hero et le bandeau final).
+- Fiches des stores, liées depuis le hero et le bandeau final :
+  `https://play.google.com/store/apps/details?id=fr.premierdegre.solfege` et
+  `https://apps.apple.com/app/id6814822558`.
 - **Rafraîchir les captures** si l'app a changé, depuis le dépôt de l'app :
-  `node tools/site/captures-vitrine.mjs` — écrans réels (`ecran-*.webp`,
+  `node tools/site/captures-vitrine.mjs` — écrans réels (`ecran-*-<langue>.webp`,
   600 px de large) et vidéo d'un exercice joué par le pilote de dev
-  (`jeu.mp4`, `jeu-poster.webp`) ; ffmpeg requis.
+  (`jeu-<langue>.mp4`, `jeu-poster-<langue>.webp`), en fr, en et es (une
+  image par langue, affichée selon la langue du site) ; ffmpeg requis.
 - `og.png` (image de partage, 1200×630) est un rendu de la charte : à
   refaire si la marque change.
 
