@@ -209,6 +209,18 @@ section { padding: clamp(56px, 9vw, 96px) 0 0; }
 .engagements .tampon { font-size: 13px; padding: 5px 12px; }
 .engagements .tampon:nth-child(even) { transform: rotate(3deg); }
 
+/* ── Questions fréquentes (05/11) ── */
+.faq { max-width: 720px; margin-top: 30px; }
+.faq details { border-bottom: .75px solid rgba(35, 32, 28, .25); }
+.faq summary {
+  list-style: none; cursor: pointer; padding: 16px 30px 16px 0; position: relative;
+  font: 700 18px var(--fonte-titres); color: var(--encre);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; position: absolute; right: 4px; top: 13px; font-size: 22px; color: var(--terracotta); }
+.faq details[open] summary::after { content: '−'; }
+.faq details p { margin: 0 0 18px; color: var(--encre-douce); }
+
 /* ── Bandeau final ── */
 .final { text-align: center; padding-bottom: 20px; }
 .final .clef { display: block; font: 400 84px/1 Bravura, serif; color: var(--encre); text-shadow: 3px 3px 0 var(--terracotta); margin-bottom: 4px; }
