@@ -7,10 +7,25 @@
 <!-- Lien unique vers l'app (07/11, demande de Nestor) : iPhone et iPad vont sur l'App Store,
      Android sur Google Play, les autres appareils voient cette page avec les deux boutons.
      La redirection est faite tout de suite, avant l'affichage de la page. -->
+<!-- La source (07/11) : /app/?src=youtube (ou instagram, tiktok…) et, au besoin, &c=<campagne>.
+     Elle est transmise aux stores pour savoir d'où viennent les téléchargements :
+     Google Play la reçoit en UTM (Play Console, Acquisition) ; l'App Store en jeton de campagne
+     (App Store Connect, Analytics, Campagnes), seulement si APPLE_PT est renseigné. -->
 <script>
   (function () {
+    // Le « provider token » d'Apple (App Store Connect, générateur de liens de campagne) ; vide = pas de suivi iOS.
+    var APPLE_PT = '';
     var IOS = 'https://apps.apple.com/app/id6814822558';
     var ANDROID = 'https://play.google.com/store/apps/details?id=fr.premierdegre.solfege';
+    var q = new URLSearchParams(location.search);
+    var propre = function (v) { return (v || '').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 40); };
+    var src = propre(q.get('src'));
+    var camp = propre(q.get('c')) || 'lancement';
+    if (src) {
+      if (APPLE_PT) IOS += '?pt=' + APPLE_PT + '&ct=' + src + (q.get('c') ? '-' + camp : '') + '&mt=8';
+      ANDROID += '&referrer=' + encodeURIComponent('utm_source=' + src + '&utm_medium=social&utm_campaign=' + camp);
+    }
+    window.LUMINOTE_STORES = { ios: IOS, android: ANDROID };
     var ua = navigator.userAgent || '';
     // iPadOS se présente comme un Mac : on le reconnaît à l'écran tactile.
     var ipad = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
@@ -98,6 +113,15 @@
   </main>
 </div>
 </div>
+<script>
+  // Les boutons de la page de repli gardent la source, comme la redirection.
+  (function () {
+    var s = window.LUMINOTE_STORES;
+    if (!s) return;
+    document.querySelectorAll('a[href^="https://apps.apple.com"]').forEach(function (a) { a.href = s.ios; });
+    document.querySelectorAll('a[href^="https://play.google.com"]').forEach(function (a) { a.href = s.android; });
+  })();
+</script>
 
 </body>
 </html>
