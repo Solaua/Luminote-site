@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr" class="lang-fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luminote — Télécharger l'app</title>
+<!-- Lien unique vers l'app (07/11, demande de Nestor) : iPhone et iPad vont sur l'App Store,
+     Android sur Google Play, les autres appareils voient cette page avec les deux boutons.
+     La redirection est faite tout de suite, avant l'affichage de la page. -->
+<script>
+  (function () {
+    var IOS = 'https://apps.apple.com/app/id6814822558';
+    var ANDROID = 'https://play.google.com/store/apps/details?id=fr.premierdegre.solfege';
+    var ua = navigator.userAgent || '';
+    // iPadOS se présente comme un Mac : on le reconnaît à l'écran tactile.
+    var ipad = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+    if (/iPhone|iPad|iPod/i.test(ua) || ipad) location.replace(IOS);
+    else if (/Android/i.test(ua)) location.replace(ANDROID);
+  })();
+</script>
+<meta name="description" content="Luminote apprend à lire la musique, en jouant. Gratuit sur l'App Store et Google Play.">
+<meta property="og:title" content="Luminote — La lecture de notes, en jouant">
+<meta property="og:description" content="Gratuit sur iPhone, iPad et Android.">
+<meta property="og:image" content="https://luminote-app.com/assets/img/og.png">
+<meta property="og:url" content="https://luminote-app.com/app/">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://luminote-app.com/">
+<meta name="theme-color" content="#FBF8F1">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js" defer></script>
+<noscript><style>.L{display:revert !important}</style></noscript>
+<style>
+  .telecharger { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 18px; padding: 40px 0; }
+  .telecharger img.icone { width: 96px; height: 96px; border-radius: 22px; border: 2px solid var(--encre, #23201C); box-shadow: 0 4px 0 var(--encre, #23201C); }
+  .telecharger h1 { margin: 6px 0 0; }
+  .telecharger .ctas { justify-content: center; }
+</style>
+</head>
+<body data-title-fr="Luminote — Télécharger l'app"
+      data-title-en="Luminote — Get the app"
+      data-title-es="Luminote — Descargar la app">
+
+<div class="page">
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="../index.html">
+      <img src="../assets/img/icon-192.png" alt="" width="34" height="34">
+      Luminote
+    </a>
+    <div class="entete-droite">
+      <div class="lang-switch" role="group" aria-label="Langue / Language / Idioma">
+        <button type="button" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
+      </div>
+    </div>
+  </header>
+  <div class="filet"></div>
+
+  <main class="telecharger">
+    <img class="icone" src="../assets/img/icon-192.png" alt="">
+    <h1>Luminote</h1>
+    <p class="chapo">
+      <span class="L fr" lang="fr">La lecture de notes, en jouant. Gratuit sur iPhone, iPad et Android.</span>
+      <span class="L en" lang="en">Learn to read music, by playing. Free on iPhone, iPad and Android.</span>
+      <span class="L es" lang="es">La lectura de notas, jugando. Gratis en iPhone, iPad y Android.</span>
+    </p>
+    <div class="ctas">
+      <a class="btn btn-store" href="https://apps.apple.com/app/id6814822558">
+        <svg width="18" height="22" viewBox="0 0 17 20" fill="currentColor" aria-hidden="true"><path d="M14.1 10.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9C3.6 4.8 2 5.8 1.1 7.4c-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.7-1-2.7-4.3ZM11.5 3c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5Z"/></svg>
+        <span class="lignes">
+          <small class="L fr" lang="fr">Télécharger dans</small>
+          <small class="L en" lang="en">Download on the</small>
+          <small class="L es" lang="es">Descargar en</small>
+          App Store
+        </span>
+      </a>
+      <a class="btn btn-store" href="https://play.google.com/store/apps/details?id=fr.premierdegre.solfege">
+        <svg width="20" height="22" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M2.5 1.8v22.4c0 .5.6.9 1 .6l17.8-10.6c.5-.3.5-1 0-1.3L3.5 2.2c-.4-.3-1 0-1 .6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span class="lignes">
+          <small class="L fr" lang="fr">Disponible sur</small>
+          <small class="L en" lang="en">Get it on</small>
+          <small class="L es" lang="es">Disponible en</small>
+          Google Play
+        </span>
+      </a>
+    </div>
+    <p>
+      <a href="../index.html">
+        <span class="L fr" lang="fr">Découvrir Luminote</span>
+        <span class="L en" lang="en">Discover Luminote</span>
+        <span class="L es" lang="es">Descubrir Luminote</span>
+      </a>
+    </p>
+  </main>
+</div>
+</div>
+
+</body>
+</html>
